@@ -4,10 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Next‑Gen Marketing Communication | Telkom University × Lensetek</title>
+  <link rel="icon" type="image/png" href="https://lensetek.github.io/lensetek-cdn/favicon.png" />
   <meta name="description" content="40‑Hour Full Course — AI‑powered Next‑Gen Marketing Communication by Lensetek International, LLC (United States) in collaboration with D3 Digital Marketing, Telkom University. ISO 42001 compliant international certification."/>
   <meta property="og:title" content="Next‑Gen Marketing Communication"/>
   <meta property="og:description" content="40‑Hour Full Course — AI‑powered, data‑driven, culturally‑aware. Exclusive cohort for Telkom University students."/>
   <meta property="og:type" content="website"/>
+  <meta name="theme-color" content="#0acb91" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,50 +20,51 @@
         extend: {
           fontFamily: { jakarta: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'] },
           colors: {
-            brand: { 50:'#eefdf7',100:'#cff8ea',200:'#a0f0d6',300:'#69e5c0',400:'#34d4a9',500:'#12b48d',600:'#0b9276',700:'#0a7562',800:'#0b5d4f',900:'#0b4c42' },
-            ink: '#0b1220',
-            neon: '#f6ff7f',
+            brand: { 50:'#e7fff7',100:'#b8f9e4',200:'#84f3d1',300:'#4eebbc',400:'#1fdca8',500:'#0acb91',600:'#08a87b',700:'#078566',800:'#056251',900:'#044e42' },
           },
-          boxShadow: { glow: '0 0 0 3px rgba(246,255,127,0.35)' },
-          backgroundImage: { grid: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)' }
+          boxShadow: { glow: '0 0 0 3px rgba(10,203,145,0.25)' },
+          backgroundImage: {
+            grid: 'radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0)'
+          }
         }
       }
     }
   </script>
   <style>
-    :root { color-scheme: dark; }
+    :root { color-scheme: light; }
     body { font-feature-settings: "ss01" on, "ss02" on; }
-    .hero-bg { background-image: linear-gradient(180deg, rgba(11,18,32,0.6), rgba(11,18,32,0.9)), url('https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1600&auto=format&fit=crop'); background-size: cover; background-position: center; }
-    .card { backdrop-filter: blur(8px); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+    .hero-bg { background-image: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.95)), url('https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1600&auto=format&fit=crop'); background-size: cover; background-position: center; }
+    .card { backdrop-filter: blur(8px); background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.08); }
   </style>
 </head>
-<body class="bg-ink text-white font-jakarta antialiased">
+<body class="bg-white text-gray-800 font-jakarta antialiased">
   <!-- NAV -->
-  <header class="fixed top-0 inset-x-0 z-50 bg-ink/60 backdrop-blur-md border-b border-white/10">
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between py-3">
         <a href="#home" class="flex items-center gap-3">
           <img src="https://lensetek.github.io/lensetek-cdn/AsadelTEK-Logo.png" alt="Lensetek / AsadelTEK" class="h-10 w-auto">
           <div class="leading-tight">
-            <p class="text-xs uppercase tracking-wider text-white/60">Lensetek × Telkom University</p>
-            <p class="font-semibold">Next‑Gen Marketing Communication</p>
+            <p class="text-xs uppercase tracking-wider text-gray-500">Lensetek × Telkom University</p>
+            <p class="font-semibold text-gray-900">Next‑Gen Marketing Communication</p>
           </div>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-white/80">
-          <a href="#about" class="hover:text-white">About</a>
-          <a href="#master" class="hover:text-white">Master</a>
-          <a href="#curriculum" class="hover:text-white">Curriculum</a>
-          <a href="#cert" class="hover:text-white">Certification</a>
-          <a href="#faq" class="hover:text-white">FAQ</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-gray-700">
+          <a href="#about" class="hover:text-brand-600">About</a>
+          <a href="#master" class="hover:text-brand-600">Master</a>
+          <a href="#curriculum" class="hover:text-brand-600">Curriculum</a>
+          <a href="#cert" class="hover:text-brand-600">Certification</a>
+          <a href="#faq" class="hover:text-brand-600">FAQ</a>
         </nav>
         <div class="hidden md:flex items-center gap-3">
-          <a href="#apply" class="px-4 py-2 rounded-xl border border-white/20 hover:border-brand-400">Get Info</a>
-          <a href="#apply" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-ink font-semibold shadow-glow">Apply Now</a>
+          <a href="#apply" class="px-4 py-2 rounded-xl border border-gray-300 hover:border-brand-400 text-gray-700">Get Info</a>
+          <a href="#apply" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold shadow-glow">Apply Now</a>
         </div>
-        <button id="menuBtn" class="md:hidden p-2 rounded-lg border border-white/15" aria-label="Open Menu">
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg border border-gray-300" aria-label="Open Menu">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
+      <!-- mobile menu -->
       <div id="mobileMenu" class="hidden mt-2 card rounded-2xl px-4 py-4 md:hidden">
         <div class="flex flex-col gap-3">
           <a href="#about" class="py-1">About</a>
@@ -69,52 +72,51 @@
           <a href="#curriculum" class="py-1">Curriculum</a>
           <a href="#cert" class="py-1">Certification</a>
           <a href="#faq" class="py-1">FAQ</a>
-          <a href="#apply" class="mt-2 px-4 py-2 rounded-xl bg-brand-500 text-ink font-semibold text-center">Apply Now</a>
+          <a href="#apply" class="mt-2 px-4 py-2 rounded-xl bg-brand-500 text-white font-semibold text-center">Apply Now</a>
         </div>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
-  <section id="home" class="hero-bg pt-40 pb-20 relative">
-    <div class="absolute inset-0 bg-grid bg-[length:18px_18px] opacity-20"></div>
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+  <section id="home" class="hero-bg pt-40 pb-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
       <div>
-        <div class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/10 px-3 py-1 text-xs tracking-wide">
+        <div class="inline-flex items-center gap-2 rounded-full bg-gray-100 border border-gray-300 px-3 py-1 text-xs tracking-wide text-gray-600">
           <span>Exclusive for Telkom University Students</span>
-          <span class="text-white/50">•</span>
+          <span>•</span>
           <span>United States × Indonesia</span>
         </div>
-        <h1 class="mt-4 text-3xl md:text-5xl font-extrabold leading-tight">Step into the Future of <span class="text-neon">Marketing</span></h1>
-        <p class="mt-4 text-white/80 md:text-lg max-w-2xl">A 40‑hour full course to transform you into an AI‑powered marketing communicator ready for global challenges. Delivered by <span class="font-semibold">Lensetek International, LLC (United States)</span> in collaboration with <span class="font-semibold">D3 Digital Marketing — Telkom University</span>.</p>
+        <h1 class="mt-4 text-3xl md:text-5xl font-extrabold leading-tight text-gray-900">Step into the Future of <span class="text-brand-600">Marketing</span></h1>
+        <p class="mt-4 text-gray-700 md:text-lg max-w-2xl">A 40‑hour full course to transform you into an AI‑powered marketing communicator ready for global challenges. Delivered by <span class="font-semibold">Lensetek International, LLC (United States)</span> in collaboration with <span class="font-semibold">D3 Digital Marketing — Telkom University</span>.</p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#apply" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-ink font-semibold shadow-glow">Apply Now</a>
-          <a href="#curriculum" class="px-6 py-3 rounded-xl border border-white/20 hover:border-brand-400">View Curriculum</a>
+          <a href="#apply" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold shadow-glow">Apply Now</a>
+          <a href="#curriculum" class="px-6 py-3 rounded-xl border border-gray-300 hover:border-brand-400 text-gray-700">View Curriculum</a>
         </div>
         <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div class="card rounded-xl px-4 py-3 text-center">
-            <p class="text-2xl font-bold">40h</p>
-            <p class="text-xs text-white/70">Full Course</p>
+            <p class="text-2xl font-bold text-gray-900">40h</p>
+            <p class="text-xs text-gray-600">Full Course</p>
           </div>
           <div class="card rounded-xl px-4 py-3 text-center">
-            <p class="text-2xl font-bold">ISO</p>
-            <p class="text-xs text-white/70">42001 Compliant</p>
+            <p class="text-2xl font-bold text-gray-900">ISO</p>
+            <p class="text-xs text-gray-600">42001 Compliant</p>
           </div>
           <div class="card rounded-xl px-4 py-3 text-center">
-            <p class="text-2xl font-bold">AI</p>
-            <p class="text-xs text-white/70">Copy & Visual</p>
+            <p class="text-2xl font-bold text-gray-900">AI</p>
+            <p class="text-xs text-gray-600">Copy & Visual</p>
           </div>
           <div class="card rounded-xl px-4 py-3 text-center">
-            <p class="text-2xl font-bold">Global</p>
-            <p class="text-xs text-white/70">Portfolio Ready</p>
+            <p class="text-2xl font-bold text-gray-900">Global</p>
+            <p class="text-xs text-gray-600">Portfolio Ready</p>
           </div>
         </div>
       </div>
       <div class="lg:justify-self-end w-full">
         <!-- OFFICIAL FLYER -->
         <figure class="relative group">
-          <img src="https://lensetek.github.io/lensetek-cdn/MACOMM/Next-GenMarketingCommunication.jpg" alt="Official Flyer — Next‑Gen Marketing Communication" loading="lazy" class="w-full max-w-lg mx-auto aspect-[3/4] object-cover rounded-3xl border border-white/15 shadow-2xl shadow-black/40 ring-1 ring-white/10 group-hover:ring-brand-400 transition" />
-          <figcaption class="mt-3 text-center text-xs text-white/70">Official Flyer • Click to enlarge</figcaption>
+          <img src="https://lensetek.github.io/lensetek-cdn/MACOMM/Next-GenMarketingCommunication.jpg" alt="Official Flyer — Next‑Gen Marketing Communication" loading="lazy" class="w-full max-w-lg mx-auto aspect-[3/4] object-cover rounded-3xl border border-gray-300 shadow-lg" />
+          <figcaption class="mt-3 text-center text-xs text-gray-500">Official Flyer • Click to enlarge</figcaption>
           <!-- overlay button -->
           <button id="flyerOpen" class="absolute inset-0 rounded-3xl focus:outline-none" aria-label="Open flyer"></button>
         </figure>
@@ -127,13 +129,13 @@
     <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
     <div class="relative mx-auto max-w-4xl w-[92%] mt-16 md:mt-20">
       <div class="card rounded-3xl overflow-hidden">
-        <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
-          <p class="text-sm font-semibold">Official Flyer — Next‑Gen Marketing Communication</p>
-          <button id="flyerClose" class="p-2 rounded-lg border border-white/15 hover:border-brand-400" aria-label="Close flyer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6.225 4.811 4.811 6.225 10.586 12l-5.775 5.775 1.414 1.414L12 13.414l5.775 5.775 1.414-1.414L13.414 12l5.775-5.775-1.414-1.414L12 10.586 6.225 4.811z"/></svg>
+        <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+          <p class="text-sm font-semibold text-gray-800">Official Flyer — Next‑Gen Marketing Communication</p>
+          <button id="flyerClose" class="p-2 rounded-lg border border-gray-300 hover:border-brand-400" aria-label="Close flyer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" viewBox="0 0 24 24" fill="currentColor"><path d="M6.225 4.811 4.811 6.225 10.586 12l-5.775 5.775 1.414 1.414L12 13.414l5.775 5.775 1.414-1.414L13.414 12l5.775-5.775-1.414-1.414L12 10.586 6.225 4.811z"/></svg>
           </button>
         </div>
-        <div class="p-2 md:p-4">
+        <div class="p-2 md:p-4 bg-white">
           <img src="https://lensetek.github.io/lensetek-cdn/MACOMM/Next-GenMarketingCommunication.jpg" alt="Official Flyer — enlarged" class="w-full h-auto rounded-2xl"/>
         </div>
       </div>
@@ -144,74 +146,74 @@
   <section id="about" class="py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-10 items-start">
       <div class="lg:col-span-1">
-        <h2 class="text-2xl md:text-3xl font-bold">Why this program?</h2>
-        <p class="mt-3 text-white/80">We merge AI capability, data literacy, and cultural intelligence so you can design campaigns that actually move markets — especially in SEA, LATAM, and Africa.</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Why this program?</h2>
+        <p class="mt-3 text-gray-700">We merge AI capability, data literacy, and cultural intelligence so you can design campaigns that actually move markets — especially in SEA, LATAM, and Africa.</p>
       </div>
       <div class="lg:col-span-2 grid md:grid-cols-3 gap-4">
         <div class="card rounded-2xl p-5">
-          <p class="font-semibold">AI‑Driven Creation</p>
-          <p class="mt-1 text-sm text-white/70">Prompt engineering for copy & visuals using leading tools.</p>
+          <p class="font-semibold text-gray-900">AI‑Driven Creation</p>
+          <p class="mt-1 text-sm text-gray-600">Prompt engineering for copy & visuals using leading tools.</p>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="font-semibold">Data‑Based Planning</p>
-          <p class="mt-1 text-sm text-white/70">From hypotheses to dashboards and KPI reviews.</p>
+          <p class="font-semibold text-gray-900">Data‑Based Planning</p>
+          <p class="mt-1 text-sm text-gray-600">From hypotheses to dashboards and KPI reviews.</p>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="font-semibold">Cultural Strategy</p>
-          <p class="mt-1 text-sm text-white/70">Localization frameworks for emerging markets.</p>
+          <p class="font-semibold text-gray-900">Cultural Strategy</p>
+          <p class="mt-1 text-sm text-gray-600">Localization frameworks for emerging markets.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- WHAT YOU'LL MASTER -->
-  <section id="master" class="py-20">
+  <section id="master" class="py-20 bg-gray-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl md:text-3xl font-bold">What you’ll master</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900">What you’ll master</h2>
       <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="card rounded-2xl p-6">
-          <p class="font-semibold">AI‑Driven Copywriting & Visual Production</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="font-semibold text-gray-900">AI‑Driven Copywriting & Visual Production</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Persona‑linked prompts</li>
             <li>TOV libraries & brand kits</li>
             <li>Creative QA with checklists</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-6">
-          <p class="font-semibold">Data‑Based Campaign Planning & Analytics</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="font-semibold text-gray-900">Data‑Based Campaign Planning & Analytics</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Brief → hypothesis → test</li>
             <li>Attribution & funnel metrics</li>
             <li>Lightweight dashboards</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-6">
-          <p class="font-semibold">Cultural Strategy for Emerging Markets</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="font-semibold text-gray-900">Cultural Strategy for Emerging Markets</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Localization canvas</li>
             <li>Platform behaviors</li>
             <li>Regulatory awareness</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-6">
-          <p class="font-semibold">Professional Portfolio for Global Careers</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="font-semibold text-gray-900">Professional Portfolio for Global Careers</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Story‑driven case studies</li>
             <li>Repo & live demo structure</li>
             <li>Interview‑ready artifacts</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-6">
-          <p class="font-semibold">Ethical & Secure AI Use</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="font-semibold text-gray-900">Ethical & Secure AI Use</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Risk registers & guardrails</li>
             <li>Prompt safety patterns</li>
             <li>ISO 42001 alignment</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-6">
-          <p class="font-semibold">Career Enablement</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="font-semibold text-gray-900">Career Enablement</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>CV + LinkedIn revamp</li>
             <li>Portfolio showcase</li>
             <li>Mock interview drills</li>
@@ -225,59 +227,59 @@
   <section id="curriculum" class="py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between gap-6 flex-wrap">
-        <h2 class="text-2xl md:text-3xl font-bold">Curriculum (40 Hours)</h2>
-        <a href="#apply" class="text-sm px-4 py-2 rounded-xl border border-white/20 hover:border-brand-400">Download Syllabus (PDF)</a>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Curriculum (40 Hours)</h2>
+        <a href="#apply" class="text-sm px-4 py-2 rounded-xl border border-gray-300 hover:border-brand-400">Download Syllabus (PDF)</a>
       </div>
       <div class="mt-6 grid lg:grid-cols-3 gap-4">
         <div class="card rounded-2xl p-5">
-          <p class="text-sm text-white/60">Module 1</p>
-          <p class="font-semibold">Foundations & AI Toolchain</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="text-sm text-gray-500">Module 1</p>
+          <p class="font-semibold text-gray-900">Foundations & AI Toolchain</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>AI landscape & safety</li>
             <li>Prompt systems & TOV</li>
             <li>Quick wins workshop</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="text-sm text-white/60">Module 2</p>
-          <p class="font-semibold">Data‑Driven Campaigns</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="text-sm text-gray-500">Module 2</p>
+          <p class="font-semibold text-gray-900">Data‑Driven Campaigns</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Hypothesis & ICP</li>
             <li>Metrics & dashboard</li>
             <li>Experiment design</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="text-sm text-white/60">Module 3</p>
-          <p class="font-semibold">Creative Production Lab</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="text-sm text-gray-500">Module 3</p>
+          <p class="font-semibold text-gray-900">Creative Production Lab</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Copy + visual pipelines</li>
             <li>Short‑form video basics</li>
             <li>QA & brand guardrails</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="text-sm text-white/60">Module 4</p>
-          <p class="font-semibold">Cultural Strategy (SEA, LATAM, Africa)</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="text-sm text-gray-500">Module 4</p>
+          <p class="font-semibold text-gray-900">Cultural Strategy (SEA, LATAM, Africa)</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Localization canvas</li>
             <li>Channel behavior</li>
             <li>Regulatory context</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="text-sm text-white/60">Module 5</p>
-          <p class="font-semibold">Portfolio Studio</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="text-sm text-gray-500">Module 5</p>
+          <p class="font-semibold text-gray-900">Portfolio Studio</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Case study storytelling</li>
             <li>Live demo packaging</li>
             <li>Career artifacts</li>
           </ul>
         </div>
         <div class="card rounded-2xl p-5">
-          <p class="text-sm text-white/60">Capstone</p>
-          <p class="font-semibold">Market Entry Playbook</p>
-          <ul class="mt-2 text-sm list-disc list-inside text-white/80 space-y-1">
+          <p class="text-sm text-gray-500">Capstone</p>
+          <p class="font-semibold text-gray-900">Market Entry Playbook</p>
+          <ul class="mt-2 text-sm list-disc list-inside text-gray-700 space-y-1">
             <li>Pitch + demo day</li>
             <li>Panel review</li>
             <li>Certification check</li>
@@ -288,32 +290,32 @@
   </section>
 
   <!-- CERTIFICATION / ISO -->
-  <section id="cert" class="py-20">
+  <section id="cert" class="py-20 bg-gray-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
       <div class="order-2 lg:order-1">
-        <h2 class="text-2xl md:text-3xl font-bold">International Certification</h2>
-        <p class="mt-3 text-white/80">Graduates receive an international certificate from Lensetek International, LLC. The program is aligned with <span class="font-semibold">ISO 42001</span> (Artificial Intelligence Management System) so you learn to build, evaluate, and deploy AI responsibly.</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">International Certification</h2>
+        <p class="mt-3 text-gray-700">Graduates receive an international certificate from Lensetek International, LLC. The program is aligned with <span class="font-semibold">ISO 42001</span> (Artificial Intelligence Management System) so you learn to build, evaluate, and deploy AI responsibly.</p>
         <div class="mt-6 flex gap-3">
           <div class="card rounded-xl px-4 py-3 text-center">
-            <p class="text-2xl font-bold">ISO 42001</p>
-            <p class="text-xs text-white/70">Compliance</p>
+            <p class="text-2xl font-bold text-gray-900">ISO 42001</p>
+            <p class="text-xs text-gray-600">Compliance</p>
           </div>
           <div class="card rounded-xl px-4 py-3 text-center">
-            <p class="text-2xl font-bold">Global</p>
-            <p class="text-xs text-white/70">Recognition</p>
+            <p class="text-2xl font-bold text-gray-900">Global</p>
+            <p class="text-xs text-gray-600">Recognition</p>
           </div>
         </div>
       </div>
       <div class="order-1 lg:order-2">
         <div class="card rounded-3xl p-6">
-          <p class="text-sm text-white/70">You’ll walk away with</p>
-          <ul class="mt-3 space-y-2 text-sm text-white/85">
+          <p class="text-sm text-gray-600">You’ll walk away with</p>
+          <ul class="mt-3 space-y-2 text-sm text-gray-700">
             <li>• Certificate (digital + verifiable)</li>
             <li>• Portfolio with 3+ case studies</li>
             <li>• Reusable prompt & design libraries</li>
             <li>• Dashboard templates</li>
           </ul>
-          <a href="#apply" class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-500 text-ink font-semibold shadow-glow">Get Certified</a>
+          <a href="#apply" class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-500 text-white font-semibold shadow-glow">Get Certified</a>
         </div>
       </div>
     </div>
@@ -322,46 +324,47 @@
   <!-- APPLY / CTA -->
   <section id="apply" class="py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold">Seats are limited — join the cohort</h2>
-      <p class="mt-3 text-white/80 max-w-2xl mx-auto">Exclusive cohort for Telkom University students. Fill the form and our team will contact you with the next steps.</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Seats are limited — join the cohort</h2>
+      <p class="mt-3 text-gray-700 max-w-2xl mx-auto">Exclusive cohort for Telkom University students. Fill the form and our team will contact you with the next steps.</p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <a href="#" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-ink font-semibold shadow-glow">Apply via Form</a>
-        <a href="#" class="px-6 py-3 rounded-xl border border-white/20 hover:border-brand-400">Talk to Program Advisor</a>
+        <!-- Replace the # link with the actual application URL -->
+        <a href="#" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold shadow-glow">Apply via Form</a>
+        <a href="#" class="px-6 py-3 rounded-xl border border-gray-300 hover:border-brand-400">Talk to Program Advisor</a>
       </div>
-      <p class="mt-4 text-xs text-white/60">By applying, you agree to be contacted about schedules, cohort selection, and prerequisites.</p>
+      <p class="mt-4 text-xs text-gray-500">By applying, you agree to be contacted about schedules, cohort selection, and prerequisites.</p>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-20">
+  <section id="faq" class="py-20 border-t border-gray-200">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl md:text-3xl font-bold text-center">Frequently Asked Questions</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900">Frequently Asked Questions</h2>
       <div class="mt-8 grid md:grid-cols-2 gap-4">
         <details class="card rounded-2xl p-5" open>
-          <summary class="font-semibold cursor-pointer">Who can join?</summary>
-          <p class="mt-2 text-white/80 text-sm">Active Telkom University students. Cohort size is limited to keep workshops hands‑on.</p>
+          <summary class="font-semibold cursor-pointer text-gray-900">Who can join?</summary>
+          <p class="mt-2 text-gray-700 text-sm">Active Telkom University students. Cohort size is limited to keep workshops hands‑on.</p>
         </details>
         <details class="card rounded-2xl p-5">
-          <summary class="font-semibold cursor-pointer">Is it online or offline?</summary>
-          <p class="mt-2 text-white/80 text-sm">Hybrid. Core workshops are on‑campus; select sessions are online with recordings.</p>
+          <summary class="font-semibold cursor-pointer text-gray-900">Is it online or offline?</summary>
+          <p class="mt-2 text-gray-700 text-sm">Hybrid. Core workshops are on‑campus; select sessions are online with recordings.</p>
         </details>
         <details class="card rounded-2xl p-5">
-          <summary class="font-semibold cursor-pointer">Do I need prior AI knowledge?</summary>
-          <p class="mt-2 text-white/80 text-sm">No. We start with foundations, then move to production‑grade workflows.</p>
+          <summary class="font-semibold cursor-pointer text-gray-900">Do I need prior AI knowledge?</summary>
+          <p class="mt-2 text-gray-700 text-sm">No. We start with foundations, then move to production‑grade workflows.</p>
         </details>
         <details class="card rounded-2xl p-5">
-          <summary class="font-semibold cursor-pointer">What tools are used?</summary>
-          <p class="mt-2 text-white/80 text-sm">ChatGPT, Gemini, Canva/Adobe tools, lightweight dashboards, and collaborative docs.</p>
+          <summary class="font-semibold cursor-pointer text-gray-900">What tools are used?</summary>
+          <p class="mt-2 text-gray-700 text-sm">ChatGPT, Gemini, Canva/Adobe tools, lightweight dashboards, and collaborative docs.</p>
         </details>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 border-t border-white/10">
+  <footer class="py-12 border-t border-gray-200 bg-gray-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-white/60 text-sm">© <span id="yr"></span> Lensetek International, LLC — in collaboration with D3 Digital Marketing, Telkom University.</p>
-      <p class="text-white/50 text-xs">#Lensetek #TelkomUniversity #NextGenMarketing #AIinMarketing #DigitalMarketingRevolution</p>
+      <p class="text-gray-600 text-sm">© <span id="yr"></span> Lensetek International, LLC — in collaboration with D3 Digital Marketing, Telkom University.</p>
+      <p class="text-gray-400 text-xs">#Lensetek #TelkomUniversity #NextGenMarketing #AIinMarketing #DigitalMarketingRevolution</p>
     </div>
   </footer>
 
@@ -375,7 +378,7 @@
     const yrEl = document.getElementById('yr');
     if (yrEl) yrEl.textContent = new Date().getFullYear();
 
-    // Flyer lightbox (added)
+    // Flyer lightbox
     const flyerOpen = document.getElementById('flyerOpen');
     const flyerModal = document.getElementById('flyerModal');
     const flyerClose = document.getElementById('flyerClose');
