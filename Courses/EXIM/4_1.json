@@ -1,0 +1,106 @@
+{
+  "minggu": 4,
+  "topik": "Menganalisis Potensi Produk Ekspor",
+  "sub_cpmk": "Mahasiswa mampu menggunakan tools untuk riset produk ekspor.",
+  "indikator_penilaian": "Mampu mengidentifikasi dan menganalisis potensi produk ekspor berbasis data.",
+  "bobot_penilaian_persen": 5,
+  "bentuk_penilaian": {
+    "jenis": "Tugas riset produk dan negara tujuan",
+    "kriteria_ringkas": [
+      "Ketepatan analisis",
+      "Relevansi dan kualitas data",
+      "Argumentasi dan komunikasi"
+    ]
+  },
+  "rubrik_penilaian_persen": {
+    "ketepatan_analisis": 40,
+    "relevansi_data": 35,
+    "argumentasi_komunikasi": 25
+  },
+  "metode_pembelajaran": {
+    "luring": "Workshop riset pasar (praktikum analisis data & brainstorming)",
+    "daring": "Tutorial penggunaan tools riset pasar ekspor"
+  },
+  "materi_pembelajaran": [
+    "Riset pasar ekspor",
+    "Google Trends (tren & minat pencarian)",
+    "ITC Trade Map (HS code, top importers, pertumbuhan, pangsa pasar)",
+    "Buyer persona (profil pembeli & preferensi)"
+  ],
+  "tools": [
+    {
+      "nama": "Google Trends",
+      "fungsi": "Mengukur tren pencarian dan seasonality",
+      "tips": [
+        "Bandingkan 2–3 kata kunci",
+        "Gunakan rentang 12–24 bulan",
+        "Filter negara/wilayah sasaran"
+      ]
+    },
+    {
+      "nama": "ITC Trade Map",
+      "fungsi": "Menganalisis arus perdagangan internasional",
+      "tips": [
+        "Gunakan HS Code 6 digit",
+        "Cek top importers dan CAGR 5 tahun",
+        "Bandingkan posisi Indonesia vs kompetitor"
+      ]
+    },
+    {
+      "nama": "Buyer Persona",
+      "fungsi": "Mendefinisikan pembeli ideal & implikasi strategi",
+      "tips": [
+        "Tentukan segmen, lokasi, preferensi, kanal distribusi",
+        "Gunakan 1–2 persona untuk fokus",
+        "Turunkan implikasi positioning & channel"
+      ]
+    }
+  ],
+  "langkah_praktikum": [
+    "Identifikasi produk unggulan (keunikan, pasokan, nilai tambah)",
+    "Ukur tren permintaan (Google Trends: tren & minat per wilayah)",
+    "Analisis data perdagangan (ITC Trade Map: importers, market share, CAGR)",
+    "Susun buyer persona (segmen, preferensi, channel)",
+    "Rumuskan rekomendasi negara prioritas (1–2) beserta alasan berbasis data"
+  ],
+  "output_diharapkan": [
+    "Mini-laporan 2–4 halaman",
+    "Tabel ringkas data utama (Trends & Trade Map)",
+    "1–2 buyer persona",
+    "Negara tujuan prioritas & rekomendasi strategi awal"
+  ],
+  "contoh_studi_kasus_ringkas": {
+    "produk": "Madu hutan Indonesia (eco-friendly)",
+    "tren": "Minat madu organik meningkat (Google Trends)",
+    "perdagangan": "Jepang importir besar; peluang diferensiasi kualitas (ITC Trade Map)",
+    "buyer_persona": "Retail organik & produsen makanan sehat di Jepang",
+    "rekomendasi": [
+      "Sertifikasi mutu & label bilingual",
+      "Distribusi via distributor spesialis health food"
+    ]
+  },
+  "resources": [
+    {
+      "nama": "Notebook Materi Minggu 4",
+      "url": "https://notebooklm.google.com/notebook/5ad0c753-0259-4caf-b636-870c4ec745f3"
+    },
+    {
+      "nama": "ITC Trade Map",
+      "url": "https://www.trademap.org/",
+      "catatan": "Perlu akun gratis untuk akses penuh"
+    },
+    {
+      "nama": "Google Trends",
+      "url": "https://trends.google.com/"
+    }
+  ],
+  "template_laporan_outline": [
+    "Produk & HS Code (6 digit)",
+    "Ringkasan Google Trends (12–24 bulan): kata kunci, pola tren, negara minat tinggi",
+    "Ringkasan ITC Trade Map: top importers, market share, CAGR 5 tahun, posisi Indonesia",
+    "Buyer Persona (1–2): segmen, lokasi, preferensi, kanal",
+    "Negara Tujuan Prioritas (1–2) & alasan berbasis data",
+    "Risiko utama & mitigasi",
+    "Kesimpulan & langkah lanjut"
+  ]
+}
