@@ -9,84 +9,189 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f8fafc; /* light background */
-      --card:#ffffff;
-      --ink:#0f172a; /* text */
-      --muted:#475569; /* secondary text */
-      --line:#e2e8f0; /* borders */
-      --primary:#2563eb; /* blue */
-      --primary-ink:#ffffff;
-      --accent:#0ea5e9;
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --primary: #2563eb;
+      --primary-ink: #ffffff;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,sans-serif;line-height:1.6}
-    a{color:var(--primary);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{max-width:1080px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
-    .brand{display:flex;gap:10px;align-items:center}
-    .brand svg{width:28px;height:28px}
-    .brand b{font-weight:800}
-    .pill{padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:12px}
-    nav a.btn{padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:48px 24px}
-    .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);padding:6px 10px;border-radius:999px;color:var(--muted);background:#fff}
-    h1{font-size:40px;line-height:1.15;margin:12px 0 8px}
-    p.lead{font-size:18px;color:var(--muted)}
-    .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;border:none;background:var(--primary);color:var(--primary-ink);padding:12px 16px;border-radius:12px;font-weight:600;cursor:pointer}
-    .btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 1px 0 rgba(15,23,42,.02)}
-    .card h3{margin:6px 0 8px}
-    .tagrow{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{background:#eef2ff;border:1px solid #e0e7ff;color:#3730a3;padding:4px 8px;border-radius:999px;font-size:12px}
-    .section{padding:40px 24px}
-    .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .kpi .card{padding:16px;text-align:center}
-    .muted{color:var(--muted)}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .steps{counter-reset:step}
-    .step{display:flex;gap:14px;margin:10px 0}
-    .step .num{min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:var(--ink);color:#fff;font-weight:700}
-    details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
-    summary{cursor:pointer;font-weight:600}
-    table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-    th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left}
-    th{background:#f1f5f9}
-    .links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
-    .linkcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-    .footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var(--muted)}
-    .hero-ill{background:linear-gradient(135deg,#dbeafe, #fff);border:1px solid var(--line);border-radius:20px;padding:18px}
-    .illus{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .illus .cell{background:#fff;border:1px dashed var(--line);border-radius:12px;min-height:90px;display:flex;align-items:center;justify-content:center}
-    .note{font-size:13px;color:var(--muted)}
-    .video-wrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    iframe{width:100%;max-width:960px;height:540px;border-radius:12px;border:none;display:block;margin:12px auto}
-    @media (max-width: 960px){
-      .hero{grid-template-columns:1fr}
-      .cards{grid-template-columns:1fr}
-      .kpi{grid-template-columns:1fr 1fr}
-      .grid-2{grid-template-columns:1fr}
-      .links{grid-template-columns:1fr}
-      iframe{height:315px}
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .pill {
+      padding: 2px 6px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    nav a.btn {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin: 4px;
+      color: var(--ink);
+    }
+
+    .hero {
+      padding: 40px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: #fff;
+      font-size: 14px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.3;
+      margin: 0;
+    }
+    p.lead {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-ink);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-outline {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 24px 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      background: #f1f5f9;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .linkcard {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h1 { font-size: 36px; }
+      p.lead { font-size: 18px; }
+      iframe { height: 480px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="nav container">
-      <div class="brand" aria-label="Brand">
-        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2" opacity="0.7"/><rect x="3" y="14" width="7" height="7" rx="2" opacity="0.5"/><rect x="14" y="14" width="7" height="7" rx="2" opacity="0.3"/></svg>
-        <b>Pengantar Pasar Modal</b>
+    <div class="nav">
+      <div class="brand">
+        <span>Pengantar Pasar Modal</span>
         <span class="pill">Materi 4</span>
       </div>
       <nav>
         <a class="btn" href="#ringkasan">Ringkasan</a>
         <a class="btn" href="#konten">Konten</a>
-        <a class="btn" href="#hak">Hak Saham</a>
         <a class="btn" href="#video">Video</a>
         <a class="btn" href="#tautan">Tautan</a>
       </nav>
@@ -94,208 +199,74 @@
   </header>
 
   <main>
-    <section class="hero container" id="ringkasan">
+    <section class="hero" id="ringkasan">
       <div>
-        <span class="badge" title="Tema kuliah">Tema: Perusahaan Efek &amp; Emiten</span>
+        <span class="badge">Tema: Perusahaan Efek &amp; Emiten</span>
         <h1>Materi 4 — Perusahaan Efek &amp; Emiten</h1>
         <p class="lead">Pendalaman mekanisme <b>IPO</b>, peran <b>underwriter</b>, tugas <b>broker/WPPE</b>, konsep <b>emiten &amp; perusahaan publik</b>, serta <b>hak pemegang saham</b>—dengan fokus pada praktik di Indonesia.</p>
         <div class="cta">
-          <a class="btn" href="#konten">Jelajahi Materi</a>
-          <a class="btn alt" href="#tautan">Buka Tautan Pendukung</a>
+          <a href="#konten" class="btn-primary">Jelajahi Materi</a>
+          <a href="#tautan" class="btn-outline">Buka Tautan Pendukung</a>
         </div>
-        <p class="note">CPMK: Memahami mekanisme IPO & aktor emisi efek • Metode: presentasi & diskusi • Penilaian: tugas individu (5%).</p>
-      </div>
-      <div class="hero-ill" aria-hidden="true">
-        <div class="illus">
-          <div class="cell">IPO</div>
-          <div class="cell">Underwriter</div>
-          <div class="cell">Broker</div>
-          <div class="cell">Emiten</div>
-          <div class="cell">Publik</div>
-          <div class="cell">RUPS</div>
-        </div>
+        <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">CPMK: Memahami mekanisme IPO & aktor emisi efek • Metode: presentasi & diskusi • Penilaian: tugas individu (5%).</p>
       </div>
     </section>
 
-    <section class="section container">
-      <div class="cards" role="list" aria-label="Topik kunci">
-        <article class="card" role="listitem">
-          <h3>Perusahaan Efek</h3>
-          <p class="muted">Entitas berizin OJK yang menjalankan penjaminan emisi, perantara pedagang efek, dan/atau manajer investasi.</p>
-          <div class="tagrow"><span class="tag">OJK</span><span class="tag">BEI</span><span class="tag">KPEI</span><span class="tag">KSEI</span></div>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Underwriter</h3>
-          <p class="muted">Membantu emiten go public: menilai kelayakan, menyusun prospektus, menentukan harga, dan menjamin penyerapan efek.</p>
-          <div class="tagrow"><span class="tag">Prospektus</span><span class="tag">Pricing</span><span class="tag">Full/Best Effort</span></div>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Broker / WPPE</h3>
-          <p class="muted">Perantara jual-beli efek: mengeksekusi order, memberi info pasar, bantu pembukaan rekening efek & RDN.</p>
-          <div class="tagrow"><span class="tag">Order</span><span class="tag">RDN</span><span class="tag">Perantara</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section container grid-2" id="konten">
-      <article class="card">
+    <section class="section" id="konten">
+      <div class="card">
         <h2>Proses IPO (Ringkas)</h2>
-        <div class="steps">
-          <div class="step"><div class="num">1</div><div><b>Persiapan internal</b><br><span class="muted">Audit laporan keuangan, tata kelola, penunjukan underwriter & konsultan.</span></div></div>
-          <div class="step"><div class="num">2</div><div><b>Pendaftaran ke OJK</b><br><span class="muted">Pernyataan pendaftaran & prospektus awal.</span></div></div>
-          <div class="step"><div class="num">3</div><div><b>Masa penawaran umum</b><br><span class="muted">Bookbuilding & offering ke publik.</span></div></div>
-          <div class="step"><div class="num">4</div><div><b>Listing di BEI</b><br><span class="muted">Mulai diperdagangkan di pasar sekunder.</span></div></div>
-        </div>
-      </article>
-      <article class="card">
-        <h2>Peran & Tanggung Jawab</h2>
-        <details open>
-          <summary>Underwriter</summary>
-          <ul>
-            <li>Menilai kelayakan & struktur aksi korporasi.</li>
-            <li>Menentukan harga penawaran (initial offering price).</li>
-            <li>Menyusun/meninjau prospektus & materi pemasaran.</li>
-            <li>Menjamin penyerapan efek: <i>full commitment</i> atau <i>best effort</i>.</li>
-          </ul>
-        </details>
-        <details>
-          <summary>Broker / WPPE</summary>
-          <ul>
-            <li>Meneruskan order ke sistem perdagangan BEI & memberi konfirmasi eksekusi.</li>
-            <li>Memberi informasi pasar & layanan nasabah.</li>
-            <li>Fasilitasi pembukaan rekening efek & RDN.</li>
-          </ul>
-        </details>
-        <details>
-          <summary>Emiten & Perusahaan Publik</summary>
-          <ul>
-            <li>Emiten menerbitkan efek (saham/obligasi) untuk publik.</li>
-            <li>Perusahaan publik: saham dimiliki masyarakat sesuai ketentuan OJK.</li>
-            <li>Kewajiban keterbukaan informasi & penerapan GCG.</li>
-          </ul>
-        </details>
-      </article>
+        <ol>
+          <li>Persiapan internal: audit laporan keuangan, tata kelola, penunjukan underwriter & konsultan.</li>
+          <li>Pendaftaran ke OJK: pernyataan pendaftaran & prospektus awal.</li>
+          <li>Masa penawaran umum: bookbuilding & offering ke publik.</li>
+          <li>Listing di BEI: saham mulai diperdagangkan di pasar sekunder.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>Peran dan Tanggung Jawab</h2>
+        <ul>
+          <li><b>Underwriter</b>: Menilai kelayakan, menentukan harga, menyusun prospektus, menjamin penyerapan efek.</li>
+          <li><b>Broker / WPPE</b>: Perantara jual beli efek antara investor dan BEI, memberi rekomendasi dan layanan nasabah.</li>
+          <li><b>Emiten</b>: Pihak penerbit efek untuk publik, wajib keterbukaan informasi.</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="section container" id="hak">
+    <section class="section">
       <h2>Hak Pemegang Saham</h2>
-      <table aria-label="Hak-hak pemegang saham">
+      <table>
         <thead>
-          <tr>
-            <th>Hak</th>
-            <th>Penjelasan</th>
-            <th>Contoh</th>
-          </tr>
+          <tr><th>Hak</th><th>Penjelasan</th><th>Contoh</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Dividen</td>
-            <td>Berhak atas pembagian laba jika diputuskan RUPS.</td>
-            <td>Emiten perbankan besar rutin membagikan dividen tahunan.</td>
-          </tr>
-          <tr>
-            <td>Hak Suara</td>
-            <td>Memberi suara di RUPS untuk keputusan strategis.</td>
-            <td>Pemilihan direksi/komisaris, persetujuan aksi korporasi.</td>
-          </tr>
-          <tr>
-            <td>Hak atas Informasi</td>
-            <td>Mengakses laporan keuangan & keterbukaan informasi.</td>
-            <td>Laporan keuangan triwulanan & tahunan pada situs resmi.</td>
-          </tr>
-          <tr>
-            <td>HMETD</td>
-            <td>Memesan efek terlebih dahulu saat <i>rights issue</i>.</td>
-            <td>Rights issue untuk memperkuat ekuitas.</td>
-          </tr>
-          <tr>
-            <td>Sisa Kekayaan</td>
-            <td>Hak atas sisa aset setelah likuidasi & pelunasan utang.</td>
-            <td>Berlaku saat pembubaran perusahaan.</td>
-          </tr>
+          <tr><td>Dividen</td><td>Berhak atas pembagian laba jika diputuskan RUPS.</td><td>Perusahaan rutin bagi dividen tahunan.</td></tr>
+          <tr><td>Hak Suara</td><td>Berhak memberikan suara dalam RUPS.</td><td>Pemilihan direksi dan komisaris.</td></tr>
+          <tr><td>Hak Informasi</td><td>Berhak mengakses laporan keuangan & informasi publik.</td><td>Laporan keuangan tahunan BEI.</td></tr>
+          <tr><td>HMETD</td><td>Hak memesan efek terlebih dahulu saat rights issue.</td><td>Rights issue perusahaan konstruksi.</td></tr>
+          <tr><td>Sisa Kekayaan</td><td>Hak atas sisa aset pasca likuidasi.</td><td>Diterima setelah pelunasan utang.</td></tr>
         </tbody>
       </table>
     </section>
 
-    <section class="section container">
-      <div class="grid-2">
-        <article class="card">
-          <h2>Lembaga Terkait</h2>
-          <ul>
-            <li><b>OJK</b>: regulator & pengawas pasar modal.</li>
-            <li><b>BEI</b>: penyelenggara perdagangan efek.</li>
-            <li><b>KSEI</b>: penyimpanan & penyelesaian kepemilikan efek.</li>
-            <li><b>KPEI</b>: kliring & penjaminan penyelesaian transaksi.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h2>Penerapan Praktis</h2>
-          <ul>
-            <li><b>Investor</b>: pahami biaya broker, baca prospektus, nilai risiko & valuasi.</li>
-            <li><b>Perusahaan</b>: pilih waktu & valuasi IPO, tentukan skema penjaminan (full vs best effort).</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section container">
-      <div class="card">
-        <h2>Latihan Diskusi</h2>
-        <ol>
-          <li>Analisis ringkas prospektus emiten IPO: model bisnis, risiko utama, rencana penggunaan dana.</li>
-          <li>Bandingkan peran underwriter vs broker dalam keberhasilan IPO.</li>
-        </ol>
-      </div>
-      <div class="kpi">
-        <div class="card"><div class="muted">Durasi Belajar</div><div><b>1–2 jam</b></div></div>
-        <div class="card"><div class="muted">Evaluasi</div><div><b>Tugas Individu (5%)</b></div></div>
-        <div class="card"><div class="muted">Metode</div><div><b>Presentasi & Diskusi</b></div></div>
-        <div class="card"><div class="muted">Level</div><div><b>S1 Manajemen</b></div></div>
-      </div>
-    </section>
-
-    <section class="section container" id="video">
+    <section class="section" id="video">
       <h2>Video YouTube Materi 4</h2>
-      <div class="video-wrap">
-        <p class="muted">Simak penjelasan visual untuk memahami praktik IPO & peran perusahaan efek di Indonesia.</p>
-        <iframe src="https://www.youtube.com/embed/TtkywL0OJVY?si=LIw0FciwRtULN5Ij" title="YouTube Materi 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+      <p class="muted">Tonton penjelasan visual tentang praktik IPO & peran perusahaan efek di Indonesia.</p>
+      <iframe src="https://www.youtube.com/embed/TtkywL0OJVY?si=LIw0FciwRtULN5Ij" title="YouTube Materi 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </section>
 
-    <section class="section container" id="tautan">
+    <section class="section" id="tautan">
       <h2>Tautan Pendukung Materi</h2>
       <div class="links">
-        <a class="linkcard" href="https://notebooklm.google.com/notebook/943e178b-81fa-4144-84fe-5f7257a16434" target="_blank" rel="noopener noreferrer">
-          <h3>Materi 4 (NotebookLM)</h3>
-          <p class="muted">Catatan & ringkasan tambahan untuk pendalaman.</p>
-        </a>
-        <a class="linkcard" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek" target="_blank" rel="noopener noreferrer">
-          <h3>Chatbot Pengantar Pasar Modal</h3>
-          <p class="muted">Tanya jawab interaktif terkait materi kuliah.</p>
-        </a>
-        <a class="linkcard" href="https://youtu.be/TtkywL0OJVY" target="_blank" rel="noopener noreferrer">
-          <h3>Link YouTube (Cadangan)</h3>
-          <p class="muted">Buka langsung di YouTube apabila embed diblokir.</p>
-        </a>
+        <a class="linkcard" href="https://notebooklm.google.com/notebook/943e178b-81fa-4144-84fe-5f7257a16434" target="_blank">Materi 4 di NotebookLM</a>
+        <a class="linkcard" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek" target="_blank">Chatbot Pengantar Pasar Modal</a>
+        <a class="linkcard" href="https://youtu.be/TtkywL0OJVY" target="_blank">Link YouTube Cadangan</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer>
     © 2025 Lensetek, LLC. • <a href="#ringkasan">Kembali ke atas</a>
   </footer>
-
-  <script>
-    // Smooth scroll untuk navigasi internal
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href');
-        if(id && id.startsWith('#')){
-          const el = document.querySelector(id);
-          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
-        }
-      });
-    });
-  </script>
 </body>
 </html>
