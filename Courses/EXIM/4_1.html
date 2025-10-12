@@ -1,336 +1,519 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { CheckCircle2, Rocket, BookOpen, Globe2, BarChart3, Link as LinkIcon, FileText, Target, Users, CalendarDays } from "lucide-react";
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materi Minggu 4 – Analisis Potensi Produk Ekspor | Ekspor Impor UNDA</title>
+  <meta name="description" content="Landing page materi Minggu ke-4: Menganalisis Potensi Produk Ekspor – S1 Manajemen, Universitas Darwan Ali. Light theme, responsive, Tailwind CSS." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f6f9ff',
+              100: '#e9f0ff',
+              200: '#cfe0ff',
+              300: '#a9c6ff',
+              400: '#7ea6ff',
+              500: '#5b8eff',
+              600: '#3f71f5',
+              700: '#2f57d6',
+              800: '#273ea3',
+              900: '#22357f'
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Subtle noise background */
+    .grain { position: relative; }
+    .grain:before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.04"/></svg>');
+      mix-blend-mode: multiply; opacity:.6; border-radius: 1.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-800 antialiased">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#hero" class="flex items-center gap-3 group">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-100 ring-1 ring-brand-200">
+            <!-- minimal logo -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-brand-700">
+              <path d="M4 12a8 8 0 1016 0A8 8 0 004 12Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <div class="leading-tight">
+            <p class="font-semibold text-slate-900">Ekspor Impor UNDA</p>
+            <p class="text-xs text-slate-500">Minggu 4 • Riset Potensi Ekspor</p>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#overview" class="hover:text-brand-700">Overview</a>
+          <a href="#objectives" class="hover:text-brand-700">Tujuan</a>
+          <a href="#tools" class="hover:text-brand-700">Tools</a>
+          <a href="#steps" class="hover:text-brand-700">Langkah</a>
+          <a href="#case" class="hover:text-brand-700">Studi Kasus</a>
+          <a href="#task" class="hover:text-brand-700">Tugas</a>
+          <a href="#resources" class="hover:text-brand-700">Materi</a>
+        </nav>
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg border border-slate-200" aria-label="Toggle Menu">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200">
+      <div class="px-4 py-3 grid gap-3 text-sm">
+        <a href="#overview" class="py-2">Overview</a>
+        <a href="#objectives" class="py-2">Tujuan</a>
+        <a href="#tools" class="py-2">Tools</a>
+        <a href="#steps" class="py-2">Langkah</a>
+        <a href="#case" class="py-2">Studi Kasus</a>
+        <a href="#task" class="py-2">Tugas</a>
+        <a href="#resources" class="py-2">Materi</a>
+      </div>
+    </div>
+  </header>
 
-// Light theme-first landing page for Week 4 material: Export Product Potential Analysis
-// University: Universitas Darwan Ali – S1 Manajemen (Mata Kuliah Ekspor Impor)
-
-const FADE_UP = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const STAGGER = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-
-export default function Week4LandingPage() {
-  return (
-    <div className="min-h-screen bg-white text-slate-800 selection:bg-sky-200/60 selection:text-slate-900">
-      {/* Decorative background */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-x-0 top-[-8rem] -z-10 transform-gpu overflow-hidden blur-3xl" aria-hidden="true">
-          <div
-            className="relative left-1/2 aspect-[1155/678] w-[72.1875rem] -translate-x-1/2 bg-gradient-to-tr from-sky-200 via-indigo-100 to-emerald-100 opacity-60"
-            style={{ clipPath: "polygon(74% 44%, 100% 62%, 94% 100%, 64% 89%, 31% 100%, 0 76%, 8% 43%, 33% 22%, 63% 20%, 88% 34%)" }}
-          />
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 py-14 lg:py-20 items-center">
+        <div class="space-y-6">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-brand-50 text-brand-700 ring-1 ring-brand-200">Minggu 4 • Workshop Riset Pasar</span>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">Analisis Potensi <span class="text-brand-700">Produk Ekspor</span></h1>
+          <p class="text-slate-600 text-base sm:text-lg leading-relaxed">Pelajari cara menilai kelayakan produk untuk pasar internasional menggunakan data dan alat digital: Google Trends, ITC Trade Map, hingga pembuatan buyer persona.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#resources" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-sm">Lihat Materi</a>
+            <a href="#task" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">Tugas Minggu 4</a>
+          </div>
+          <div class="flex items-center gap-4 pt-2">
+            <div class="flex -space-x-2">
+              <span class="inline-flex h-8 w-8 rounded-full bg-brand-200 ring-2 ring-white"></span>
+              <span class="inline-flex h-8 w-8 rounded-full bg-brand-300 ring-2 ring-white"></span>
+              <span class="inline-flex h-8 w-8 rounded-full bg-brand-400 ring-2 ring-white"></span>
+            </div>
+            <p class="text-sm text-slate-500">Capaian: gunakan tools riset, pilih negara tujuan, susun argumen data-driven.</p>
+          </div>
         </div>
-        <div className="absolute inset-x-0 bottom-[-8rem] -z-10 transform-gpu overflow-hidden blur-3xl" aria-hidden="true">
-          <div
-            className="relative left-1/2 aspect-[1155/678] w-[72.1875rem] -translate-x-1/2 bg-gradient-to-tr from-emerald-100 via-sky-100 to-violet-100 opacity-70"
-            style={{ clipPath: "polygon(74% 44%, 100% 62%, 94% 100%, 64% 89%, 31% 100%, 0 76%, 8% 43%, 33% 22%, 63% 20%, 88% 34%)" }}
-          />
+        <div class="relative grain rounded-3xl p-1 bg-gradient-to-br from-brand-100 to-white ring-1 ring-inset ring-brand-200/60">
+          <div class="rounded-3xl p-6 bg-white shadow-xl">
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Card 1 -->
+              <div class="p-4 rounded-2xl ring-1 ring-slate-200 bg-slate-50">
+                <p class="text-xs text-slate-500 mb-1">Langkah</p>
+                <h3 class="font-semibold">Identifikasi Produk</h3>
+                <p class="text-sm text-slate-600">Telusuri keunikan & pasokan lokal.</p>
+              </div>
+              <!-- Card 2 -->
+              <div class="p-4 rounded-2xl ring-1 ring-slate-200 bg-slate-50">
+                <p class="text-xs text-slate-500 mb-1">Alat</p>
+                <h3 class="font-semibold">Google Trends</h3>
+                <p class="text-sm text-slate-600">Ukur minat & tren global.</p>
+              </div>
+              <!-- Card 3 -->
+              <div class="p-4 rounded-2xl ring-1 ring-slate-200 bg-slate-50">
+                <p class="text-xs text-slate-500 mb-1">Data</p>
+                <h3 class="font-semibold">ITC Trade Map</h3>
+                <p class="text-sm text-slate-600">Pilih negara tujuan potensial.</p>
+              </div>
+              <!-- Card 4 -->
+              <div class="p-4 rounded-2xl ring-1 ring-slate-200 bg-slate-50">
+                <p class="text-xs text-slate-500 mb-1">Output</p>
+                <h3 class="font-semibold">Buyer Persona</h3>
+                <p class="text-sm text-slate-600">Profil pembeli & preferensi.</p>
+              </div>
+            </div>
+            <div class="mt-4 text-xs text-slate-500">*Light theme • Responsif • Estetis</div>
+          </div>
         </div>
       </div>
-
-      {/* Navbar */}
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-slate-200/70">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-sky-400 to-emerald-400" />
-            <span className="font-semibold tracking-tight">Ekspor Impor – UNDA</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#topik" className="hover:text-sky-700 transition-colors">Topik</a>
-            <a href="#tujuan" className="hover:text-sky-700 transition-colors">Tujuan</a>
-            <a href="#tools" className="hover:text-sky-700 transition-colors">Tools</a>
-            <a href="#tugas" className="hover:text-sky-700 transition-colors">Tugas</a>
-            <a href="#jadwal" className="hover:text-sky-700 transition-colors">Jadwal</a>
-            <a href="#faq" className="hover:text-sky-700 transition-colors">FAQ</a>
-          </nav>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section id="hero" className="relative">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <motion.div variants={STAGGER} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }} className="grid lg:grid-cols-12 gap-10 items-center">
-            <motion.div variants={FADE_UP} className="lg:col-span-7">
-              <Badge className="bg-sky-100 text-sky-800 border border-sky-200 hover:bg-sky-100">Pertemuan 4</Badge>
-              <h1 className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
-                Analisis Potensi <span className="bg-gradient-to-tr from-sky-600 to-emerald-600 bg-clip-text text-transparent">Produk Ekspor</span>
-              </h1>
-              <p className="mt-4 text-base sm:text-lg text-slate-700 max-w-2xl">
-                Pelajari cara mengidentifikasi produk unggulan, membaca tren global, memetakan negara tujuan, dan menyusun argumen bisnis berbasis data. Materi disusun sesuai RPS mata kuliah Ekspor Impor – S1 Manajemen, Universitas Darwan Ali.
-              </p>
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg" className="rounded-2xl shadow-md">
-                  <a href="https://notebooklm.google.com/notebook/5ad0c753-0259-4caf-b636-870c4ec745f3" target="_blank" rel="noreferrer">
-                    <LinkIcon className="mr-2 h-4 w-4" /> Buka Materi Pendukung (NotebookLM)
-                  </a>
-                </Button>
-                <Button variant="outline" asChild size="lg" className="rounded-2xl">
-                  <a href="#tugas">
-                    <FileText className="mr-2 h-4 w-4" /> Lihat Tugas Mingguan
-                  </a>
-                </Button>
-              </div>
-              {/* Mini newsletter/cta (optional) */}
-              <div className="mt-8 hidden sm:flex items-center gap-2">
-                <Input placeholder="Tulis pertanyaan singkat kamu di sini…" className="h-12 rounded-2xl" />
-                <Button className="h-12 rounded-2xl">Kirim</Button>
-              </div>
-            </motion.div>
-
-            <motion.div variants={FADE_UP} className="lg:col-span-5">
-              <Card className="rounded-3xl shadow-xl border-slate-200/70">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-slate-900"><Rocket className="h-5 w-5 text-emerald-600" /> Ringkasan Minggu Ke-4</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4 text-sm text-slate-700">
-                  <div className="flex items-start gap-3">
-                    <Target className="h-5 w-5 text-sky-600 mt-0.5" />
-                    <p><span className="font-semibold">Sub-CPMK:</span> Mahasiswa mampu menggunakan tools untuk riset produk ekspor.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <BookOpen className="h-5 w-5 text-sky-600 mt-0.5" />
-                    <p><span className="font-semibold">Materi:</span> Riset pasar ekspor, Google Trends, ITC Trade Map, buyer persona.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <BarChart3 className="h-5 w-5 text-sky-600 mt-0.5" />
-                    <p><span className="font-semibold">Penilaian:</span> Tugas riset produk + negara tujuan (bobot 5%).</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Users className="h-5 w-5 text-sky-600 mt-0.5" />
-                    <p><span className="font-semibold">Metode:</span> Workshop riset pasar (luring) dan tutorial tools (daring).</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Topic Highlights */}
-      <section id="topik" className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={STAGGER} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Identifikasi Produk Unggulan",
-                desc: "Menilai keunikan, ketersediaan pasokan, dan nilai tambah produk lokal.",
-                icon: <CheckCircle2 className="h-5 w-5 text-emerald-600" />,
-              },
-              {
-                title: "Tren & Data Perdagangan",
-                desc: "Membaca tren pencarian global dan data arus ekspor-impor dunia.",
-                icon: <BarChart3 className="h-5 w-5 text-sky-600" />,
-              },
-              {
-                title: "Buyer Persona & Target Pasar",
-                desc: "Mendefinisikan profil pembeli ideal dan preferensi pasar tujuan.",
-                icon: <Globe2 className="h-5 w-5 text-indigo-600" />,
-              },
-            ].map((item, i) => (
-              <motion.div key={i} variants={FADE_UP}>
-                <Card className="rounded-3xl h-full border-slate-200/70 hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-slate-900">{item.icon}{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-slate-700 text-sm">{item.desc}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Learning Outcomes */}
-      <section id="tujuan" className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">Tujuan Pembelajaran</h2>
-            <p className="mt-3 text-slate-700">Setelah sesi ini, mahasiswa mampu mengidentifikasi produk potensial, membaca tren global, menentukan negara tujuan, dan menyusun argumen bisnis berbasis data.</p>
-          </div>
-          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {["Menggunakan Google Trends untuk tren permintaan", "Mengeksplor ITC Trade Map & HS Code", "Menganalisis kompetitor dan positioning harga", "Menyusun buyer persona dan preferensi pasar", "Menentukan prioritas negara tujuan ekspor", "Menyusun ringkasan rekomendasi bisnis"].map((text, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-2xl border border-slate-200/70 p-4">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" />
-                <span className="text-sm text-slate-700">{text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tools Section */}
-      <section id="tools" className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4 flex-wrap">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">Tools Riset yang Digunakan</h2>
-              <p className="mt-2 text-slate-700 max-w-2xl">Gunakan kombinasi data kualitatif dan kuantitatif untuk memetakan peluang ekspor secara akurat.</p>
-            </div>
-          </div>
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Google Trends",
-                desc: "Mengukur minat pencarian global untuk kata kunci produk dalam rentang waktu dan wilayah tertentu.",
-                tip: "Bandingkan beberapa kata kunci sekaligus untuk melihat pergeseran preferensi konsumen.",
-              },
-              {
-                name: "ITC Trade Map",
-                desc: "Melihat arus perdagangan dunia berdasarkan HS Code: negara pengekspor/pengimpor, nilai, dan tren.",
-                tip: "Gunakan 2–3 tahun terakhir untuk membaca momentum pasar.",
-              },
-              {
-                name: "Buyer Persona",
-                desc: "Profil pembeli ideal: segmen, preferensi kualitas/sertifikasi, saluran distribusi, sensitivitas harga.",
-                tip: "Sesuaikan kemasan & sertifikasi dengan ekspektasi pasar tujuan.",
-              },
-            ].map((t, i) => (
-              <Card key={i} className="rounded-3xl border-slate-200/70 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-slate-900">{t.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <p className="text-sm text-slate-700">{t.desc}</p>
-                  <div className="rounded-xl bg-sky-50 text-sky-900 text-xs p-3 border border-sky-100">
-                    <span className="font-medium">Tips:</span> {t.tip}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Assignment Section */}
-      <section id="tugas" className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7">
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">Tugas Mingguan (Bobot 5%)</h2>
-              <p className="mt-3 text-slate-700">Pilih satu produk lokal, tentukan negara tujuan utama, dan susun argumen berbasis data untuk menunjukkan kelayakan ekspor.</p>
-              <div className="mt-6 space-y-3">
-                {[
-                  { label: "Produk & HS Code", detail: "Sebutkan nama produk dan HS Code yang relevan (6 digit)." },
-                  { label: "Tren Permintaan", detail: "Tangkapan layar & interpretasi Google Trends (2–3 negara)." },
-                  { label: "Data Perdagangan", detail: "Ringkas temuan dari ITC Trade Map (nilai, pertumbuhan, 3 tujuan teratas)." },
-                  { label: "Buyer Persona", detail: "Profil pembeli (segmen, preferensi kualitas/sertifikasi, saluran)." },
-                  { label: "Strategi Masuk Pasar", detail: "Posisi harga, kemasan, sertifikasi yang dibutuhkan, dan channel distribusi." },
-                  { label: "Kesimpulan & Rekomendasi", detail: "Simpulkan kelayakan & langkah awal 90 hari." },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 rounded-2xl border border-slate-200/70 p-4">
-                    <FileText className="h-5 w-5 text-sky-600 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-slate-900">{item.label}</p>
-                      <p className="text-sm text-slate-700">{item.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6">
-                <Button asChild className="rounded-2xl">
-                  <a href="https://notebooklm.google.com/notebook/5ad0c753-0259-4caf-b636-870c4ec745f3" target="_blank" rel="noreferrer">
-                    <BookOpen className="mr-2 h-4 w-4" /> Baca Materi Pendukung – NotebookLM
-                  </a>
-                </Button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <Card className="rounded-3xl border-slate-200/70 shadow-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-slate-900">
-                    <CalendarDays className="h-5 w-5 text-emerald-600" /> Timeline Kegiatan
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4 text-sm text-slate-700">
-                  <div className="flex items-start gap-3">
-                    <div className="h-6 w-6 rounded-full bg-emerald-100 text-emerald-800 grid place-items-center text-[10px]">1</div>
-                    <p><span className="font-medium">Workshop kelas</span>: identifikasi produk + penyusunan kata kunci.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-6 w-6 rounded-full bg-sky-100 text-sky-800 grid place-items-center text-[10px]">2</div>
-                    <p><span className="font-medium">Eksplor tools</span>: Google Trends, ITC Trade Map (HS Code, negara tujuan).</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-6 w-6 rounded-full bg-indigo-100 text-indigo-800 grid place-items-center text-[10px]">3</div>
-                    <p><span className="font-medium">Draft laporan</span>: temuan awal + pertanyaan untuk dosen/mentor.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-6 w-6 rounded-full bg-violet-100 text-violet-800 grid place-items-center text-[10px]">4</div>
-                    <p><span className="font-medium">Submit akhir</span>: ringkas rekomendasi dan rencana 90 hari.</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">Pertanyaan yang Sering Diajukan</h2>
-            <p className="mt-3 text-slate-700">Beberapa klarifikasi umum terkait materi dan tugas minggu ini.</p>
-          </div>
-          <div className="mt-8 grid gap-4">
-            {[
-              {
-                q: "Apakah harus menggunakan kedua tools (Trends & ITC)?",
-                a: "Disarankan ya. Keduanya saling melengkapi: Trends untuk minat konsumen, ITC untuk arus perdagangan riil.",
-              },
-              {
-                q: "Bagaimana menentukan HS Code?",
-                a: "Mulai dari deskripsi produk, cari referensi HS 6 digit di portal resmi/ITC, lalu verifikasi dengan contoh produk serupa.",
-              },
-              {
-                q: "Berapa panjang laporan?",
-                a: "Ringkas 2–4 halaman dengan grafik/tangkapan layar penting dan poin rekomendasi yang jelas.",
-              },
-              {
-                q: "Bolehkah memilih lebih dari satu negara tujuan?",
-                a: "Boleh, namun tetap prioritaskan 1 negara utama agar argumentasi fokus dan mendalam.",
-              },
-            ].map((f, i) => (
-              <details key={i} className="group rounded-2xl border border-slate-200/70 p-4 open:shadow-sm">
-                <summary className="flex cursor-pointer list-none items-center justify-between">
-                  <span className="font-medium text-slate-900">{f.q}</span>
-                  <span className="text-slate-500 group-open:rotate-45 transition-transform">+</span>
-                </summary>
-                <p className="mt-2 text-sm text-slate-700">{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-200/70 py-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-slate-600">© {new Date().getFullYear()} Universitas Darwan Ali · Mata Kuliah Ekspor Impor</p>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" asChild className="rounded-2xl">
-              <a href="#hero"><Rocket className="mr-2 h-4 w-4" /> Kembali ke Atas</a>
-            </Button>
-            <Button asChild className="rounded-2xl">
-              <a href="https://notebooklm.google.com/notebook/5ad0c753-0259-4caf-b636-870c4ec745f3" target="_blank" rel="noreferrer">
-                <LinkIcon className="mr-2 h-4 w-4" /> Materi NotebookLM
-              </a>
-            </Button>
-          </div>
-        </div>
-      </footer>
     </div>
-  );
-}
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="py-12 border-t border-slate-200 bg-slate-50/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="md:col-span-2 space-y-4">
+          <h2 class="text-2xl font-bold text-slate-900">Overview Materi</h2>
+          <p class="text-slate-600 leading-relaxed">Fokus Minggu 4 adalah mengevaluasi kelayakan produk untuk ekspor menggunakan pendekatan berbasis data. Mahasiswa akan belajar menilai tren permintaan, peta perdagangan internasional, posisi kompetitif Indonesia, hingga menyusun buyer persona untuk menyelaraskan strategi pemasaran lintas negara.</p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+              <p class="text-xs text-slate-500">Sub-CPMK</p>
+              <p class="font-medium">Mampu menggunakan tools untuk riset produk ekspor</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+              <p class="text-xs text-slate-500">Bobot Penilaian</p>
+              <p class="font-medium">5% • Tugas riset produk & negara tujuan</p>
+            </div>
+          </div>
+        </div>
+        <aside class="space-y-4">
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-white to-brand-50 ring-1 ring-brand-200/60">
+            <h3 class="font-semibold mb-1">Quick Facts</h3>
+            <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1">
+              <li>Workshop riset pasar (luring)</li>
+              <li>Tutorial tools riset (daring)</li>
+              <li>Output: ringkasan data & rekomendasi tujuan ekspor</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+            <h3 class="font-semibold mb-2">Komponen Penilaian</h3>
+            <div class="flex items-center justify-between text-sm py-1"><span>Ketepatan analisis</span><span class="font-medium">40%</span></div>
+            <div class="flex items-center justify-between text-sm py-1"><span>Relevansi data</span><span class="font-medium">35%</span></div>
+            <div class="flex items-center justify-between text-sm py-1"><span>Argumentasi & komunikasi</span><span class="font-medium">25%</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section id="objectives" class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Tujuan & Capaian Pembelajaran</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <ul class="bg-white p-6 rounded-2xl ring-1 ring-slate-200 space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-1 h-5 w-5 inline-flex items-center justify-center rounded-full bg-brand-100 text-brand-700">1</span> Mengidentifikasi produk unggulan lokal dan nilai tambahnya.</li>
+          <li class="flex gap-3"><span class="mt-1 h-5 w-5 inline-flex items-center justify-center rounded-full bg-brand-100 text-brand-700">2</span> Mengukur minat pasar global melalui Google Trends.</li>
+          <li class="flex gap-3"><span class="mt-1 h-5 w-5 inline-flex items-center justify-center rounded-full bg-brand-100 text-brand-700">3</span> Mengevaluasi tujuan ekspor dengan data ITC Trade Map (HS Code, volume, pertumbuhan).</li>
+          <li class="flex gap-3"><span class="mt-1 h-5 w-5 inline-flex items-center justify-center rounded-full bg-brand-100 text-brand-700">4</span> Menyusun buyer persona & implikasinya terhadap strategi masuk pasar.</li>
+        </ul>
+        <div class="bg-gradient-to-br from-brand-50 to-white p-6 rounded-2xl ring-1 ring-brand-200/60">
+          <h3 class="font-semibold mb-3">Hasil Akhir</h3>
+          <p class="text-slate-700">Mini laporan berbasis data (2–4 halaman) berisi: pilihan produk, negara tujuan, ringkasan data tren & perdagangan, buyer persona, serta rekomendasi awal strategi.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="px-3 py-1 rounded-full bg-white ring-1 ring-slate-200">Data-driven</span>
+            <span class="px-3 py-1 rounded-full bg-white ring-1 ring-slate-200">Praktis</span>
+            <span class="px-3 py-1 rounded-full bg-white ring-1 ring-slate-200">Kontekstual</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools" class="py-12 bg-slate-50/60 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4 mb-6">
+        <h2 class="text-2xl font-bold text-slate-900">Tools Riset Pasar Ekspor</h2>
+        <div class="text-sm text-slate-500">Klik untuk detail</div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Tool card template -->
+        <button data-accordion class="text-left bg-white p-6 rounded-2xl ring-1 ring-slate-200 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">Google Trends</h3>
+              <p class="text-sm text-slate-600">Mengukur minat pencarian & seasonality</p>
+            </div>
+            <span class="text-slate-400">+</span>
+          </div>
+          <div class="mt-4 hidden text-sm text-slate-700 space-y-2">
+            <p>Cara pakai: cari kata kunci produk; atur rentang 12–24 bulan; filter negara; bandingkan beberapa istilah.</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>Identifikasi tren naik/turun</li>
+              <li>Lihat minat per wilayah</li>
+              <li>Catat musiman/seasonality</li>
+            </ul>
+          </div>
+        </button>
+        <button data-accordion class="text-left bg-white p-6 rounded-2xl ring-1 ring-slate-200 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">ITC Trade Map</h3>
+              <p class="text-sm text-slate-600">Data perdagangan: volume, pertumbuhan, negara tujuan</p>
+            </div>
+            <span class="text-slate-400">+</span>
+          </div>
+          <div class="mt-4 hidden text-sm text-slate-700 space-y-2">
+            <p>Masukkan HS Code produk; tinjau importers terbesar; cek pertumbuhan 5 tahun; bandingkan posisi Indonesia vs kompetitor.</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>Top importers & market share</li>
+              <li>Tarif & hambatan (jika tersedia)</li>
+              <li>Tren CAGR & dinamika pasar</li>
+            </ul>
+          </div>
+        </button>
+        <button data-accordion class="text-left bg-white p-6 rounded-2xl ring-1 ring-slate-200 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">Buyer Persona</h3>
+              <p class="text-sm text-slate-600">Profil pembeli ideal & preferensi</p>
+            </div>
+            <span class="text-slate-400">+</span>
+          </div>
+          <div class="mt-4 hidden text-sm text-slate-700 space-y-2">
+            <p>Definisikan segmen (industri/retail), lokasi, preferensi (harga, sertifikasi, kemasan), dan saluran distribusi.</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>Gunakan 1–2 persona untuk fokus</li>
+              <li>Turunkan implikasi strategi</li>
+              <li>Hubungkan dengan positioning</li>
+            </ul>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS / TIMELINE -->
+  <section id="steps" class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8">Langkah Analisis (Praktikum)</h2>
+      <ol class="relative border-s border-transparent grid gap-6">
+        <li class="relative pl-10">
+          <span class="absolute left-0 top-1.5 h-6 w-6 rounded-full bg-brand-100 ring-1 ring-brand-200 flex items-center justify-center text-xs font-semibold text-brand-700">1</span>
+          <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+            <h3 class="font-semibold">Identifikasi Produk Unggulan</h3>
+            <p class="text-slate-700 text-sm">Telusuri keunikan, ketersediaan pasokan, dan nilai tambah lokal.</p>
+          </div>
+        </li>
+        <li class="relative pl-10">
+          <span class="absolute left-0 top-1.5 h-6 w-6 rounded-full bg-brand-100 ring-1 ring-brand-200 flex items-center justify-center text-xs font-semibold text-brand-700">2</span>
+          <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+            <h3 class="font-semibold">Ukur Tren Permintaan</h3>
+            <p class="text-slate-700 text-sm">Gunakan Google Trends untuk melihat minat global dan seasonality.</p>
+          </div>
+        </li>
+        <li class="relative pl-10">
+          <span class="absolute left-0 top-1.5 h-6 w-6 rounded-full bg-brand-100 ring-1 ring-brand-200 flex items-center justify-center text-xs font-semibold text-brand-700">3</span>
+          <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+            <h3 class="font-semibold">Analisis Data Perdagangan</h3>
+            <p class="text-slate-700 text-sm">Pakai ITC Trade Map: top importers, market share, dan tren pertumbuhan.</p>
+          </div>
+        </li>
+        <li class="relative pl-10">
+          <span class="absolute left-0 top-1.5 h-6 w-6 rounded-full bg-brand-100 ring-1 ring-brand-200 flex items-center justify-center text-xs font-semibold text-brand-700">4</span>
+          <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+            <h3 class="font-semibold">Susun Buyer Persona</h3>
+            <p class="text-slate-700 text-sm">Definisikan pembeli ideal dan implikasi strategi masuk pasar.</p>
+          </div>
+        </li>
+        <li class="relative pl-10">
+          <span class="absolute left-0 top-1.5 h-6 w-6 rounded-full bg-brand-100 ring-1 ring-brand-200 flex items-center justify-center text-xs font-semibold text-brand-700">5</span>
+          <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+            <h3 class="font-semibold">Rumuskan Rekomendasi</h3>
+            <p class="text-slate-700 text-sm">Pilih 1–2 negara tujuan prioritas dengan alasan berbasis data.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section id="case" class="py-12 bg-slate-50/60 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 mb-3">Studi Kasus: Madu Hutan → Jepang</h2>
+          <p class="text-slate-700 mb-4">Contoh penerapan analisis potensi produk ekspor untuk produk khas Indonesia dengan positioning <em>eco-friendly</em>.</p>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li><span class="font-semibold">Produk:</span> Madu hutan alami dengan narasi keberlanjutan.</li>
+            <li><span class="font-semibold">Tren:</span> Pencarian madu organik meningkat (Google Trends).</li>
+            <li><span class="font-semibold">Perdagangan:</span> Jepang importir madu besar; peluang diferensiasi kualitas (ITC Trade Map).</li>
+            <li><span class="font-semibold">Buyer Persona:</span> Toko organik & produsen makanan sehat di Jepang.</li>
+            <li><span class="font-semibold">Rekomendasi:</span> Sertifikasi, kemasan bilingual, kanal distributor spesialis.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl p-6 bg-white ring-1 ring-slate-200 shadow-sm">
+          <h3 class="font-semibold mb-4">Template Ringkasan Analisis</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-sm">
+            <div class="p-3 rounded-xl bg-slate-50 ring-1 ring-slate-200"><span class="text-slate-500">HS Code</span><p class="font-medium">(isi sesuai produk)</p></div>
+            <div class="p-3 rounded-xl bg-slate-50 ring-1 ring-slate-200"><span class="text-slate-500">Top Importers</span><p class="font-medium">JPN, KOR, SGP…</p></div>
+            <div class="p-3 rounded-xl bg-slate-50 ring-1 ring-slate-200"><span class="text-slate-500">Trend 12–24 bln</span><p class="font-medium">Naik / Turun / Musiman</p></div>
+            <div class="p-3 rounded-xl bg-slate-50 ring-1 ring-slate-200"><span class="text-slate-500">Buyer Persona</span><p class="font-medium">Retail organik, pabrik makanan sehat</p></div>
+            <div class="p-3 rounded-xl bg-slate-50 ring-1 ring-slate-200"><span class="text-slate-500">Kekuatan</span><p class="font-medium">Keunikan, narasi sustainability</p></div>
+            <div class="p-3 rounded-xl bg-slate-50 ring-1 ring-slate-200"><span class="text-slate-500">Risiko</span><p class="font-medium">Standar mutu, pasokan stabil</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASK -->
+  <section id="task" class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-6 items-start">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">Tugas Minggu 4: Riset Produk & Negara Tujuan</h2>
+          <p class="text-slate-700 mb-4">Susun mini-laporan (2–4 halaman) berisi pilihan produk, 1–2 negara tujuan prioritas, data pendukung (Trends & Trade Map), buyer persona, dan rekomendasi strategi. Gunakan format ringkas namun tajam.</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+              <h3 class="font-semibold mb-2">Rubrik Penilaian</h3>
+              <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1">
+                <li>Ketepatan analisis & logika (40%)</li>
+                <li>Relevansi & kualitas data (35%)</li>
+                <li>Argumentasi & komunikasi (25%)</li>
+              </ul>
+            </div>
+            <div class="p-5 rounded-2xl bg-white ring-1 ring-slate-200">
+              <h3 class="font-semibold mb-2">Output yang Diharapkan</h3>
+              <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1">
+                <li>Tabel ringkas data utama</li>
+                <li>Persona pembeli (1–2)</li>
+                <li>Negara prioritas & alasannya</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <aside class="space-y-4">
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-white to-brand-50 ring-1 ring-brand-200/60">
+            <h3 class="font-semibold mb-2">Tips Praktis</h3>
+            <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1">
+              <li>Bandingkan 2–3 kata kunci di Google Trends</li>
+              <li>Gunakan HS Code yang paling spesifik</li>
+              <li>Tulis rekomendasi yang dapat ditindaklanjuti</li>
+            </ul>
+          </div>
+          <button id="downloadTemplate" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-sm">Unduh Template (.docx)</button>
+          <p id="downloadInfo" class="text-xs text-slate-500 hidden">Template berhasil dibuat. Silakan unduh berkas dari bagian bawah halaman.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="resources" class="py-12 bg-slate-50/60 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 mb-3">Materi & Referensi</h2>
+          <p class="text-slate-700 mb-4">Akses materi pendukung resmi untuk pendalaman dan latihan:</p>
+          <ul class="space-y-3">
+            <li class="p-5 rounded-2xl bg-white ring-1 ring-slate-200 flex items-start gap-4">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-100 ring-1 ring-brand-200">📘</span>
+              <div>
+                <p class="font-medium">Notebook Materi Minggu 4</p>
+                <a href="https://notebooklm.google.com/notebook/5ad0c753-0259-4caf-b636-870c4ec745f3" target="_blank" rel="noopener" class="text-brand-700 hover:underline">Buka tautan materi</a>
+              </div>
+            </li>
+            <li class="p-5 rounded-2xl bg-white ring-1 ring-slate-200 flex items-start gap-4">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-100 ring-1 ring-brand-200">📊</span>
+              <div>
+                <p class="font-medium">ITC Trade Map</p>
+                <p class="text-sm text-slate-600">Gunakan untuk mengecek importers & tren pertumbuhan 5 tahun.</p>
+              </div>
+            </li>
+            <li class="p-5 rounded-2xl bg-white ring-1 ring-slate-200 flex items-start gap-4">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-100 ring-1 ring-brand-200">🔎</span>
+              <div>
+                <p class="font-medium">Google Trends</p>
+                <p class="text-sm text-slate-600">Bandingkan 2–3 istilah kunci untuk mengukur minat.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="rounded-3xl p-6 bg-white ring-1 ring-slate-200 shadow-sm">
+          <h3 class="font-semibold mb-3">FAQ Cepat</h3>
+          <div class="divide-y divide-slate-200">
+            <details class="py-3 group">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <span class="font-medium">Apakah semua produk lokal layak diekspor?</span>
+                <span class="text-slate-400 group-open:rotate-45 transition">+</span>
+              </summary>
+              <p class="mt-2 text-sm text-slate-700">Tidak. Prioritaskan produk dengan tren permintaan positif, standar kualitas terpenuhi, pasokan stabil, dan harga kompetitif.</p>
+            </details>
+            <details class="py-3 group">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <span class="font-medium">Bagaimana memilih HS Code?</span>
+                <span class="text-slate-400 group-open:rotate-45 transition">+</span>
+              </summary>
+              <p class="mt-2 text-sm text-slate-700">Mulai dari deskripsi produk → temukan HS 6 digit → cocokkan dengan referensi resmi dan cek subkategori yang paling relevan.</p>
+            </details>
+            <details class="py-3 group">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <span class="font-medium">Berapa negara tujuan yang dianalisis?</span>
+                <span class="text-slate-400 group-open:rotate-45 transition">+</span>
+              </summary>
+              <p class="mt-2 text-sm text-slate-700">Fokus pada 1–2 negara prioritas untuk analisis mendalam dan rekomendasi yang dapat ditindaklanjuti.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-brand-50 to-white ring-1 ring-brand-200/60 text-center">
+        <h2 class="text-2xl font-bold text-slate-900">Siap mulai riset potensi ekspor?</h2>
+        <p class="text-slate-700 mt-2">Buka materi, pilih produk unggulanmu, dan buktikan dengan data.</p>
+        <div class="mt-5 flex flex-wrap justify-center gap-3">
+          <a href="#task" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow">Lihat Tugas</a>
+          <a href="https://notebooklm.google.com/notebook/5ad0c753-0259-4caf-b636-870c4ec745f3" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">Buka Materi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+      <p>© <span id="year"></span> Program Studi S1 Manajemen — Universitas Darwan Ali</p>
+      <div class="flex items-center gap-4">
+        <a href="#overview" class="hover:text-slate-700">Tentang Materi</a>
+        <a href="#resources" class="hover:text-slate-700">Referensi</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="toTop" class="fixed bottom-6 right-6 hidden p-3 rounded-full bg-white ring-1 ring-slate-200 shadow hover:shadow-md" aria-label="Kembali ke atas">
+    ↑
+  </button>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Accordion toggle for tools
+    document.querySelectorAll('[data-accordion]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const content = card.querySelector('div.mt-4');
+        content.classList.toggle('hidden');
+      });
+    });
+
+    // Back to top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) toTop.classList.remove('hidden');
+      else toTop.classList.add('hidden');
+    });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Template download (client-side minimal .docx via data URI fallback to .txt)
+    // Simpler: generate a .txt with template content; user dapat konversi ke .docx jika diperlukan.
+    const tmpl = `TEMPLATE RINGKASAN ANALISIS – MINGGU 4\n\n1. Produk: ______________________________\n2. HS Code (6 digit): ____________________\n3. Google Trends (12–24 bln):\n   - Kata kunci: __________________________\n   - Pola tren: Naik/Turun/Musiman\n   - Negara dengan minat tinggi: __________\n\n4. ITC Trade Map:\n   - Top importers: _______________________\n   - Pertumbuhan 5 thn (CAGR): ____________\n   - Posisi Indonesia vs kompetitor: ______\n\n5. Buyer Persona (1–2):\n   - Segmen: ______________________________\n   - Lokasi: ______________________________\n   - Preferensi (harga/sertifikasi/kemasan):\n     ______________________________________\n   - Kanal distribusi: ____________________\n\n6. Rekomendasi Negara Tujuan (1–2):\n   - Negara 1: __________ | Alasan: _______\n   - Negara 2: __________ | Alasan: _______\n\n7. Catatan Risiko & Mitigasi: ____________\n\n8. Kesimpulan & Langkah Lanjut: __________`;
+
+    document.getElementById('downloadTemplate').addEventListener('click', () => {
+      const blob = new Blob([tmpl], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Template_Minggu4_Riset_Potensi_Ekspor.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      document.getElementById('downloadInfo').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
