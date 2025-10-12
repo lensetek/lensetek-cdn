@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Materi 4 — Perusahaan Efek & Emiten | Pengantar Pasar Modal</title>
-  <meta name="description" content="Materi 4: Perusahaan Efek & Emiten. Pendalaman IPO, underwriter, broker/WPPE, emiten & perusahaan publik, hak pemegang saham, lembaga pasar modal. Disertai video, ringkasan, dan tautan."/>
+  <meta name="description" content="Materi 4: Perusahaan Efek & Emiten. Pendalaman IPO, underwriter, broker/WPPE, emiten & perusahaan publik, hak pemegang saham, lembaga pasar modal. Disertai video, ringkasan, dan tautan." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -41,31 +41,44 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 12px 20px;
       flex-wrap: wrap;
     }
     .brand {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 18px;
+      flex-direction: column;
+      align-items: flex-start;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .brand span {
+      display: block;
     }
     .pill {
-      padding: 2px 6px;
+      display: inline-block;
+      margin-top: 4px;
+      padding: 3px 8px;
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 12px;
       color: var(--muted);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
     }
     nav a.btn {
       background: var(--card);
       border: 1px solid var(--line);
       padding: 8px 12px;
       border-radius: 8px;
-      margin: 4px;
       color: var(--ink);
+      font-weight: 500;
     }
 
     .hero {
@@ -171,6 +184,12 @@
     }
 
     @media (min-width: 768px) {
+      .brand {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        font-size: 18px;
+      }
       .hero {
         flex-direction: row;
         justify-content: space-between;
@@ -186,7 +205,9 @@
   <header>
     <div class="nav">
       <div class="brand">
-        <span>Pengantar Pasar Modal</span>
+        <span>Pengantar</span>
+        <span>Pasar</span>
+        <span>Modal</span>
         <span class="pill">Materi 4</span>
       </div>
       <nav>
