@@ -575,4 +575,19 @@ Catatan:
     document.getElementById('calcDown')?.addEventListener('click', ()=>simulate(-0.03));
 
     // Copy all links
-    document
+    document.getElementById('copyLinks')?.addEventListener('click', async () => {
+      const links = [
+        'Materi 7 (NotebookLM): https://notebooklm.google.com/notebook/40ba028c-e23b-43b6-ace7-57bddc16ebec',
+        'Chatbot AI: https://chatgpt.com/g/g-EW0YdkPwu-international-business-course-with-lensetek-llc'
+      ].join('\n');
+      try {
+        await navigator.clipboard.writeText(links);
+        document.getElementById('copyMsg').textContent = '✅ Tautan disalin ke clipboard.';
+      } catch {
+        document.getElementById('copyMsg').textContent = 'Salin gagal. Silakan salin manual.';
+      }
+      setTimeout(()=>{ document.getElementById('copyMsg').textContent = ''; }, 3000);
+    });
+  </script>
+</body>
+</html>
