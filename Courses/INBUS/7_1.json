@@ -1,0 +1,62 @@
+{
+  "minggu_ke": 7,
+  "topik": "Valuta Asing dan Pasar Keuangan Internasional",
+  "tujuan_pembelajaran": "Mahasiswa mampu memahami valuta asing dan pasar keuangan internasional.",
+  "bahan_kajian": {
+    "1": {
+      "judul": "Pengertian Valuta Asing",
+      "isi": [
+        "Valuta asing (foreign exchange) adalah mata uang asing yang digunakan sebagai alat pembayaran internasional.",
+        "Fungsi valuta asing: alat pembayaran internasional, alat investasi/spekulasi, pengendali ekonomi, cadangan devisa negara."
+      ],
+      "contoh_mata_uang": ["USD", "EUR", "JPY", "GBP"]
+    },
+    "2": {
+      "judul": "Pasar Valuta Asing",
+      "isi": [
+        "Pasar valuta asing adalah tempat terjadinya transaksi jual-beli mata uang antarnegara secara global dan terdesentralisasi.",
+        "Pelaku utama: bank sentral, bank komersial, perusahaan multinasional, pialang, investor individu.",
+        "Jenis transaksi: spot, forward, swap, futures, options."
+      ]
+    },
+    "3": {
+      "judul": "Kurs Valuta Asing (Exchange Rate)",
+      "isi": [
+        "Kurs adalah harga satu mata uang terhadap mata uang lainnya.",
+        "Jenis kurs: tetap (fixed), mengambang (floating), dan mengambang terkendali (managed float).",
+        "Faktor yang memengaruhi: inflasi, suku bunga, neraca perdagangan, stabilitas politik, spekulasi, intervensi bank sentral."
+      ]
+    },
+    "4": {
+      "judul": "Pasar Keuangan Internasional",
+      "isi": [
+        "Pasar keuangan internasional adalah sistem global yang mempertemukan peminjam (borrower) dan pemberi pinjaman (lender) lintas negara.",
+        "Fungsi: pendanaan lintas negara, investasi internasional, hedging, dan mobilitas modal global.",
+        "Jenis pasar: pasar uang internasional (Eurocurrency Market), pasar modal internasional (International Capital Market), pasar derivatif internasional."
+      ]
+    },
+    "5": {
+      "judul": "Keterkaitan dengan Bisnis Internasional",
+      "isi": [
+        "Fluktuasi nilai tukar mempengaruhi keuntungan perusahaan internasional.",
+        "Rupiah menguat → pendapatan ekspor turun; Rupiah melemah → pendapatan ekspor naik.",
+        "Strategi perusahaan: hedging, diversifikasi mata uang, menetapkan harga dalam mata uang domestik, produksi multinasional."
+      ]
+    },
+    "6": {
+      "judul": "Peran Bank Sentral dan IMF",
+      "isi": [
+        "Bank Sentral: menjaga stabilitas nilai tukar dengan intervensi pasar valas.",
+        "IMF: memberikan pinjaman dan bimbingan kebijakan moneter bagi negara yang mengalami krisis valuta asing."
+      ]
+    }
+  },
+  "kesimpulan": {
+    "Valuta_Asing": "Mata uang asing yang digunakan dalam transaksi global.",
+    "Pasar_Valas": "Tempat transaksi jual beli mata uang antarnegara.",
+    "Kurs": "Harga tukar antar mata uang yang memengaruhi ekspor, impor, dan investasi.",
+    "Pasar_Keuangan_Internasional": "Sistem pendanaan lintas negara yang mendukung kegiatan bisnis global."
+  },
+  "referensi": [
+    "Czinkota, Ronkainen & Moffet. (2006). International Business. The Dryden Press.",
+    "Charles W.L.
