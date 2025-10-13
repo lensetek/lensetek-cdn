@@ -1,90 +1,578 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Materi 7 - Valuta Asing & Pasar Keuangan Internasional</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minggu 7 — Valuta Asing & Pasar Keuangan Internasional | Bisnis Internasional</title>
+  <meta name="description" content="Landing page materi pertemuan ke-7: Valuta Asing dan Pasar Keuangan Internasional (MKW357). Ringkas, interaktif, dan cantik dengan Tailwind CSS." />
+  <link rel="icon" href="data:image/svg+xml,%F0%9F%8C%8D" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
+    /* Custom light theme tweaks */
+    :root{
+      --ring: rgba(15,118,110,.25);
+    }
+    html { scroll-behavior: smooth; }
+    .card {
+      background: #fff;
+      border: 1px solid rgba(2,6,23,.06);
+      box-shadow:
+        0 1px 1px rgba(2,6,23,.02),
+        0 8px 24px rgba(2,6,23,.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 2px 2px rgba(2,6,23,.02),
+        0 16px 40px rgba(2,6,23,.10);
+    }
+    .glass {
+      background: rgba(255,255,255,.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(2,6,23,.06);
+    }
+    .ring-focus:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 6px var(--ring);
     }
   </style>
 </head>
-<body class="bg-white text-gray-800">
-  <!-- Header -->
-  <header class="bg-blue-600 text-white shadow-md">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Bisnis Internasional</h1>
-      <nav class="space-x-4">
-        <a href="#" class="hover:underline">Beranda</a>
-        <a href="#" class="hover:underline">Materi</a>
-        <a href="#" class="hover:underline">Kontak</a>
+<body class="bg-slate-50 text-slate-800">
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50 glass">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-2 font-semibold tracking-tight">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-teal-600 text-white">IB</span>
+          <span>Bisnis Internasional — MKW357</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#overview" class="hover:text-teal-700">Ringkasan</a>
+          <a href="#objectives" class="hover:text-teal-700">Tujuan</a>
+          <a href="#topics" class="hover:text-teal-700">Materi</a>
+          <a href="#practice" class="hover:text-teal-700">Latihan</a>
+          <a href="#resources" class="hover:text-teal-700">Sumber</a>
+        </nav>
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-slate-100 ring-focus" aria-label="Buka menu">
+          <!-- menu icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200">
+      <nav class="mx-auto max-w-7xl px-4 py-3 flex flex-col gap-3 text-sm">
+        <a href="#overview" class="hover:text-teal-700">Ringkasan</a>
+        <a href="#objectives" class="hover:text-teal-700">Tujuan</a>
+        <a href="#topics" class="hover:text-teal-700">Materi</a>
+        <a href="#practice" class="hover:text-teal-700">Latihan</a>
+        <a href="#resources" class="hover:text-teal-700">Sumber</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gray-100 py-20">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-extrabold mb-4 text-blue-700">Materi 7</h2>
-      <p class="text-xl">Valuta Asing & Pasar Keuangan Internasional</p>
+  <!-- Hero -->
+  <section id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 opacity-60" aria-hidden="true">
+      <svg class="w-[140%] -left-1/4 absolute -top-24" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g opacity=".18">
+          <circle cx="150" cy="150" r="280" fill="#14b8a6"/>
+          <circle cx="1050" cy="150" r="220" fill="#0ea5e9"/>
+          <circle cx="800" cy="520" r="300" fill="#22d3ee"/>
+        </g>
+      </svg>
+    </div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium ring-1 ring-slate-200">
+            <span class="inline-block h-2 w-2 rounded-full bg-teal-600"></span>Minggu 7
+          </span>
+          <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+            Valuta Asing & Pasar Keuangan Internasional
+          </h1>
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Pahami bagaimana nilai tukar terbentuk, siapa pemain kuncinya, dan strategi melindungi bisnis dari risiko kurs. Materi dirancang ringkas, interaktif, dan siap pakai untuk UTS.
+          </p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#topics" class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-white hover:bg-teal-700 ring-focus">
+              Mulai Belajar
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mr-1" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.5 4.5a1 1 0 0 1 1 1v4.75h4.75a1 1 0 1 1 0 2H14.5v4.75a1 1 0 1 1-2 0V12H7.75a1 1 0 1 1 0-2H12V5.5a1 1 0 0 1 1-1z"/>
+              </svg>
+            </a>
+            <a href="https://notebooklm.google.com/notebook/40ba028c-e23b-43b6-ace7-57bddc16ebec" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50 ring-focus">
+              Materi 7 (NotebookLM)
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mr-1" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.5 3a1 1 0 0 1 1 1v5h5a1 1 0 1 1 0 2h-5v5a1 1 0 1 1-2 0v-5h-5a1 1 0 1 1 0-2h5V4a1 1 0 0 1 1-1z"/>
+              </svg>
+            </a>
+            <a href="https://chatgpt.com/g/g-EW0YdkPwu-international-business-course-with-lensetek-llc" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50 ring-focus">
+              Chatbot AI Kelas
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mr-1" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3c4.97 0 9 3.134 9 7 0 2.036-1.176 3.86-3.02 5.063l.472 3.247a.75.75 0 0 1-1.104.77L13.5 17.64a10.98 10.98 0 0 1-1.5.11c-4.97 0-9-3.134-9-7s4.03-7 9-7z"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="mt-6 text-xs text-slate-500">*Link resmi materi & asisten belajar.</div>
+        </div>
+
+        <div class="card rounded-2xl p-6">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-xl bg-gradient-to-br from-teal-50 to-white p-5 ring-1 ring-slate-200">
+              <p class="text-xs font-medium text-teal-700">Fokus</p>
+              <h3 class="mt-1 text-lg font-semibold">Kurs & Risiko</h3>
+              <p class="mt-2 text-sm text-slate-600">Fixed vs Floating, faktor penentu kurs, dan volatilitas.</p>
+            </div>
+            <div class="rounded-xl bg-gradient-to-br from-sky-50 to-white p-5 ring-1 ring-slate-200">
+              <p class="text-xs font-medium text-sky-700">Instrumen</p>
+              <h3 class="mt-1 text-lg font-semibold">Hedging</h3>
+              <p class="mt-2 text-sm text-slate-600">Forward, futures, swap, dan opsi mata uang.</p>
+            </div>
+            <div class="rounded-xl bg-gradient-to-br from-amber-50 to-white p-5 ring-1 ring-slate-200">
+              <p class="text-xs font-medium text-amber-700">Pelaku</p>
+              <h3 class="mt-1 text-lg font-semibold">Pasar Valas</h3>
+              <p class="mt-2 text-sm text-slate-600">Bank sentral, bank, MNC, broker, spekulan.</p>
+            </div>
+            <div class="rounded-xl bg-gradient-to-br from-fuchsia-50 to-white p-5 ring-1 ring-slate-200">
+              <p class="text-xs font-medium text-fuchsia-700">Pasar</p>
+              <h3 class="mt-1 text-lg font-semibold">Keuangan Global</h3>
+              <p class="mt-2 text-sm text-slate-600">Eurocurrency, modal & derivatif internasional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div id="overview" class="mt-10 lg:mt-14">
+        <div class="card rounded-2xl p-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-semibold">Ringkasan Pertemuan</h2>
+              <p class="mt-1 text-sm text-slate-600">3 × 50 menit • teori + studi kasus + latihan cepat</p>
+            </div>
+            <div class="w-full md:w-auto">
+              <div class="flex items-center gap-3">
+                <div class="h-2 w-44 rounded-full bg-slate-200 overflow-hidden">
+                  <div class="h-full w-3/4 bg-teal-600"></div>
+                </div>
+                <span class="text-xs text-slate-500">75% inti kurikulum valas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- Content Section -->
-  <section class="container mx-auto px-4 py-16 space-y-12">
-    <!-- 1 -->
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-2xl font-semibold mb-2 text-blue-600">Apa itu Valuta Asing?</h3>
-      <p>Valuta asing adalah mata uang dari negara lain yang digunakan dalam transaksi internasional. Contohnya, pembayaran impor barang Jepang menggunakan Yen (JPY).</p>
-    </div>
-    
-    <!-- 2 -->
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-2xl font-semibold mb-2 text-blue-600">Kurs & Jenisnya</h3>
-      <ul class="list-disc list-inside space-y-1">
-        <li>Kurs Tetap (Fixed)</li>
-        <li>Kurs Mengambang (Floating)</li>
-        <li>Kurs Mengambang Terkendali</li>
-      </ul>
-    </div>
-
-    <!-- 3 -->
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-2xl font-semibold mb-2 text-blue-600">Pasar Valuta Asing</h3>
-      <p>Pasar tempat mata uang dipertukarkan secara global selama 24 jam, melibatkan bank, perusahaan multinasional, dan spekulan.</p>
-    </div>
-
-    <!-- 4 -->
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-2xl font-semibold mb-2 text-blue-600">Risiko dan Strategi</h3>
-      <p>Risiko kurs dapat dikurangi dengan <strong>hedging</strong>, diversifikasi mata uang, dan netting transaksi lintas negara.</p>
-    </div>
-
-    <!-- 5 -->
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-2xl font-semibold mb-2 text-blue-600">Pasar Keuangan Internasional</h3>
-      <p>Menjadi sumber modal global bagi perusahaan, menyediakan instrumen seperti saham internasional, obligasi global, dan derivatif keuangan.</p>
+  <!-- Objectives -->
+  <section id="objectives" class="py-12 lg:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-1">
+          <h2 class="text-2xl font-bold">Tujuan Pembelajaran</h2>
+          <p class="mt-2 text-slate-600">Mahasiswa mampu memahami valuta asing & pasar keuangan internasional dan menerapkan strategi mitigasi risiko kurs dalam konteks bisnis global.</p>
+        </div>
+        <div class="lg:col-span-2 grid sm:grid-cols-2 gap-6">
+          <div class="card rounded-xl p-5">
+            <h3 class="font-semibold">Pengetahuan</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li>• Menjelaskan definisi & fungsi valuta asing.</li>
+              <li>• Menguraikan pelaku & mekanisme pasar valas.</li>
+              <li>• Membedakan fixed, floating, managed float.</li>
+            </ul>
+          </div>
+          <div class="card rounded-xl p-5">
+            <h3 class="font-semibold">Keterampilan</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li>• Mengestimasi dampak perubahan kurs ke laba.</li>
+              <li>• Memilih instrumen hedging yang relevan.</li>
+              <li>• Menyusun kebijakan harga lintas mata uang.</li>
+            </ul>
+          </div>
+          <div class="card rounded-xl p-5">
+            <h3 class="font-semibold">Sikap</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li>• Berpikir kritis & berbasis data.</li>
+              <li>• Taat etika & regulasi moneter.</li>
+              <li>• Kolaboratif dalam pengambilan keputusan.</li>
+            </ul>
+          </div>
+          <div class="card rounded-xl p-5">
+            <h3 class="font-semibold">Output</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li>• Mini-brief risiko kurs & rekomendasi hedging.</li>
+              <li>• Jawaban latihan kuantitatif sederhana.</li>
+              <li>• Glosarium konsep kunci.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section class="bg-blue-50 py-12">
-    <div class="container mx-auto px-4 text-center">
-      <h3 class="text-xl font-semibold mb-2">Ingin memperdalam materi ini?</h3>
-      <p class="mb-4">Pelajari lebih lanjut melalui studi kasus dan simulasi bisnis global.</p>
-      <button onclick="alert('Fitur belum tersedia.')" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-        Pelajari Selengkapnya
-      </button>
+  <!-- Topics -->
+  <section id="topics" class="py-12 lg:py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold">Materi Inti</h2>
+        <div class="text-sm">
+          <button id="expandAll" class="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50">Buka semua</button>
+        </div>
+      </div>
+
+      <div class="mt-6 space-y-4" id="accordion">
+        <!-- 1 -->
+        <article class="card rounded-xl">
+          <button class="acc-header w-full p-5 text-left flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">1) Pengertian & Fungsi Valuta Asing</h3>
+              <p class="mt-1 text-sm text-slate-600">Alat pembayaran internasional, investasi, cadangan devisa, dan stabilisasi moneter.</p>
+            </div>
+            <svg class="acc-icon h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.06 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+          </button>
+          <div class="acc-body hidden px-5 pb-5 pt-0 text-sm text-slate-700 leading-7">
+            Valuta asing (FX) adalah mata uang non-domestik yang digunakan dalam transaksi lintas negara. Ketersediaannya dan ekspektasi pasar membentuk harga tukar terhadap mata uang lain.
+          </div>
+        </article>
+        <!-- 2 -->
+        <article class="card rounded-xl">
+          <button class="acc-header w-full p-5 text-left flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">2) Pasar Valuta Asing & Pelaku</h3>
+              <p class="mt-1 text-sm text-slate-600">Bank sentral, bank, MNC, broker, investor; pasar global 24 jam, terdesentralisasi.</p>
+            </div>
+            <svg class="acc-icon h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.06 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+          </button>
+          <div class="acc-body hidden px-5 pb-5 pt-0 text-sm text-slate-700 leading-7">
+            Mekanisme harga terjadi melalui permintaan-penawaran mata uang, dipengaruhi intervensi kebijakan, arus perdagangan & modal, serta sentimen pasar.
+          </div>
+        </article>
+        <!-- 3 -->
+        <article class="card rounded-xl">
+          <button class="acc-header w-full p-5 text-left flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">3) Sistem Kurs & Faktor Penentu</h3>
+              <p class="mt-1 text-sm text-slate-600">Fixed, floating, managed float; inflasi, suku bunga, neraca perdagangan, politik, spekulasi.</p>
+            </div>
+            <svg class="acc-icon h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.06 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+          </button>
+          <div class="acc-body hidden px-5 pb-5 pt-0 text-sm text-slate-700 leading-7">
+            Kurs adalah harga relatif antar mata uang. Perubahan kecil dapat berdampak besar pada arus kas perusahaan global—perlu pemantauan berkala dan skenario.
+          </div>
+        </article>
+        <!-- 4 -->
+        <article class="card rounded-xl">
+          <button class="acc-header w-full p-5 text-left flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">4) Pasar Keuangan Internasional</h3>
+              <p class="mt-1 text-sm text-slate-600">Eurocurrency, pasar modal internasional, & derivatif.</p>
+            </div>
+            <svg class="acc-icon h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.06 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+          </button>
+          <div class="acc-body hidden px-5 pb-5 pt-0 text-sm text-slate-700 leading-7">
+            Pasar global mempertemukan borrower–lender lintas negara; menyediakan pendanaan, investasi, serta perangkat pengelolaan risiko suku bunga dan nilai tukar.
+          </div>
+        </article>
+        <!-- 5 -->
+        <article class="card rounded-xl">
+          <button class="acc-header w-full p-5 text-left flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">5) Strategi Hedging untuk Bisnis</h3>
+              <p class="mt-1 text-sm text-slate-600">Forward, futures, swap, opsi; natural hedge & kebijakan harga.</p>
+            </div>
+            <svg class="acc-icon h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.06 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+          </button>
+          <div class="acc-body hidden px-5 pb-5 pt-0 text-sm text-slate-700 leading-7">
+            Pilih instrumen berdasarkan eksposur (transaksi, translasi, ekonomi), horizon waktu, biaya, dan kecocokan akuntansi. Dokumentasikan kebijakan lindung nilai.
+          </div>
+        </article>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="rounded-xl border border-teal-200 bg-teal-50 p-5">
+          <p class="text-xs font-medium text-teal-700">Takeaway #1</p>
+          <h4 class="mt-1 font-semibold">Kurs = Harga Relatif</h4>
+          <p class="mt-2 text-sm text-slate-700">Perubahan kurs mengalihkan daya saing harga dan margin. Kendalikan dengan pricing & hedging.</p>
+        </div>
+        <div class="rounded-xl border border-sky-200 bg-sky-50 p-5">
+          <p class="text-xs font-medium text-sky-700">Takeaway #2</p>
+          <h4 class="mt-1 font-semibold">Pasar Valas itu Global</h4>
+          <p class="mt-2 text-sm text-slate-700">Beroperasi 24 jam, multi-pelaku, dan responsif terhadap berita & kebijakan moneter.</p>
+        </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+          <p class="text-xs font-medium text-amber-700">Takeaway #3</p>
+          <h4 class="mt-1 font-semibold">Hedging = Disiplin</h4>
+          <p class="mt-2 text-sm text-slate-700">Tanpa kebijakan, volatilitas kurs menjadi risiko laba & arus kas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice -->
+  <section id="practice" class="py-12 lg:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <!-- Quiz Card -->
+        <div class="card rounded-2xl p-6">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-semibold">Latihan Cepat</h2>
+            <button id="shuffleBtn" class="rounded-lg px-3 py-1.5 text-sm ring-1 ring-slate-200 hover:bg-slate-50">Acak Soal</button>
+          </div>
+          <div id="quiz" class="mt-4 space-y-4 text-sm">
+            <!-- Soal akan disuntik via JS -->
+          </div>
+          <div class="mt-4 flex items-center gap-3">
+            <button id="checkBtn" class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-white hover:bg-teal-700 ring-focus">Cek Jawaban</button>
+            <span id="score" class="text-sm text-slate-600"></span>
+          </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="card rounded-2xl p-6">
+          <h2 class="text-xl font-semibold">Mini Kasus: Ekspor & Kurs</h2>
+          <p class="mt-2 text-sm text-slate-700">
+            Sebuah UKM Indonesia mengekspor produk ke AS dengan kontrak USD 50.000, pengiriman 60 hari. Saat ini 1 USD = Rp15.000.
+          </p>
+          <ul class="mt-3 text-sm text-slate-700 list-disc pl-5 space-y-2">
+            <li>Perkirakan pendapatan dalam rupiah jika kurs <em>naik</em> 3% atau <em>turun</em> 3%.</li>
+            <li>Pilih <strong>forward</strong> atau <strong>opsi</strong>? Jelaskan alasan (biaya vs fleksibilitas).</li>
+          </ul>
+          <div class="mt-4 grid sm:grid-cols-2 gap-3">
+            <button id="calcUp" class="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50">Simulasi: Kurs Naik 3%</button>
+            <button id="calcDown" class="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50">Simulasi: Kurs Turun 3%</button>
+          </div>
+          <pre id="calcResult" class="mt-4 rounded-lg bg-slate-900 p-4 text-slate-100 text-xs overflow-auto"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section id="resources" class="py-12 lg:py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold">Sumber & Tautan</h2>
+          <div class="mt-6 grid sm:grid-cols-2 gap-6">
+            <a href="https://notebooklm.google.com/notebook/40ba028c-e23b-43b6-ace7-57bddc16ebec" target="_blank" rel="noopener" class="card rounded-xl p-5 group">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">Materi 7 — NotebookLM</h3>
+                <svg class="h-5 w-5 text-slate-400 group-hover:text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 2.293a1 1 0 0 1 1.414 0l4 4a1 1 0 1 1-1.414 1.414L14 5.414V14a1 1 0 1 1-2 0V5.414L8.707 7.707A1 1 0 0 1 7.293 6.293l4-4z"/></svg>
+              </div>
+              <p class="mt-2 text-sm text-slate-600">Ringkasan, catatan, dan rujukan cepat untuk pertemuan ini.</p>
+            </a>
+            <a href="https://chatgpt.com/g/g-EW0YdkPwu-international-business-course-with-lensetek-llc" target="_blank" rel="noopener" class="card rounded-xl p-5 group">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">Chatbot AI — Lensetek</h3>
+                <svg class="h-5 w-5 text-slate-400 group-hover:text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path d="M10 3a7 7 0 1 1-6.938 6H1a1 1 0 1 1 0-2h2.062A7 7 0 0 1 10 3zM4 11a1 1 0 0 1 1 1 5 5 0 1 0 5-5 1 1 0 1 1 0-2 7 7 0 1 1-7 7 1 1 0 0 1 1-1z"/></svg>
+              </div>
+              <p class="mt-2 text-sm text-slate-600">Tanya materi, minta contoh soal, atau meringkas glosarium.</p>
+            </a>
+          </div>
+
+          <div class="mt-6 card rounded-xl p-5">
+            <h3 class="font-semibold">Referensi Klasik RPS</h3>
+            <ul class="mt-3 text-sm text-slate-700 space-y-2">
+              <li>• Czinkota, Ronkainen & Moffet. <em>International Business</em> (The Dryden Press).</li>
+              <li>• Charles W. L. Hill. <em>International Business: Competing in the Global Marketplace</em> (McGraw-Hill).</li>
+              <li>• Hodgetts & Luthans. <em>International Management</em> (McGraw-Hill).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lg:col-span-1">
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-semibold">Glosarium Mini</h3>
+            <dl class="mt-4 space-y-3 text-sm">
+              <div>
+                <dt class="font-medium text-slate-900">Valuta Asing</dt>
+                <dd class="text-slate-600">Mata uang non-domestik untuk transaksi lintas negara.</dd>
+              </div>
+              <div>
+                <dt class="font-medium text-slate-900">Kurs (Exchange Rate)</dt>
+                <dd class="text-slate-600">Harga satu mata uang terhadap mata uang lain.</dd>
+              </div>
+              <div>
+                <dt class="font-medium text-slate-900">Hedging</dt>
+                <dd class="text-slate-600">Strategi mengurangi risiko pergerakan harga/kurs.</dd>
+              </div>
+              <div>
+                <dt class="font-medium text-slate-900">Forward</dt>
+                <dd class="text-slate-600">Kontrak tukar di masa depan pada kurs yang disepakati.</dd>
+              </div>
+              <div>
+                <dt class="font-medium text-slate-900">Swap</dt>
+                <dd class="text-slate-600">Pertukaran arus kas/valuta untuk periode tertentu.</dd>
+              </div>
+            </dl>
+
+            <div class="mt-5">
+              <button id="copyLinks" class="w-full rounded-lg bg-slate-900 text-white px-4 py-2.5 hover:bg-slate-800 ring-focus">Salin Semua Tautan</button>
+              <p id="copyMsg" class="mt-2 text-xs text-slate-500"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 lg:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="card rounded-2xl p-8 lg:p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-xl font-semibold">Siap ke UTS?</h3>
+          <p class="mt-2 text-slate-600">Gunakan ringkasan ini + latihan, lalu tanyakan ke Chatbot AI untuk penguatan konsep.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://notebooklm.google.com/notebook/40ba028c-e23b-43b6-ace7-57bddc16ebec" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 ring-1 ring-slate-200 hover:bg-slate-50">
+            Buka Materi 7
+            <svg class="h-5 w-5 -mr-1" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 2.293a1 1 0 0 1 1.414 0l4 4a1 1 0 1 1-1.414 1.414L14 5.414V14a1 1 0 1 1-2 0V5.414L8.707 7.707A1 1 0 0 1 7.293 6.293l4-4z"/></svg>
+          </a>
+          <a href="https://chatgpt.com/g/g-EW0YdkPwu-international-business-course-with-lensetek-llc" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-white hover:bg-teal-700">
+            Tanya Chatbot AI
+            <svg class="h-5 w-5 -mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4.97 0 9 3.134 9 7 0 2.036-1.176 3.86-3.02 5.063l.472 3.247a.75.75 0 0 1-1.104.77L13.5 17.64a10.98 10.98 0 0 1-1.5.11c-4.97 0-9-3.134-9-7s4.03-7 9-7z"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-100 text-center py-6 mt-10 border-t text-sm text-gray-600">
-    &copy; 2025 Lensetek, LLC. All rights reserved.
+  <footer class="border-t border-slate-200 py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+        <p class="text-slate-600">&copy; Copyright 2025 Lensetek, LLC.</p>
+        <div class="flex items-center gap-4">
+          <a href="#top" class="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50">Kembali ke atas</a>
+        </div>
+      </div>
+    </div>
   </footer>
-</body>
-</html>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Accordion behavior
+    const headers = document.querySelectorAll('.acc-header');
+    headers.forEach(h => {
+      h.addEventListener('click', () => {
+        const body = h.parentElement.querySelector('.acc-body');
+        const icon = h.parentElement.querySelector('.acc-icon');
+        body.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+    document.getElementById('expandAll')?.addEventListener('click', () => {
+      document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('hidden'));
+      document.querySelectorAll('.acc-icon').forEach(i => i.classList.add('rotate-180'));
+    });
+
+    // Quiz data
+    const questions = [
+      {
+        q: "Kurs mengambang (floating) terutama ditentukan oleh:",
+        options: ["Pemerintah/Bank Sentral", "Permintaan–penawaran pasar", "Kesepakatan WTO", "Paritas daya beli tidak relevan"],
+        answer: 1
+      },
+      {
+        q: "Instrumen yang PALING tepat untuk mengunci kurs pada tanggal jatuh tempo tertentu:",
+        options: ["Forward", "Opsi call", "Swap suku bunga", "ETF mata uang"],
+        answer: 0
+      },
+      {
+        q: "Pelaku yang sering melakukan intervensi untuk stabilisasi nilai tukar:",
+        options: ["Broker ritel", "Bank Sentral", "UMKM eksportir", "Manajer investasi ritel"],
+        answer: 1
+      },
+      {
+        q: "Contoh eksposur yang muncul akibat arus kas masa depan dalam mata uang asing:",
+        options: ["Eksposur transaksi", "Eksposur translasi", "Eksposur ekonomi", "Eksposur reputasi"],
+        answer: 0
+      },
+      {
+        q: "Manfaat pasar keuangan internasional TIDAK termasuk:",
+        options: ["Pendanaan lintas negara", "Memfasilitasi investasi", "Menghilangkan volatilitas kurs sepenuhnya", "Instrumen lindung nilai"],
+        answer: 2
+      }
+    ];
+    const quizEl = document.getElementById('quiz');
+    const shuffle = (arr) => arr.map(v => ({v, s: Math.random()})).sort((a,b)=>a.s-b.s).map(({v})=>v);
+
+    function renderQuiz(items=questions) {
+      quizEl.innerHTML = '';
+      items.forEach((item, idx) => {
+        const id = `q${idx}`;
+        const block = document.createElement('div');
+        block.className = "rounded-lg border border-slate-200 p-4";
+        block.innerHTML = `
+          <p class="font-medium">${idx+1}. ${item.q}</p>
+          <div class="mt-3 space-y-2">
+            ${item.options.map((opt,i)=>`
+              <label class="flex items-center gap-3">
+                <input type="radio" name="${id}" value="${i}" class="h-4 w-4 accent-teal-600">
+                <span class="text-sm">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+        `;
+        quizEl.appendChild(block);
+      });
+    }
+    renderQuiz();
+
+    document.getElementById('shuffleBtn')?.addEventListener('click', () => {
+      renderQuiz(shuffle(questions));
+      document.getElementById('score').textContent = '';
+    });
+
+    document.getElementById('checkBtn')?.addEventListener('click', () => {
+      let correct = 0;
+      questions.forEach((item, idx) => {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        if (selected && Number(selected.value) === item.answer) correct++;
+      });
+      document.getElementById('score').textContent = `Skor: ${correct}/${questions.length}`;
+    });
+
+    // Mini-case simulator
+    const baseUSD = 50000;
+    const baseRate = 15000;
+    const resultEl = document.getElementById('calcResult');
+    function fmt(num){ return num.toLocaleString('id-ID'); }
+    function simulate(pct){
+      const newRate = baseRate * (1 + pct);
+      const rupiah = baseUSD * newRate;
+      const delta = rupiah - (baseUSD * baseRate);
+      resultEl.textContent =
+`Asumsi:
+- Nilai kontrak: USD ${fmt(baseUSD)}
+- Kurs awal: Rp${fmt(baseRate)} / USD
+- Perubahan kurs: ${ (pct*100).toFixed(1) }%
+
+Hasil:
+- Kurs baru: Rp${fmt(Math.round(newRate))} / USD
+- Estimasi pendapatan: Rp${fmt(Math.round(rupiah))}
+- Selisih vs awal: ${delta >= 0 ? '+' : '-'}Rp${fmt(Math.abs(Math.round(delta)))} (${(pct*100).toFixed(1)}%)
+
+Catatan:
+- Hedging forward “mengunci” kurs tetapi mengorbankan upside.
+- Opsi memberi fleksibilitas (membayar premi) untuk melindungi downside.`;
+    }
+    document.getElementById('calcUp')?.addEventListener('click', ()=>simulate(0.03));
+    document.getElementById('calcDown')?.addEventListener('click', ()=>simulate(-0.03));
+
+    // Copy all links
+    document
