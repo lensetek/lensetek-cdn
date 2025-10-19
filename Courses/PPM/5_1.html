@@ -102,6 +102,14 @@
               <div id="progressBar" class="h-full bg-gradient-to-r from-pink-300 via-amber-300 to-sky-300" style="width:0%"></div>
             </div>
             <p id="progressLabel" class="text-xs text-slate-500 mt-1">0% selesai</p>
+            <!-- Badge CTA (shown when 100%) -->
+            <div id="badgeCta" class="mt-2 hidden">
+              <div class="flex flex-wrap items-center gap-2">
+                <input id="badgeName" type="text" class="text-xs md:text-sm rounded-lg border p-2 bg-white/70" placeholder="Nama pada lencana (opsional)" />
+                <button id="openBadge" class="px-3 py-2 text-xs md:text-sm rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-700">Lihat/Unduh Lencana</button>
+              </div>
+              <p class="text-[11px] md:text-xs text-slate-500 mt-1">100% tercapai! Anda dapat mencetak atau mengunduh lencana kelulusan.</p>
+            </div>
           </div>
           <button id="resetBtn" class="px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white hover:bg-slate-50">Reset Progres</button>
         </div>
@@ -316,6 +324,37 @@
     </div>
   </footer>
 
+  <!-- Badge Modal -->
+  <div id="badgeModal" class="hidden fixed inset-0 z-50">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="w-full max-w-3xl bg-white rounded-2xl shadow-soft border border-slate-200 overflow-hidden">
+        <div class="px-4 py-3 border-b bg-slate-50 flex items-center justify-between">
+          <div class="text-sm font-medium">Lencana Kelulusan — PPM Pertemuan 5</div>
+          <button id="closeBadge" class="text-slate-500 hover:text-slate-700 text-sm">Tutup ✕</button>
+        </div>
+        <div class="p-4 grid md:grid-cols-2 gap-4">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-2 overflow-auto">
+            <canvas id="badgeCanvas" width="1200" height="1200" class="w-full h-auto block"></canvas>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div>
+              <label class="text-sm block">Nama pada lencana</label>
+              <input id="badgeNameModal" type="text" class="mt-1 w-full rounded-lg border p-2" placeholder="Opsional" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="dlPng" class="px-3 py-2 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm">Unduh PNG</button>
+              <button id="dlJpg" class="px-3 py-2 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-700 text-sm">Unduh JPG</button>
+              <button id="printBadge" class="px-3 py-2 rounded-xl border border-sky-300 bg-sky-50 hover:bg-sky-100 text-sky-700 text-sm col-span-2">Cetak</button>
+              <button id="uploadBadge" class="hidden px-3 py-2 rounded-xl border border-pink-300 bg-pink-50 hover:bg-pink-100 text-pink-700 text-sm col-span-2">Simpan ke Server</button>
+            </div>
+            <p class="text-xs text-slate-500">Catatan: versi unduhan dibuat di perangkat Anda (tidak diunggah ke server).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ------------------------------
     // Cookie Utilities
@@ -351,7 +390,8 @@
       consent: null, // 'accepted' | 'rejected'
       completed: { cpkm: false, saham: false, obligasi: false, perbandingan: false },
       quiz: { score: 0, done: false },
-      lastVisit: null
+      lastVisit: null,
+      badgeName: ''
     };
 
     function loadProgress() {
@@ -389,6 +429,8 @@
     const progressBar = document.getElementById('progressBar');
     const progressLabel = document.getElementById('progressLabel');
     const resetBtn = document.getElementById('resetBtn');
+    const badgeCta = document.getElementById('badgeCta');
+    const badgeNameInput = document.getElementById('badgeName');
 
     function sectionCount() {
       // 4 materi + 1 quiz = 5 unit progres
@@ -405,6 +447,14 @@
       const pct = Math.round((done/total)*100);
       progressBar.style.width = pct + '%';
       progressLabel.textContent = pct + '% selesai';
+      if (badgeCta) {
+        if (pct === 100) {
+          badgeCta.classList.remove('hidden');
+          if (state.badgeName && badgeNameInput) badgeNameInput.value = state.badgeName;
+        } else {
+          badgeCta.classList.add('hidden');
+        }
+      }
 
       // badges
       const ids = ['cpkm','saham','obligasi','perbandingan'];
@@ -439,6 +489,180 @@
       renderQuiz();
       document.getElementById('quizScore').textContent='';
     });
+
+    // ------------------------------
+    // Badge Generation (Canvas)
+    // ------------------------------
+    const badgeModal = document.getElementById('badgeModal');
+    const openBadge = document.getElementById('openBadge');
+    const closeBadge = document.getElementById('closeBadge');
+    const badgeCanvas = document.getElementById('badgeCanvas');
+    const nameModal = document.getElementById('badgeNameModal');
+    const dlPng = document.getElementById('dlPng');
+    const dlJpg = document.getElementById('dlJpg');
+    const printBtn = document.getElementById('printBadge');
+    const uploadBtn = document.getElementById('uploadBadge');
+
+    // Optional server upload endpoint (set to string URL to enable)
+    const BADGE_UPLOAD_ENDPOINT = null; // e.g. '/api/upload-badge'
+
+    function drawBadge(name) {
+      const ctx = badgeCanvas.getContext('2d');
+      const W = badgeCanvas.width;
+      const H = badgeCanvas.height;
+      ctx.clearRect(0,0,W,H);
+
+      // Background gradient
+      const bg = ctx.createLinearGradient(0,0,W,H);
+      bg.addColorStop(0, '#fff7f7');
+      bg.addColorStop(0.5, '#f7fff9');
+      bg.addColorStop(1, '#f7fbff');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,W,H);
+
+      // Medallion
+      const cx = W/2, cy = H/2 - 40, r = 360;
+      const med = ctx.createRadialGradient(cx, cy-40, 40, cx, cy, r);
+      med.addColorStop(0, '#fde68a'); // amber-200
+      med.addColorStop(0.6, '#f59e0b'); // amber-500
+      med.addColorStop(1, '#d97706'); // amber-600
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI*2);
+      ctx.fillStyle = med;
+      ctx.fill();
+
+      // Inner circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, r-40, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.fill();
+
+      // Top sparkle
+      ctx.beginPath();
+      ctx.arc(cx-180, cy-180, 12, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(236,72,153,0.8)'; // pink-500
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx+200, cy-200, 8, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(56,189,248,0.8)'; // sky-400
+      ctx.fill();
+
+      // Ribbon bottom
+      ctx.save();
+      ctx.translate(0, 90);
+      ctx.beginPath();
+      ctx.moveTo(cx-240, cy+r-260);
+      ctx.lineTo(cx+240, cy+r-260);
+      ctx.lineTo(cx+200, cy+r-160);
+      ctx.lineTo(cx-200, cy+r-160);
+      ctx.closePath();
+      const rib = ctx.createLinearGradient(cx-240, cy+r-260, cx+240, cy+r-160);
+      rib.addColorStop(0, '#bfdbfe'); // blue-200
+      rib.addColorStop(1, '#fecaca'); // red-200
+      ctx.fillStyle = rib;
+      ctx.fill();
+      ctx.restore();
+
+      // Text
+      ctx.fillStyle = '#0f172a'; // slate-900
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 72px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillText('Lencana Kelulusan', cx, cy-40);
+
+      ctx.font = '500 44px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillStyle = '#334155'; // slate-700
+      ctx.fillText('Pengantar Pasar Modal — Pertemuan 5', cx, cy+20);
+
+      const displayName = (name && name.trim()) ? name.trim() : 'Peserta';
+      ctx.font = '600 60px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillStyle = '#111827'; // gray-900
+      ctx.fillText(displayName, cx, cy+110);
+
+      ctx.font = 'normal 32px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillStyle = '#475569';
+      const d = new Date();
+      const locale = 'id-ID';
+      const tgl = d.toLocaleDateString(locale, { day:'2-digit', month:'long', year:'numeric' });
+      ctx.fillText('Tanggal: ' + tgl, cx, cy+170);
+
+      // Seal
+      ctx.beginPath();
+      ctx.arc(cx+280, cy+180, 60, 0, Math.PI*2);
+      ctx.fillStyle = '#34d399'; // emerald-400
+      ctx.fill();
+      ctx.font = 'bold 28px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillStyle = 'white';
+      ctx.fillText('100%', cx+280, cy+190);
+    }
+
+    function openBadgeModal() {
+      // sync name fields
+      const name = (badgeNameInput && badgeNameInput.value) || state.badgeName || '';
+      if (nameModal) nameModal.value = name;
+      drawBadge(name);
+      badgeModal.classList.remove('hidden');
+    }
+    function closeBadgeModal() { badgeModal.classList.add('hidden'); }
+
+    function downloadCanvas(type) {
+      const mime = type === 'jpg' ? 'image/jpeg' : 'image/png';
+      const quality = type === 'jpg' ? 0.92 : 1.0;
+      const url = badgeCanvas.toDataURL(mime, quality);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `badge-ppm-w5.${type}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function printCanvas() {
+      const url = badgeCanvas.toDataURL('image/png');
+      const w = window.open('', '_blank');
+      if (!w) return;
+      w.document.write(`<html><head><title>Cetak Lencana</title><style>@page{size:auto;margin:10mm} body{margin:0;display:flex;justify-content:center;align-items:center;height:100vh} img{max-width:95vw;max-height:95vh}</style></head><body><img src="${url}" onload="window.print(); setTimeout(()=>window.close(), 50);"/></body></html>`);
+      w.document.close();
+    }
+
+    async function uploadCanvasToServer() {
+      if (!BADGE_UPLOAD_ENDPOINT) return;
+      const mime = 'image/png';
+      // Convert to Blob
+      const dataUrl = badgeCanvas.toDataURL(mime);
+      const res = await fetch(dataUrl);
+      const blob = await res.blob();
+      const form = new FormData();
+      form.append('file', blob, 'badge-ppm-w5.png');
+      form.append('name', (nameModal && nameModal.value) || '');
+      form.append('course', 'PPM Pertemuan 5');
+      try {
+        const r = await fetch(BADGE_UPLOAD_ENDPOINT, { method: 'POST', body: form });
+        if (!r.ok) throw new Error('Upload gagal');
+        alert('Lencana berhasil disimpan ke server.');
+      } catch (e) {
+        alert('Gagal menyimpan ke server: ' + (e && e.message ? e.message : e));
+      }
+    }
+
+    if (openBadge) openBadge.addEventListener('click', () => {
+      if (state.consent === 'accepted') {
+        state.badgeName = (badgeNameInput && badgeNameInput.value) || '';
+        saveProgress(state);
+      }
+      openBadgeModal();
+    });
+    if (closeBadge) closeBadge.addEventListener('click', closeBadgeModal);
+    if (badgeModal) badgeModal.addEventListener('click', (e)=>{ if (e.target === badgeModal) closeBadgeModal(); });
+    if (nameModal) nameModal.addEventListener('input', ()=>{
+      drawBadge(nameModal.value || '');
+    });
+    if (dlPng) dlPng.addEventListener('click', ()=>downloadCanvas('png'));
+    if (dlJpg) dlJpg.addEventListener('click', ()=>downloadCanvas('jpg'));
+    if (printBtn) printBtn.addEventListener('click', printCanvas);
+    if (uploadBtn) {
+      if (BADGE_UPLOAD_ENDPOINT) uploadBtn.classList.remove('hidden');
+      uploadBtn.addEventListener('click', uploadCanvasToServer);
+    }
 
     // ------------------------------
     // Kalkulator Return
