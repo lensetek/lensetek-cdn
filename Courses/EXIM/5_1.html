@@ -102,8 +102,14 @@
           <div class="aspect-video w-full overflow-hidden rounded-xl border">
             <iframe class="w-full h-full" src="https://www.youtube.com/embed/xQCzIZjljJk" title="Video Materi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="aspect-video w-full overflow-hidden rounded-xl border">
-            <iframe class="w-full h-full" src="https://import-potential-analyst-trainer-exim-w5-179392852285.us-west1.run.app" title="Dosen AI Interaktif" frameborder="0"></iframe>
+          <div class="aspect-video w-full overflow-hidden rounded-xl border grid place-items-center bg-slate-50">
+            <div class="text-center p-4">
+              <p class="text-sm text-slate-600 mb-3">Tampilan embed terlalu kecil. Buka versi layar penuh:</p>
+              <div class="flex flex-wrap items-center justify-center gap-3">
+                <button id="openTrainer" class="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600">Buka Dosen AI (Fullscreen)</button>
+                <a href="https://import-potential-analyst-trainer-exim-w5-179392852285.us-west1.run.app" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl border hover:bg-slate-50">Buka di Tab Baru</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -217,6 +223,15 @@
       </div>
     </section>
   </main>
+
+  <!-- Fullscreen modal for Interactive Trainer -->
+  <div id="trainerModal" class="fixed inset-0 z-50 hidden">
+    <div id="trainerBackdrop" class="absolute inset-0 bg-black/60"></div>
+    <div class="relative mx-auto my-6 w-[95vw] h-[90vh] max-w-6xl bg-white rounded-2xl overflow-hidden shadow-2xl">
+      <button id="closeTrainer" class="absolute top-3 right-3 px-3 py-1 rounded-lg bg-white/80 hover:bg-white border">✕</button>
+      <iframe src="https://import-potential-analyst-trainer-exim-w5-179392852285.us-west1.run.app" title="Dosen AI Interaktif - Fullscreen" class="w-full h-full border-0"></iframe>
+    </div>
+  </div>
 
   <footer class="max-w-6xl mx-auto px-4 pb-10 pt-8 text-center text-xs text-slate-500">
     © <span id="year"></span> EXIM — Universitas Darwan Ali • Light theme • Anime style ✨
@@ -378,6 +393,18 @@
       state = JSON.parse(JSON.stringify(defaultState));
       save(); location.reload();
     });
+
+    // ------------------ Trainer modal (fullscreen) ------------------
+    const openTrainerBtn = document.getElementById('openTrainer');
+    const trainerModal = document.getElementById('trainerModal');
+    const closeTrainerBtn = document.getElementById('closeTrainer');
+    const trainerBackdrop = document.getElementById('trainerBackdrop');
+    function closeTrainer(){ trainerModal.classList.add('hidden'); }
+    function openTrainer(){ trainerModal.classList.remove('hidden'); }
+    if(openTrainerBtn){ openTrainerBtn.addEventListener('click', openTrainer); }
+    if(closeTrainerBtn){ closeTrainerBtn.addEventListener('click', closeTrainer); }
+    if(trainerBackdrop){ trainerBackdrop.addEventListener('click', closeTrainer); }
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeTrainer(); });
 
     // ------------------ Badge Generator ------------------
     function drawBadge(name, kelas, dateStr){
