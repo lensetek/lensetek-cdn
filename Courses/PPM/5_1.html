@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pertemuan 5 — Instrumen Investasi Dasar | Pengantar Pasar Modal</title>
+  <meta name="description" content="Web pembelajaran interaktif pertemuan ke-5: Saham & Obligasi — Pengantar Pasar Modal. Termasuk video, penjelasan interaktif, latihan soal, kalkulator return, dan progres yang tersimpan via cookie." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind on-the-fly config for light anime style
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            soft: '0 10px 25px rgba(0,0,0,0.08)',
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            sparkle: 'sparkle 2.5s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            sparkle: {
+              '0%': { opacity: 0, transform: 'scale(0.8) rotate(0deg)' },
+              '50%': { opacity: 1, transform: 'scale(1) rotate(15deg)' },
+              '100%': { opacity: 0, transform: 'scale(0.8) rotate(0deg)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Subtle anime pastel background */
+    .pastel-bg {
+      background: radial-gradient(1200px 600px at 10% 10%, #fff7f7 0%, transparent 60%),
+                  radial-gradient(1000px 500px at 90% 20%, #f7fff9 0%, transparent 60%),
+                  radial-gradient(900px 600px at 20% 90%, #f8f9ff 0%, transparent 60%),
+                  linear-gradient(180deg, #ffffff, #f7fbff);
+    }
+    .chip {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    /* Simple cookie banner style (hidden by default) */
+    #cookieBanner { display: none; }
+  </style>
+</head>
+<body class="pastel-bg text-slate-800 min-h-screen">
+  <!-- Floating anime sparkles -->
+  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-6 left-10 text-pink-300 animate-sparkle">✦</div>
+    <div class="absolute top-20 right-10 text-amber-300 animate-sparkle" style="animation-delay: .5s">✧</div>
+    <div class="absolute bottom-20 left-1/2 text-sky-300 animate-sparkle" style="animation-delay: 1s">✦</div>
+  </div>
+
+  <header class="relative">
+    <div class="max-w-6xl mx-auto px-4 pt-8 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-pink-100 grid place-items-center shadow-soft animate-float">
+          <span class="text-2xl">🎀</span>
+        </div>
+        <div>
+          <h1 class="text-2xl md:text-3xl font-semibold tracking-tight">Pertemuan 5 — Instrumen Investasi Dasar</h1>
+          <p class="text-sm md:text-base text-slate-600">Mata Kuliah: Pengantar Pasar Modal (S1 Manajemen) • Light theme · Anime style</p>
+        </div>
+      </div>
+
+      <div class="mt-5 grid md:grid-cols-3 gap-4">
+        <a href="https://notebooklm.google.com/notebook/42541244-7b47-4c3a-ae00-dc58aeace64c" target="_blank" class="chip flex items-center gap-3 p-3 rounded-xl shadow-soft hover:shadow-lg transition" rel="noopener">
+          <span class="text-xl">📓</span>
+          <div>
+            <p class="font-medium">Penjelasan Interaktif</p>
+            <p class="text-xs text-slate-600">Notebook interaktif materi minggu ke-5</p>
+          </div>
+        </a>
+        <a href="https://youtu.be/zpGmyNKVtFg" target="_blank" class="chip flex items-center gap-3 p-3 rounded-xl shadow-soft hover:shadow-lg transition" rel="noopener">
+          <span class="text-xl">▶️</span>
+          <div>
+            <p class="font-medium">Video YouTube Pendamping</p>
+            <p class="text-xs text-slate-600">Tonton untuk penguatan konsep</p>
+          </div>
+        </a>
+        <a href="https://interactive-investment-tutor-ppm-w5-179392852285.us-west1.run.app/" target="_blank" class="chip flex items-center gap-3 p-3 rounded-xl shadow-soft hover:shadow-lg transition" rel="noopener">
+          <span class="text-xl">🤖</span>
+          <div>
+            <p class="font-medium">Diskusi bersama Dosen AI</p>
+            <p class="text-xs text-slate-600">Tanya-jawab terarah kapan saja</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="mt-6 p-4 rounded-2xl border border-slate-200 bg-white/80 shadow-soft">
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex-1">
+            <p class="text-sm text-slate-600">Progres Anda</p>
+            <div class="w-full h-3 bg-slate-100 rounded-xl overflow-hidden">
+              <div id="progressBar" class="h-full bg-gradient-to-r from-pink-300 via-amber-300 to-sky-300" style="width:0%"></div>
+            </div>
+            <p id="progressLabel" class="text-xs text-slate-500 mt-1">0% selesai</p>
+          </div>
+          <button id="resetBtn" class="px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white hover:bg-slate-50">Reset Progres</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+    <!-- CPMK & Indikator -->
+    <section id="cpkm" class="mt-8">
+      <div class="bg-white/80 rounded-2xl border border-slate-200 shadow-soft p-6">
+        <h2 class="text-xl font-semibold flex items-center gap-2">🎯 Capaian Pembelajaran & Indikator</h2>
+        <p class="mt-2 text-slate-600">Mahasiswa mampu menjelaskan dan membedakan instrumen dasar pasar modal (saham dan obligasi), mekanisme, istilah, risiko, dan return.</p>
+        <ul class="mt-4 grid md:grid-cols-2 gap-2 text-sm list-disc pl-5">
+          <li>Mekanisme & istilah saham</li>
+          <li>Risiko & return saham</li>
+          <li>Definisi obligasi: kupon, maturity, nilai par</li>
+          <li>Perbandingan saham vs obligasi</li>
+        </ul>
+        <div class="mt-4 flex gap-3">
+          <button data-complete="cpkm" class="completeBtn px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-700 text-sm">Tandai selesai</button>
+          <span id="badge-cpkm" class="text-xs px-2 py-1 rounded-full bg-slate-100 border border-slate-200">Belum</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Materi: Saham -->
+    <section id="saham" class="mt-6">
+      <div class="bg-white/80 rounded-2xl border border-slate-200 shadow-soft p-6">
+        <h2 class="text-xl font-semibold flex items-center gap-2">📊 Saham: Konsep, Return, & Risiko</h2>
+        <p class="mt-2">Saham adalah bukti kepemilikan perusahaan. Return berasal dari <span class="font-medium">capital gain</span> dan <span class="font-medium">dividen</span>.</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="p-4 rounded-xl border border-pink-200 bg-pink-50/60">
+            <h3 class="font-medium">Istilah Penting</h3>
+            <ul class="text-sm list-disc pl-5 mt-2">
+              <li>Harga saham, Lot (1 lot = 100 lembar)</li>
+              <li>Ticker: BBCA, TLKM, BBRI, dll.</li>
+              <li>Dividen tunai, Dividend yield</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/60">
+            <h3 class="font-medium">Risiko</h3>
+            <ul class="text-sm list-disc pl-5 mt-2">
+              <li>Risiko pasar</li>
+              <li>Risiko spesifik perusahaan</li>
+              <li>Risiko likuiditas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 flex gap-3">
+          <button data-complete="saham" class="completeBtn px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-700 text-sm">Tandai selesai</button>
+          <span id="badge-saham" class="text-xs px-2 py-1 rounded-full bg-slate-100 border border-slate-200">Belum</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Materi: Obligasi -->
+    <section id="obligasi" class="mt-6">
+      <div class="bg-white/80 rounded-2xl border border-slate-200 shadow-soft p-6">
+        <h2 class="text-xl font-semibold flex items-center gap-2">💰 Obligasi: Konsep, Kupon, & Maturity</h2>
+        <p class="mt-2">Obligasi adalah surat utang. Investor menerima <span class="font-medium">kupon</span> berkala dan pokok saat <span class="font-medium">jatuh tempo</span>.</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="p-4 rounded-xl border border-sky-200 bg-sky-50/60">
+            <h3 class="font-medium">Istilah Penting</h3>
+            <ul class="text-sm list-disc pl-5 mt-2">
+              <li>Nilai nominal (par)</li>
+              <li>Coupon rate vs yield</li>
+              <li>Maturity date</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/60">
+            <h3 class="font-medium">Risiko</h3>
+            <ul class="text-sm list-disc pl-5 mt-2">
+              <li>Risiko suku bunga</li>
+              <li>Risiko gagal bayar</li>
+              <li>Risiko likuiditas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 flex gap-3">
+          <button data-complete="obligasi" class="completeBtn px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-700 text-sm">Tandai selesai</button>
+          <span id="badge-obligasi" class="text-xs px-2 py-1 rounded-full bg-slate-100 border border-slate-200">Belum</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perbandingan & Kalkulator Return -->
+    <section id="perbandingan" class="mt-6">
+      <div class="bg-white/80 rounded-2xl border border-slate-200 shadow-soft p-6">
+        <h2 class="text-xl font-semibold flex items-center gap-2">⚖️ Perbandingan Saham vs Obligasi & Kalkulator Return</h2>
+        <div class="overflow-x-auto mt-2">
+          <table class="w-full text-sm border border-slate-200 rounded-xl">
+            <thead class="bg-slate-50">
+              <tr>
+                <th class="p-2 text-left">Aspek</th>
+                <th class="p-2 text-left">Saham</th>
+                <th class="p-2 text-left">Obligasi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="p-2">Kepemilikan</td>
+                <td class="p-2">Pemilik perusahaan</td>
+                <td class="p-2">Pemberi pinjaman</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-2">Sumber Return</td>
+                <td class="p-2">Dividen & capital gain</td>
+                <td class="p-2">Kupon & capital gain/kerugian harga</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-2">Risiko</td>
+                <td class="p-2">Lebih tinggi</td>
+                <td class="p-2">Lebih rendah (terutama SBN)</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-2">Likuiditas</td>
+                <td class="p-2">Tinggi (BEI)</td>
+                <td class="p-2">Bervariasi</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Kalkulator Return Saham -->
+        <div class="mt-6 grid lg:grid-cols-2 gap-4">
+          <div class="p-4 rounded-2xl border bg-white">
+            <h3 class="font-medium">🧮 Kalkulator Return Saham</h3>
+            <p class="text-sm text-slate-600">Rumus: (Pt - P0 + D) / P0</p>
+            <div class="grid grid-cols-2 gap-3 mt-3 text-sm">
+              <label class="block">Harga awal (P0)
+                <input id="p0" type="number" class="mt-1 w-full rounded-lg border p-2" placeholder="mis. 9000" />
+              </label>
+              <label class="block">Harga akhir (Pt)
+                <input id="pt" type="number" class="mt-1 w-full rounded-lg border p-2" placeholder="mis. 10000" />
+              </label>
+              <label class="block">Dividen (D)
+                <input id="div" type="number" class="mt-1 w-full rounded-lg border p-2" placeholder="mis. 100" />
+              </label>
+            </div>
+            <div class="mt-3 flex gap-2">
+              <button id="calcBtn" class="px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 border border-amber-200">Hitung</button>
+              <span id="calcOut" class="text-sm text-slate-700"></span>
+            </div>
+          </div>
+
+          <!-- Contoh Konteks Investasi -->
+          <div class="p-4 rounded-2xl border bg-white">
+            <h3 class="font-medium">🎯 Rekomendasi Profil</h3>
+            <ul class="text-sm list-disc pl-5 mt-2">
+              <li>Konservatif: porsi lebih besar ke SBN/obligasi.</li>
+              <li>Moderat: kombinasi saham blue-chip & SBN.</li>
+              <li>Agresif: porsi saham lebih dominan (jangka panjang).</li>
+            </ul>
+            <div class="mt-3 flex gap-3">
+              <button data-complete="perbandingan" class="completeBtn px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-700 text-sm">Tandai selesai</button>
+              <span id="badge-perbandingan" class="text-xs px-2 py-1 rounded-full bg-slate-100 border border-slate-200">Belum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latihan Soal Interaktif -->
+    <section id="quiz" class="mt-6">
+      <div class="bg-white/80 rounded-2xl border border-slate-200 shadow-soft p-6">
+        <h2 class="text-xl font-semibold flex items-center gap-2">📝 Latihan Soal Interaktif</h2>
+        <p class="text-sm text-slate-600 mt-1">Jawab pertanyaan berikut. Skor dan progres Anda disimpan via cookie di perangkat ini.</p>
+
+        <div id="quizContainer" class="mt-4 grid gap-4"></div>
+
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <button id="submitQuiz" class="px-4 py-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 border border-emerald-200 font-medium">Kumpulkan</button>
+          <button id="retryQuiz" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200">Ulangi</button>
+          <span id="quizScore" class="text-sm text-slate-700"></span>
+          <span id="badge-quiz" class="text-xs px-2 py-1 rounded-full bg-slate-100 border border-slate-200">Belum</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catatan & Kebijakan Cookie -->
+    <section class="mt-6">
+      <div class="bg-white/80 rounded-2xl border border-slate-200 shadow-soft p-6">
+        <h2 class="text-xl font-semibold flex items-center gap-2">ℹ️ Catatan</h2>
+        <ul class="text-sm list-disc pl-5 mt-2">
+          <li>Progres disimpan melalui <strong>cookie</strong> (bukan server). Jika Anda menghapus cookie browser, data progres akan hilang.</li>
+          <li>Gunakan tombol <em>Reset Progres</em> bila ingin memulai ulang.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-xl w-[90%] bg-white/90 border border-slate-200 rounded-2xl shadow-soft p-4 z-50">
+      <div class="flex items-start gap-3">
+        <div class="text-2xl">🍪</div>
+        <div class="text-sm">
+          <p class="font-medium">Cookie untuk Progres Belajar</p>
+          <p class="text-slate-600">Situs ini menggunakan cookie untuk menyimpan progres materi & skor kuis Anda secara lokal.</p>
+        </div>
+      </div>
+      <div class="mt-3 flex gap-2 justify-end">
+        <button id="rejectCookie" class="px-3 py-2 rounded-xl border bg-white hover:bg-slate-50">Tolak</button>
+        <button id="acceptCookie" class="px-3 py-2 rounded-xl border bg-emerald-600 text-white hover:bg-emerald-700">Setuju</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-10 pb-10">
+    <div class="max-w-6xl mx-auto px-4 text-xs text-slate-500">
+      Dibuat untuk pembelajaran mata kuliah Pengantar Pasar Modal • Pertemuan 5. © 2025.
+      <span id="lastVisit" class="block mt-1"></span>
+    </div>
+  </footer>
+
+  <script>
+    // ------------------------------
+    // Cookie Utilities
+    // ------------------------------
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days*24*60*60*1000));
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+    }
+    function getCookie(name) {
+      const cname = name + "=";
+      const decoded = decodeURIComponent(document.cookie);
+      const ca = decoded.split(';');
+      for (let i=0; i<ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
+      }
+      return "";
+    }
+    function eraseCookie(name) {
+      document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    // ------------------------------
+    // Progress State (stored in cookie as JSON)
+    // ------------------------------
+    const COOKIE_NAME = 'ppm_w5_progress';
+    const COOKIE_DAYS = 365;
+
+    const defaultProgress = {
+      consent: null, // 'accepted' | 'rejected'
+      completed: { cpkm: false, saham: false, obligasi: false, perbandingan: false },
+      quiz: { score: 0, done: false },
+      lastVisit: null
+    };
+
+    function loadProgress() {
+      try {
+        const raw = getCookie(COOKIE_NAME);
+        if (!raw) return { ...defaultProgress };
+        const parsed = JSON.parse(raw);
+        return { ...defaultProgress, ...parsed, completed: { ...defaultProgress.completed, ...(parsed.completed||{}) }, quiz: { ...defaultProgress.quiz, ...(parsed.quiz||{}) } };
+      } catch (e) {
+        return { ...defaultProgress };
+      }
+    }
+    function saveProgress(state) {
+      setCookie(COOKIE_NAME, JSON.stringify(state), COOKIE_DAYS);
+    }
+
+    let state = loadProgress();
+
+    // ------------------------------
+    // Consent Banner
+    // ------------------------------
+    const banner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookie');
+    const rejectBtn = document.getElementById('rejectCookie');
+
+    function updateBanner() {
+      banner.style.display = state.consent ? 'none' : 'block';
+    }
+    if (acceptBtn) acceptBtn.addEventListener('click', ()=>{ state.consent='accepted'; saveProgress(state); updateBanner(); });
+    if (rejectBtn) rejectBtn.addEventListener('click', ()=>{ state.consent='rejected'; saveProgress(state); updateBanner(); alert('Tanpa persetujuan cookie, progres tidak akan disimpan.'); });
+
+    // ------------------------------
+    // Progress UI
+    // ------------------------------
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function sectionCount() {
+      // 4 materi + 1 quiz = 5 unit progres
+      return 5;
+    }
+    function completedCount() {
+      const base = Object.values(state.completed).filter(Boolean).length;
+      const quizDone = state.quiz.done ? 1 : 0;
+      return base + quizDone;
+    }
+    function renderProgress() {
+      const total = sectionCount();
+      const done = completedCount();
+      const pct = Math.round((done/total)*100);
+      progressBar.style.width = pct + '%';
+      progressLabel.textContent = pct + '% selesai';
+
+      // badges
+      const ids = ['cpkm','saham','obligasi','perbandingan'];
+      ids.forEach(id => {
+        const badge = document.getElementById('badge-'+id);
+        badge.textContent = state.completed[id] ? 'Selesai' : 'Belum';
+        badge.className = 'text-xs px-2 py-1 rounded-full border ' + (state.completed[id] ? 'bg-emerald-100 border-emerald-200' : 'bg-slate-100 border-slate-200');
+      });
+      const bq = document.getElementById('badge-quiz');
+      bq.textContent = state.quiz.done ? 'Selesai' : 'Belum';
+      bq.className = 'text-xs px-2 py-1 rounded-full border ' + (state.quiz.done ? 'bg-emerald-100 border-emerald-200' : 'bg-slate-100 border-slate-200');
+    }
+
+    function bindCompleteButtons() {
+      document.querySelectorAll('.completeBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-complete');
+          if (state.consent !== 'accepted') { alert('Setujui cookie untuk menyimpan progres.'); return; }
+          state.completed[key] = true;
+          saveProgress(state);
+          renderProgress();
+        });
+      });
+    }
+
+    if (resetBtn) resetBtn.addEventListener('click', () => {
+      if (!confirm('Hapus seluruh progres yang tersimpan di cookie?')) return;
+      eraseCookie(COOKIE_NAME);
+      state = { ...defaultProgress };
+      updateBanner();
+      renderProgress();
+      renderQuiz();
+      document.getElementById('quizScore').textContent='';
+    });
+
+    // ------------------------------
+    // Kalkulator Return
+    // ------------------------------
+    const calcBtn = document.getElementById('calcBtn');
+    const calcOut = document.getElementById('calcOut');
+    if (calcBtn) calcBtn.addEventListener('click', () => {
+      const p0 = parseFloat(document.getElementById('p0').value || '0');
+      const pt = parseFloat(document.getElementById('pt').value || '0');
+      const div = parseFloat(document.getElementById('div').value || '0');
+      if (p0 <= 0) { calcOut.textContent = 'Masukkan P0 > 0'; return; }
+      const ret = ((pt - p0 + div) / p0) * 100;
+      calcOut.textContent = 'Return: ' + ret.toFixed(2) + '%';
+    });
+
+    // ------------------------------
+    // Quiz Engine
+    // ------------------------------
+    const questions = [
+      {
+        q: 'Sumber return utama saham adalah…',
+        options: ['Kupon dan nilai pari', 'Dividen dan capital gain', 'Bunga tetap tiap bulan', 'Amortisasi dan depresiasi'],
+        answer: 1,
+        exp: 'Saham memberikan return dari dividen dan kenaikan harga (capital gain).'
+      },
+      {
+        q: 'Obligasi dengan kupon tetap paling sensitif terhadap…',
+        options: ['Risiko likuiditas', 'Perubahan suku bunga', 'Pemecahan saham', 'Right issue'],
+        answer: 1,
+        exp: 'Ketika suku bunga naik, harga obligasi kupon tetap cenderung turun (risiko suku bunga).'
+      },
+      {
+        q: 'Di BEI, 1 lot saham setara dengan…',
+        options: ['1 lembar', '10 lembar', '100 lembar', '1000 lembar'],
+        answer: 2,
+        exp: 'Standar perdagangan: 1 lot = 100 lembar saham.'
+      },
+      {
+        q: 'Pernyataan yang tepat tentang perbandingan saham vs obligasi adalah…',
+        options: ['Saham lebih dahulu dibayar saat likuidasi', 'Obligasi selalu lebih berisiko dari saham', 'Saham biasanya lebih berisiko dan berpotensi return lebih tinggi', 'Obligasi tidak punya risiko harga'],
+        answer: 2,
+        exp: 'Saham umumnya berisiko lebih tinggi dan berpotensi return lebih tinggi dibanding obligasi.'
+      },
+      {
+        q: 'Yield obligasi adalah…',
+        options: ['Selalu sama dengan coupon rate', 'Tingkat pengembalian aktual berdasarkan harga pasar', 'Jumlah dividen per saham', 'Nilai par dibagi tenor'],
+        answer: 1,
+        exp: 'Yield bergantung pada harga pasar saat ini, tidak selalu sama dengan coupon rate.'
+      }
+    ];
+
+    const quizContainer = document.getElementById('quizContainer');
+    const submitQuiz = document.getElementById('submitQuiz');
+    const retryQuiz = document.getElementById('retryQuiz');
+    const quizScore = document.getElementById('quizScore');
+
+    function renderQuiz() {
+      quizContainer.innerHTML = '';
+      questions.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-xl border bg-white';
+        card.innerHTML = `
+          <p class="font-medium">${idx+1}. ${item.q}</p>
+          <div class="mt-2 grid gap-2">
+            ${item.options.map((opt,i)=>`
+              <label class="flex items-center gap-2 text-sm">
+                <input type="radio" name="q${idx}" value="${i}" class="accent-pink-500" />
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <p id="exp-${idx}" class="mt-2 text-xs text-slate-600 hidden"></p>
+        `;
+        quizContainer.appendChild(card);
+      });
+      // restore previous score info
+      if (state.quiz.done) {
+        quizScore.textContent = `Skor terakhir: ${state.quiz.score}/${questions.length}`;
+      }
+    }
+
+    function gradeQuiz() {
+      let score = 0;
+      questions.forEach((item, idx) => {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        const expEl = document.getElementById(`exp-${idx}`);
+        if (!selected) { expEl.textContent = 'Belum menjawab.'; expEl.classList.remove('hidden'); return; }
+        const val = parseInt(selected.value, 10);
+        const correct = val === item.answer;
+        if (correct) score++;
+        expEl.textContent = (correct? '✅ Benar. ' : '❌ Kurang tepat. ') + item.exp;
+        expEl.classList.remove('hidden');
+      });
+      quizScore.textContent = `Skor: ${score}/${questions.length}`;
+      if (state.consent === 'accepted') {
+        state.quiz = { score, done: true };
+        saveProgress(state);
+        renderProgress();
+      } else {
+        alert('Setujui cookie agar skor tersimpan.');
+      }
+    }
+
+    if (submitQuiz) submitQuiz.addEventListener('click', gradeQuiz);
+    if (retryQuiz) retryQuiz.addEventListener('click', () => {
+      renderQuiz();
+      quizScore.textContent='';
+      state.quiz.done = false;
+      if (state.consent === 'accepted') saveProgress(state);
+      renderProgress();
+    });
+
+    // ------------------------------
+    // Last Visit Info
+    // ------------------------------
+    const lastVisit = document.getElementById('lastVisit');
+    function updateLastVisit() {
+      const now = new Date();
+      const locale = 'id-ID';
+      const stamp = now.toLocaleString(locale, { dateStyle: 'full', timeStyle: 'short' });
+      if (state.lastVisit) {
+        lastVisit.textContent = 'Kunjungan terakhir: ' + new Date(state.lastVisit).toLocaleString(locale, { dateStyle: 'full', timeStyle: 'short' });
+      }
+      state.lastVisit = now.toISOString();
+      if (state.consent === 'accepted') saveProgress(state);
+    }
+
+    // ------------------------------
+    // Init
+    // ------------------------------
+    function init() {
+      updateBanner();
+      bindCompleteButtons();
+      renderProgress();
+      renderQuiz();
+      updateLastVisit();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
