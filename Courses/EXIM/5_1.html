@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pertemuan 5 — Analisis Potensi Produk Impor | EXIM UNDA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f9fafb; /* tailwind slate-50 */
+      --ink: #0f172a; /* slate-900 */
+      --accent: #f472b6; /* pink-400 */
+      --accent-2: #60a5fa; /* blue-400 */
+      --chip: #fde68a; /* amber-200 */
+    }
+    html, body { background: var(--bg); color: var(--ink); }
+    body { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans JP', Arial, sans-serif; }
+    /* Subtle anime-style background */
+    .anime-bg {
+      background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(96,165,250,0.25) 0%, rgba(96,165,250,0) 60%),
+        radial-gradient(ellipse at 80% 0%, rgba(244,114,182,0.25) 0%, rgba(244,114,182,0) 60%),
+        radial-gradient(ellipse at 50% 120%, rgba(253,230,138,0.25) 0%, rgba(253,230,138,0) 60%);
+    }
+    /* Kawaii sparkle */
+    .sparkle::after {
+      content: '✦';
+      margin-left: .3rem;
+      color: var(--accent);
+    }
+    /* Cute card shadow */
+    .soft-card { box-shadow: 0 10px 30px rgba(31,41,55,0.08); }
+
+    /* Badge canvas crisp edges */
+    canvas { image-rendering: optimizeQuality; }
+
+    /* Simple fade-in */
+    .fade-in { animation: fade 0.6s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+  </style>
+</head>
+<body class="anime-bg min-h-screen">
+  <header class="max-w-6xl mx-auto px-4 pt-8 pb-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-white soft-card grid place-items-center text-2xl">📦</div>
+        <div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Pertemuan 5 — Analisis Potensi Produk Impor</h1>
+          <p class="text-sm text-slate-600">Mata Kuliah Ekspor-Impor • Universitas Darwan Ali</p>
+        </div>
+      </div>
+      <button id="resetBtn" class="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-xl border soft-card bg-white hover:bg-slate-50 text-sm">🔄 Reset Progres</button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pb-24">
+    <!-- Profile / progress -->
+    <section class="grid md:grid-cols-3 gap-6 mb-8 fade-in">
+      <div class="md:col-span-2 bg-white rounded-2xl p-5 soft-card">
+        <h2 class="font-bold text-lg mb-3">👤 Profil & Progres</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm">Nama Mahasiswa</label>
+            <input id="nameInput" type="text" placeholder="Tulis nama lengkap" class="mt-1 w-full px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-pink-300"/>
+          </div>
+          <div>
+            <label class="text-sm">Kelas</label>
+            <input id="classInput" type="text" placeholder="Misal: Manajemen A" class="mt-1 w-full px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-300"/>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="flex items-center justify-between text-sm">
+            <span>Progres keseluruhan</span>
+            <span id="progressPct" class="font-semibold">0%</span>
+          </div>
+          <div class="w-full h-3 bg-slate-100 rounded-full mt-2 overflow-hidden">
+            <div id="progressBar" class="h-full bg-gradient-to-r from-pink-400 to-blue-400 w-0"></div>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-slate-500">Progress akan disimpan otomatis di cookie/session pada perangkat ini.</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 soft-card">
+        <h3 class="font-bold mb-2">🎯 Target Pertemuan</h3>
+        <ul class="space-y-1 text-sm">
+          <li>• Menentukan <span class="font-semibold">produk impor potensial</span></li>
+          <li>• Menganalisis <span class="font-semibold">kebutuhan pasar lokal</span></li>
+          <li>• Mengenali <span class="font-semibold">regulasi & Lartas</span></li>
+          <li>• Menggunakan <span class="font-semibold">platform impor</span> untuk riset</li>
+        </ul>
+        <div class="mt-3 text-xs bg-amber-50 border border-amber-200 rounded-xl p-3">💡 Tips: Simpan nama agar muncul di lencana kelulusan (badge)!</div>
+      </div>
+    </section>
+
+    <!-- Learning resources -->
+    <section class="grid lg:grid-cols-3 gap-6 mb-10 fade-in">
+      <div class="lg:col-span-2 bg-white rounded-2xl p-5 soft-card">
+        <h2 class="font-bold text-lg mb-3 sparkle">Penjelasan Interaktif</h2>
+        <p class="text-sm mb-3">Baca ringkasan materi dan contoh kasus pertemuan 5 dalam format interaktif.</p>
+        <a href="https://notebooklm.google.com/notebook/8fb55123-55a6-473f-b50d-5118cd8ecb47" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-pink-500 text-white hover:bg-pink-600">📖 Buka Penjelasan Interaktif</a>
+        <div class="mt-5 grid md:grid-cols-2 gap-4">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/xQCzIZjljJk" title="Video Materi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="aspect-video w-full overflow-hidden rounded-xl border">
+            <iframe class="w-full h-full" src="https://import-potential-analyst-trainer-exim-w5-179392852285.us-west1.run.app" title="Dosen AI Interaktif" frameborder="0"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 soft-card">
+        <h3 class="font-bold mb-2">🧭 Checklist Belajar</h3>
+        <ul id="checklist" class="space-y-2 text-sm">
+          <li class="flex items-center gap-2"><input type="checkbox" data-key="intro"> <span>Pahami definisi & tujuan analisis produk impor</span></li>
+          <li class="flex items-center gap-2"><input type="checkbox" data-key="tools"> <span>Jelajahi minimal 1 marketplace luar negeri</span></li>
+          <li class="flex items-center gap-2"><input type="checkbox" data-key="reg"> <span>Identifikasi regulasi & Lartas terkait</span></li>
+          <li class="flex items-center gap-2"><input type="checkbox" data-key="calc"> <span>Hitung estimasi biaya & margin sederhana</span></li>
+        </ul>
+        <div class="mt-3 text-xs text-slate-500">Checklist tersimpan otomatis.</div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="bg-white rounded-2xl p-5 soft-card mb-10 fade-in">
+      <div class="flex items-center justify-between">
+        <h2 class="font-bold text-lg">📝 Latihan Soal Interaktif</h2>
+        <div class="text-sm">Skor: <span id="score">0</span>/6</div>
+      </div>
+      <p class="text-sm text-slate-600 mb-4">Pilih jawaban yang paling tepat. Sistem menyimpan progres dan skor kamu.</p>
+
+      <ol class="space-y-4 text-sm">
+        <li class="border rounded-xl p-4">
+          <p class="font-semibold">1) Apa tujuan utama analisis potensi produk impor?</p>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            <button data-q="q1" data-a="A" class="opt">Menemukan produk luar negeri yang berpeluang laku di pasar lokal</button>
+            <button data-q="q1" data-a="B" class="opt">Menggantikan seluruh produk lokal</button>
+            <button data-q="q1" data-a="C" class="opt">Menaikkan tarif impor</button>
+            <button data-q="q1" data-a="D" class="opt">Mengurangi ekspor</button>
+          </div>
+          <p class="feedback mt-2 text-xs"></p>
+        </li>
+        <li class="border rounded-xl p-4">
+          <p class="font-semibold">2) Manakah faktor yang <em>paling relevan</em> untuk menilai potensi?</p>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            <button data-q="q2" data-a="A" class="opt">Kebutuhan pasar lokal & tren</button>
+            <button data-q="q2" data-a="B" class="opt">Warna favorit dosen</button>
+            <button data-q="q2" data-a="C" class="opt">Letak benua pemasok</button>
+            <button data-q="q2" data-a="D" class="opt">Jumlah huruf di merek</button>
+          </div>
+          <p class="feedback mt-2 text-xs"></p>
+        </li>
+        <li class="border rounded-xl p-4">
+          <p class="font-semibold">3) Contoh platform yang tepat untuk riset pemasok B2B adalah…</p>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            <button data-q="q3" data-a="A" class="opt">Alibaba</button>
+            <button data-q="q3" data-a="B" class="opt">Instagram Reels</button>
+            <button data-q="q3" data-a="C" class="opt">Netflix</button>
+            <button data-q="q3" data-a="D" class="opt">Spotify</button>
+          </div>
+          <p class="feedback mt-2 text-xs"></p>
+        </li>
+        <li class="border rounded-xl p-4">
+          <p class="font-semibold">4) Apa arti Lartas dalam konteks impor Indonesia?</p>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            <button data-q="q4" data-a="A" class="opt">Larangan dan/atau pembatasan</button>
+            <button data-q="q4" data-a="B" class="opt">Layanan antar gratis</button>
+            <button data-q="q4" data-a="C" class="opt">Label artistik</button>
+            <button data-q="q4" data-a="D" class="opt">Laba ritel tas</button>
+          </div>
+          <p class="feedback mt-2 text-xs"></p>
+        </li>
+        <li class="border rounded-xl p-4">
+          <p class="font-semibold">5) Di tahap evaluasi biaya, apa yang paling tepat dihitung?</p>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            <button data-q="q5" data-a="A" class="opt">Landed cost & margin</button>
+            <button data-q="q5" data-a="B" class="opt">Jumlah like postingan</button>
+            <button data-q="q5" data-a="C" class="opt">Kecepatan Wi‑Fi</button>
+            <button data-q="q5" data-a="D" class="opt">Nama hewan peliharaan pemasok</button>
+          </div>
+          <p class="feedback mt-2 text-xs"></p>
+        </li>
+        <li class="border rounded-xl p-4">
+          <p class="font-semibold">6) Urutan langkah yang paling masuk akal adalah…</p>
+          <div class="mt-2 grid sm:grid-cols-2 gap-2">
+            <button data-q="q6" data-a="A" class="opt">Identifikasi kebutuhan → Riset pemasok → Cek regulasi → Hitung biaya</button>
+            <button data-q="q6" data-a="B" class="opt">Hitung biaya → Tanyakan warna dosen → Cek regulasi → Riset pemasok</button>
+            <button data-q="q6" data-a="C" class="opt">Riset pemasok → Unggah ke Netflix → Cek regulasi → Belanja</button>
+            <button data-q="q6" data-a="D" class="opt">Cek regulasi → Lupakan kebutuhan pasar → Riset pemasok → Hitung biaya</button>
+          </div>
+          <p class="feedback mt-2 text-xs"></p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Badge -->
+    <section class="grid md:grid-cols-2 gap-6 fade-in">
+      <div class="bg-white rounded-2xl p-5 soft-card">
+        <h2 class="font-bold text-lg">🏅 Lencana Kelulusan</h2>
+        <p class="text-sm text-slate-600">Isi nama lalu unduh sebagai bukti menyelesaikan pembelajaran pertemuan 5.</p>
+        <div class="mt-3 grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-sm">Nama di Lencana</label>
+            <input id="badgeName" type="text" placeholder="Nama sesuai profil" class="mt-1 w-full px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-pink-300"/>
+          </div>
+          <div>
+            <label class="text-sm">Tanggal</label>
+            <input id="badgeDate" type="date" class="mt-1 w-full px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-300"/>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center gap-3">
+          <button id="genBadge" class="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600">✨ Buat Lencana</button>
+          <a id="dlBadge" download="Badge-Pertemuan5-EXIM.png" class="px-4 py-2 rounded-xl bg-pink-500 text-white hover:bg-pink-600 hidden">⬇️ Unduh PNG</a>
+        </div>
+        <div id="badgeNote" class="mt-3 text-xs text-slate-500">Lencana akan tersedia setelah dibuat. Disarankan progres ≥ 80%.</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 soft-card grid place-items-center">
+        <canvas id="badgeCanvas" width="920" height="520" class="w-full max-w-xl rounded-xl border"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 pb-10 pt-8 text-center text-xs text-slate-500">
+    © <span id="year"></span> EXIM — Universitas Darwan Ali • Light theme • Anime style ✨
+  </footer>
+
+  <script>
+    // ------------------ Tailwind config (optional) ------------------
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Poppins', 'Noto Sans JP', 'ui-sans-serif', 'system-ui'] }
+        }
+      }
+    }
+
+    // ------------------ Utilities: Cookie + Storage ------------------
+    function setCookie(name, value, days=30) {
+      try {
+        const d = new Date(); d.setTime(d.getTime() + (days*24*60*60*1000));
+        document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/';
+      } catch(e) { /* ignore */ }
+    }
+    function getCookie(name){
+      try {
+        const n = name + '=';
+        const ca = document.cookie.split(';');
+        for(let c of ca){
+          c = c.trim();
+          if(c.indexOf(n) === 0) return decodeURIComponent(c.substring(n.length, c.length));
+        }
+      } catch(e) { /* ignore */ }
+      return null;
+    }
+    const store = {
+      set(k, v){ localStorage.setItem(k, JSON.stringify(v)); setCookie(k, JSON.stringify(v)); },
+      get(k){
+        const ls = localStorage.getItem(k); if(ls) try { return JSON.parse(ls); } catch {}
+        const ck = getCookie(k); if(ck) try { return JSON.parse(ck); } catch {}
+        return null;
+      }
+    }
+
+    // ------------------ State ------------------
+    const STATE_KEY = 'exim_w5_state_v1';
+    const defaultState = {
+      profile: { name: '', kelas: '' },
+      checklist: { intro:false, tools:false, reg:false, calc:false },
+      quiz: { q1:null, q2:null, q3:null, q4:null, q5:null, q6:null },
+      score: 0
+    };
+    let state = Object.assign({}, defaultState, store.get(STATE_KEY)||{});
+
+    function save(){ store.set(STATE_KEY, state); updateProgressUI(); }
+
+    // ------------------ DOM Refs ------------------
+    const nameInput = document.getElementById('nameInput');
+    const classInput = document.getElementById('classInput');
+    const progressPct = document.getElementById('progressPct');
+    const progressBar = document.getElementById('progressBar');
+    const checklist = document.getElementById('checklist');
+    const scoreEl = document.getElementById('score');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const badgeName = document.getElementById('badgeName');
+    const badgeDate = document.getElementById('badgeDate');
+    const badgeCanvas = document.getElementById('badgeCanvas');
+    const genBadgeBtn = document.getElementById('genBadge');
+    const dlBadge = document.getElementById('dlBadge');
+    const badgeNote = document.getElementById('badgeNote');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ------------------ Init UI from state ------------------
+    function initUI(){
+      // profile
+      nameInput.value = state.profile.name || '';
+      classInput.value = state.profile.kelas || '';
+      badgeName.value = state.profile.name || '';
+      badgeDate.valueAsDate = new Date();
+
+      // checklist
+      checklist.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+        const key = cb.getAttribute('data-key');
+        cb.checked = !!state.checklist[key];
+        cb.addEventListener('change', ()=>{
+          state.checklist[key] = cb.checked; save();
+        })
+      });
+
+      // quiz
+      document.querySelectorAll('.opt').forEach(btn=>{
+        btn.classList.add('px-3','py-2','rounded-xl','border','hover:bg-slate-50');
+        btn.addEventListener('click', ()=> handleAnswer(btn));
+        const q = btn.dataset.q; const a = btn.dataset.a;
+        if(state.quiz[q] && state.quiz[q].selected === a){ markOption(btn, state.quiz[q].correct); }
+      });
+
+      updateScore();
+      updateProgressUI();
+    }
+
+    function updateProgressUI(){
+      // progress calculation: checklist (4) + quiz answered (6) + profile filled (2 fields) = 12 items
+      let done = 0;
+      const total = 12;
+      // profile
+      if(state.profile.name?.trim()) done++;
+      if(state.profile.kelas?.trim()) done++;
+      // checklist
+      Object.values(state.checklist).forEach(v=>{ if(v) done++; });
+      // quiz answered
+      Object.values(state.quiz).forEach(v=>{ if(v && v.selected) done++; });
+
+      const pct = Math.round((done/total)*100);
+      progressPct.textContent = pct + '%';
+      progressBar.style.width = pct + '%';
+
+      // show/hide reset
+      resetBtn.classList.toggle('hidden', done===0);
+
+      // badge hint
+      if(pct >= 80){ badgeNote.textContent = 'Progres sudah cukup untuk mengunduh lencana. Bagus!'; }
+      else { badgeNote.textContent = 'Tingkatkan progres hingga ≥ 80% agar lencana makin valid.'; }
+    }
+
+    // ------------------ Profile handlers ------------------
+    nameInput.addEventListener('input', ()=>{ state.profile.name = nameInput.value; badgeName.value = state.profile.name; save(); });
+    classInput.addEventListener('input', ()=>{ state.profile.kelas = classInput.value; save(); });
+
+    // ------------------ Quiz logic ------------------
+    const ANSWER_KEY = { q1:'A', q2:'A', q3:'A', q4:'A', q5:'A', q6:'A' };
+
+    function handleAnswer(btn){
+      const q = btn.dataset.q; const chosen = btn.dataset.a; const correct = ANSWER_KEY[q];
+      // lock question if already answered; allow change but update state
+      const li = btn.closest('li');
+      li.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('ring-2','ring-green-300','ring-red-300','bg-green-50','bg-red-50'); });
+
+      const ok = chosen === correct;
+      state.quiz[q] = { selected: chosen, correct: ok };
+      markOption(btn, ok);
+      updateScore(); save();
+    }
+
+    function markOption(btn, ok){
+      btn.classList.add('ring-2', ok ? 'ring-green-300' : 'ring-red-300', ok ? 'bg-green-50' : 'bg-red-50');
+      const fb = btn.closest('li').querySelector('.feedback');
+      fb.textContent = ok ? '✔️ Tepat!': '❌ Coba cek lagi konsepnya.';
+    }
+
+    function updateScore(){
+      let s = 0; Object.values(state.quiz).forEach(v=>{ if(v && v.correct) s++; });
+      state.score = s; scoreEl.textContent = s;
+    }
+
+    // ------------------ Reset ------------------
+    resetBtn.addEventListener('click', ()=>{
+      if(!confirm('Hapus seluruh progres?')) return;
+      state = JSON.parse(JSON.stringify(defaultState));
+      save(); location.reload();
+    });
+
+    // ------------------ Badge Generator ------------------
+    function drawBadge(name, kelas, dateStr){
+      const c = badgeCanvas; const ctx = c.getContext('2d');
+      // bg gradient
+      const g = ctx.createLinearGradient(0,0,c.width,c.height);
+      g.addColorStop(0,'#ffffff');
+      g.addColorStop(1,'#fce7f3');
+      ctx.fillStyle = g; ctx.fillRect(0,0,c.width,c.height);
+
+      // decorative circles
+      function circle(x,y,r,fill){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle=fill; ctx.fill(); }
+      circle(120,100,60,'rgba(96,165,250,0.25)');
+      circle(820,420,80,'rgba(244,114,182,0.25)');
+      circle(780,120,30,'rgba(253,230,138,0.6)');
+
+      // frame
+      ctx.strokeStyle = '#e5e7eb'; ctx.lineWidth = 6; ctx.strokeRect(18,18,c.width-36,c.height-36);
+
+      // title
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '700 38px Poppins, sans-serif';
+      ctx.fillText('Lencana Kelulusan — Pertemuan 5', 40, 90);
+      ctx.font = '600 26px Poppins, sans-serif';
+      ctx.fillText('Analisis Potensi Produk Impor', 40, 130);
+
+      // name plate
+      ctx.fillStyle = '#1f2937';
+      ctx.font = '700 54px Poppins, sans-serif';
+      const nm = name && name.trim()? name.trim(): 'Nama Mahasiswa';
+      ctx.fillText(nm, 40, 210);
+
+      // details
+      ctx.fillStyle = '#374151';
+      ctx.font = '400 22px Poppins, sans-serif';
+      ctx.fillText('Program Studi S1 Manajemen — Universitas Darwan Ali', 40, 252);
+      ctx.fillText('Mata Kuliah Ekspor-Impor', 40, 284);
+
+      // ribbon
+      ctx.fillStyle = '#60a5fa';
+      ctx.fillRect(40,320,420,56);
+      ctx.fillStyle = 'white';
+      ctx.font = '700 24px Poppins, sans-serif';
+      ctx.fillText('Skor Kuis: ' + (state.score||0) + ' / 6 • Progres: ' + document.getElementById('progressPct').textContent, 52, 356);
+
+      // right box
+      ctx.fillStyle = '#f472b6';
+      ctx.fillRect(520,320,360,140);
+      ctx.fillStyle = 'white';
+      ctx.font = '700 24px Poppins, sans-serif';
+      ctx.fillText('Dosen EXIM — AI', 540, 360);
+      ctx.font = '400 18px Poppins, sans-serif';
+      ctx.fillText('Kelas: ' + (kelas||'-'), 540, 392);
+      ctx.fillText('Tanggal: ' + dateStr, 540, 420);
+      ctx.fillText('Tertanda: Dosen Ekspor Impor UNDA', 540, 448);
+
+      // seal
+      ctx.beginPath(); ctx.arc(840, 80, 40, 0, Math.PI*2); ctx.fillStyle = '#fde68a'; ctx.fill();
+      ctx.fillStyle = '#1f2937'; ctx.font = '800 20px Poppins, sans-serif'; ctx.fillText('EXIM', 810, 84);
+      ctx.font = '600 12px Poppins, sans-serif'; ctx.fillText('UNDA', 820, 102);
+    }
+
+    function toDataURL(){ return badgeCanvas.toDataURL('image/png'); }
+
+    genBadgeBtn.addEventListener('click', ()=>{
+      const nm = (badgeName.value || nameInput.value || '').trim();
+      if(!nm){ alert('Isi nama untuk lencana.'); return; }
+      const kelas = (classInput.value||'').trim();
+      const d = badgeDate.value ? new Date(badgeDate.value) : new Date();
+      const dateStr = d.toLocaleDateString('id-ID', { year:'numeric', month:'long', day:'numeric' });
+      drawBadge(nm, kelas, dateStr);
+      const url = toDataURL();
+      dlBadge.href = url; dlBadge.classList.remove('hidden');
+    });
+
+    // ------------------ Load ------------------
+    window.addEventListener('DOMContentLoaded', ()=>{
+      initUI();
+    });
+  </script>
+</body>
+</html>
