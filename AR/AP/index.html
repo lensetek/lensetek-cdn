@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>AR.js GLB Viewer — ap.glb</title>
+    <meta name="description" content="Marker-based AR showing ap.glb using A-Frame + AR.js" />
+
+    <!-- A-Frame -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.5.0/aframe.min.js"></script>
+    <!-- AR.js for A-Frame -->
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.js"></script>
+
+    <style>
+      html, body { margin: 0; padding: 0; height: 100%; }
+      .overlay {
+        position: fixed;
+        left: 0; right: 0; top: 0; padding: 8px 12px;
+        color: #fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0));
+        z-index: 2;
+      }
+      .hint { font-size: 14px; opacity: 0.9; }
+      .link { color: #bde0ff; text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div class="overlay">
+      <div><strong>AR Viewer</strong> — point camera at the Hiro marker.</div>
+      <div class="hint">Model: <code>ap.glb</code>. Use a printed Hiro marker or show it on another screen.</div>
+    </div>
+
+    <!--
+      Notes
+      - Serve this folder over HTTPs or localhost to allow camera access.
+      - Easiest: from repo root run `npx http-server -p 8080` then open
+        http://localhost:8080/AR/AP/ on a device with a camera.
+      - Hiro marker to print/show: https://raw.githubusercontent.com/AR-js-org/AR.js/master/three.js/data/images/HIRO.jpg
+    -->
+
+    <a-scene
+      renderer="antialias: true; logarithmicDepthBuffer: true"
+      embedded
+      arjs="
+        sourceType: webcam;
+        debugUIEnabled: false;
+        detectionMode: mono;
+        maxDetectionRate: 30;
+      "
+    >
+      <a-assets>
+        <a-asset-item id="model" src="./ap.glb"></a-asset-item>
+      </a-assets>
+
+      <!-- Use the default HIRO marker -->
+      <a-marker preset="hiro">
+        <!-- Adjust scale/rotation/position to fit your model -->
+        <a-entity
+          gltf-model="#model"
+          position="0 0 0"
+          rotation="0 90 0"
+          scale="0.5 0.5 0.5"
+          animation-mixer
+        ></a-entity>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+  </html>
+
