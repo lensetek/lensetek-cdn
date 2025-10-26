@@ -1,483 +1,459 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aided Learning – Materi 6 | Indeks, Portofolio, Reksa Dana & ETF</title>
-  <!-- TailwindCSS CDN -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pengantar Pasar Modal – Landing Page (Lensetek)</title>
+  <meta name="description" content="Landing page mata kuliah Pengantar Pasar Modal: materi ringkas, latihan interaktif, dan alat bantu analisis.">
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
-    html { scroll-behavior: smooth; }
-    .fade { opacity: 0; transform: translateY(8px); transition: all .6s ease; }
-    .fade.show { opacity: 1; transform: translateY(0); }
-    .spin-slow { animation: spin 14s linear infinite; }
-    .float { animation: float 6s ease-in-out infinite; }
-    @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-10px)} 100%{transform:translateY(0)} }
-    .step-active { background: #eef2ff; border-color: #c7d2fe; }
-    .step-done { background: #ecfdf5; border-color: #a7f3d0; }
-    .ring-ani { position: relative; }
-    .ring-ani::after{ content:""; position:absolute; inset:-6px; border:2px solid #93c5fd; border-radius:9999px; animation:pulse 2s ease-out infinite; }
-    @keyframes pulse { 0%{opacity:.7; transform:scale(.9)} 100%{opacity:0; transform:scale(1.2)} }
-    /* Simple tooltip */
-    .tip:hover .tipcard{ display:block }
+    /* Light theme tweaks (tetap ringan) */
+    :root {
+      --brand: #0ea5e9; /* sky-500 */
+      --ink: #0f172a;   /* slate-900 */
+      --sub: #334155;   /* slate-700 */
+      --bg: #f8fafc;    /* slate-50 */
+      --card: #ffffff;
+      --ring: rgba(14,165,233,.35);
+    }
+    html, body { background: var(--bg); color: var(--ink); }
+    .card { background: var(--card); border: 1px solid #e2e8f0; }
+    .ring-brand:focus { outline: none; box-shadow: 0 0 0 4px var(--ring); }
+    .link { color: var(--brand); }
+    .link:hover { text-decoration: underline; }
+    .kbd { border:1px solid #cbd5e1; padding:.1rem .4rem; border-radius:.375rem; font-size:.875rem }
   </style>
 </head>
-<body class="bg-gradient-to-b from-white to-indigo-50/40 text-slate-800">
-  <!-- Decorations -->
-  <div class="fixed inset-0 pointer-events-none -z-10">
-    <svg class="absolute -top-10 -left-10 w-64 h-64 text-indigo-100 spin-slow" viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="50"/></svg>
-    <svg class="absolute -bottom-12 -right-12 w-80 h-80 text-pink-100 spin-slow" viewBox="0 0 100 100" fill="currentColor"><rect width="100" height="100" rx="22"/></svg>
-  </div>
-
-  <!-- NAV -->
-  <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-indigo-100/60">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-      <a href="#" class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 font-extrabold">M6</a>
-      <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="#path" class="hover:text-indigo-600">Learning Path</a>
-        <a href="#materi" class="hover:text-indigo-600">Materi</a>
-        <a href="#interaktif" class="hover:text-indigo-600">Interaktif</a>
-        <a href="#alat" class="hover:text-indigo-600">Alat & Prompt</a>
-        <a href="#progress" class="hover:text-indigo-600">Progress</a>
-      </nav>
-      <div class="ml-auto flex items-center gap-2">
-        <input id="namaInput" type="text" placeholder="Nama Anda" class="px-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-white" />
-        <button id="simpanNama" class="px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Simpan</button>
-        <span id="sapaan" class="text-sm text-slate-600"></span>
+<body class="min-h-screen">
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h18v4H3zM3 17h18v4H3zM3 7l9 6 9-6"/></svg>
+        </div>
+        <div>
+          <p class="text-sm text-slate-500">Mata Kuliah</p>
+          <h1 class="text-lg font-semibold">Pengantar Pasar Modal</h1>
+        </div>
       </div>
+      <nav class="hidden md:flex items-center gap-4">
+        <a href="#materi" class="link text-sm">Materi</a>
+        <a href="#interaktif" class="link text-sm">Interaktif</a>
+        <a href="#video" class="link text-sm">Video</a>
+        <a href="#alat" class="link text-sm">Alat Bantu</a>
+      </nav>
     </div>
   </header>
 
-  <!-- HERO with embedded video -->
-  <section class="max-w-7xl mx-auto px-4 py-10 grid lg:grid-cols-2 gap-8 items-center">
-    <div class="fade">
-      <h1 class="text-3xl md:text-5xl font-black leading-tight">Aided Learning –
-        <span class="text-indigo-600">Materi 6: Indeks, Portofolio, Reksa Dana & ETF</span></h1>
-      <p class="mt-4 text-lg text-slate-700">Belajar terstruktur dan mendalam dengan jalur bertahap (guided path), checkpoint, dan aktivitas interaktif. Semua progress disimpan di <b>cookies</b> (persisten) & <b>sessionStorage</b> (sesi).</p>
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a href="#path" class="px-5 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700">Mulai Jalur Belajar</a>
-        <button id="resetAll" class="px-5 py-3 rounded-xl bg-white border border-rose-200 text-rose-600 hover:bg-rose-50">Reset Progress</button>
-      </div>
-      <p class="mt-4 text-sm text-slate-600">Tautan cepat: 
-        <a class="text-indigo-700 underline" href="https://notebooklm.google.com/notebook/52930345-ad7e-4f0b-9585-29c96709c126" target="_blank" rel="noopener">Chat Materi 6</a> • 
-        <a class="text-indigo-700 underline" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek" target="_blank" rel="noopener">GPT Kelas</a>
-      </p>
-    </div>
-    <div class="fade ring-ani rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-black">
-      <div class="aspect-video">
-        <iframe class="w-full h-full" src="https://www.youtube.com/embed/626saJZRauw?si=ZR1Lro88TM3WxICN" title="Video Materi 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold leading-tight">Belajar Pasar Modal dengan Cara Simpel & Relevan 🇮🇩</h2>
+        <p class="mt-4 text-slate-700">
+          Fokus kita: <span class="font-medium">pemahaman konsep</span> dan <span class="font-medium">penerapan praktis</span> di Bursa Efek Indonesia.
+          Penjelasan dibuat sederhana tanpa banyak hitung-hitungan. Latihan ada, tapi porsinya kecil—supaya kamu paham dulu, baru praktik.
+        </p>
 
-  <!-- AIDED LEARNING PATH -->
-  <section id="path" class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Learning Path (Step-by-step)</h2>
-    <p class="text-slate-700 mb-4">Ikuti 5 langkah berikut. Setiap langkah memiliki <b>tujuan</b>, <b>materi inti</b>, dan <b>aksi</b> untuk memastikan pemahaman. Centang untuk menandai selesai; sistem akan memperbarui progress dan membuka langkah berikutnya.</p>
-
-    <ol id="steps" class="grid lg:grid-cols-5 gap-4">
-      <!-- Step cards generated by JS -->
-    </ol>
-
-    <div class="mt-6">
-      <div class="w-full bg-slate-200 rounded-full h-3">
-        <div id="bar" class="h-3 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500" style="width:0%"></div>
-      </div>
-      <p class="text-sm text-slate-600 mt-2">Progress jalur belajar: <span id="barTxt">0%</span></p>
-    </div>
-  </section>
-
-  <!-- MATERI RINGKAS TERSTRUKTUR -->
-  <section id="materi" class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Ringkasan Materi Terkurasi</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-xl font-bold">1) Indeks Saham</h3>
-        <ul class="list-disc ml-5 mt-2 text-slate-700 space-y-1 text-sm">
-          <li>Peran: benchmark kinerja, dasar produk indeks (RD/ETF), alat alokasi aset.</li>
-          <li>Contoh BEI: IHSG, LQ45, IDX30, IDX80, ISSI (syariah), sektoral.</li>
-          <li>Metodologi umum BEI: <b>free-float market-cap weighted</b>.</li>
-          <li>Return indeks t: <code>(I_t - I_{t-1})/I_{t-1}</code>.</li>
-        </ul>
-      </article>
-      <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-xl font-bold">2) Portofolio & Diversifikasi</h3>
-        <ul class="list-disc ml-5 mt-2 text-slate-700 space-y-1 text-sm">
-          <li>Ekspektasi return: <code>E(Rp)=Σ w_i E(R_i)</code>.</li>
-          <li>Varians 2 aset: <code>σp²=wA²σA²+wB²σB²+2wAwBσAσBρAB</code>.</li>
-          <li>Kunci diversifikasi: <code>ρ&lt;1</code> menurunkan risiko gabungan.</li>
-          <li>Praktik: target alokasi & rebalancing berkala.</li>
-        </ul>
-      </article>
-      <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-xl font-bold">3) Reksa Dana</h3>
-        <ul class="list-disc ml-5 mt-2 text-slate-700 space-y-1 text-sm">
-          <li>Struktur KIK: Manajer Investasi & Bank Kustodian (diawasi OJK).</li>
-          <li>Jenis: Pasar Uang, Pendapatan Tetap, Campuran, Saham, Indeks, Syariah.</li>
-          <li>Perhatikan: NAB/UP, expense ratio, kebijakan investasi.</li>
-        </ul>
-      </article>
-      <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-xl font-bold">4) ETF</h3>
-        <ul class="list-disc ml-5 mt-2 text-slate-700 space-y-1 text-sm">
-          <li>Diperdagangkan <i>intraday</i> (ada bid-ask spread) namun berisi portofolio indeks.</li>
-          <li>AP/Dealer Partisipan & Market Maker menjaga harga dekat NAB.</li>
-          <li>Metrik: tracking difference & tracking error.</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- INTERAKTIF: kalkulator, banding, kuis, catatan -->
-  <section id="interaktif" class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Aktivitas Interaktif</h2>
-
-    <div class="grid lg:grid-cols-2 gap-6">
-      <!-- Kalkulator 2 Aset -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <div class="flex items-center justify-between flex-wrap gap-3">
-          <h3 class="text-xl font-bold">Kalkulator Return & Risiko (2 Aset)</h3>
-          <button class="text-sm px-3 py-1 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100" onclick="exampleFill()">Contoh</button>
+        <!-- Quick actions -->
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#materi" class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700">Mulai Materi</a>
+          <a href="#interaktif" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">Mode Interaktif</a>
+          <button id="btnReset" class="px-4 py-2 rounded-xl border border-rose-300 text-rose-700 hover:bg-rose-50">Reset Data Sesi</button>
         </div>
-        <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm">
-          <div><label class="block mb-1 font-medium">wA</label><input id="wA" type="number" step="0.01" min="0" max="1" class="w-full px-3 py-2 border rounded-lg" placeholder="0.6"></div>
-          <div><label class="block mb-1 font-medium">E(R)A</label><input id="eA" type="number" step="0.01" class="w-full px-3 py-2 border rounded-lg" placeholder="0.10"></div>
-          <div><label class="block mb-1 font-medium">σA</label><input id="sA" type="number" step="0.01" class="w-full px-3 py-2 border rounded-lg" placeholder="0.20"></div>
-          <div><label class="block mb-1 font-medium">wB</label><input id="wB" type="number" step="0.01" min="0" max="1" class="w-full px-3 py-2 border rounded-lg" placeholder="0.4"></div>
-          <div><label class="block mb-1 font-medium">E(R)B</label><input id="eB" type="number" step="0.01" class="w-full px-3 py-2 border rounded-lg" placeholder="0.06"></div>
-          <div><label class="block mb-1 font-medium">σB</label><input id="sB" type="number" step="0.01" class="w-full px-3 py-2 border rounded-lg" placeholder="0.10"></div>
-          <div><label class="block mb-1 font-medium">ρ</label><input id="rho" type="number" step="0.01" min="-1" max="1" class="w-full px-3 py-2 border rounded-lg" placeholder="0.30"></div>
-        </div>
-        <div class="mt-4 flex gap-3">
-          <button onclick="hitungPortofolio()" class="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">Hitung</button>
-          <button onclick="simpanHitung()" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Simpan</button>
-        </div>
-        <div id="hasil" class="mt-4 p-4 rounded-xl bg-emerald-50 hidden"></div>
-      </div>
 
-      <!-- Perbandingan RD vs ETF -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-xl font-bold">Perbandingan Reksa Dana Indeks vs ETF</h3>
-        <p class="text-sm text-slate-600">Hitung biaya efektif & perkiraan tracking difference.</p>
-        <div class="grid md:grid-cols-2 gap-6 mt-4 text-sm">
-          <div class="space-y-3">
-            <div><label class="block mb-1 font-medium">Expense Ratio RD</label><input id="erRD" type="number" step="0.001" class="w-full px-3 py-2 border rounded-lg" placeholder="0.008"></div>
-            <div><label class="block mb-1 font-medium">Biaya Tambahan RD</label><input id="miscRD" type="number" step="0.001" class="w-full px-3 py-2 border rounded-lg" placeholder="0.002"></div>
-            <div><label class="block mb-1 font-medium">Target TE RD</label><input id="teRD" type="number" step="0.001" class="w-full px-3 py-2 border rounded-lg" placeholder="0.005"></div>
-          </div>
-          <div class="space-y-3">
-            <div><label class="block mb-1 font-medium">Expense Ratio ETF</label><input id="erETF" type="number" step="0.001" class="w-full px-3 py-2 border rounded-lg" placeholder="0.006"></div>
-            <div><label class="block mb-1 font-medium">Rata Spread (tahunan)</label><input id="spreadETF" type="number" step="0.001" class="w-full px-3 py-2 border rounded-lg" placeholder="0.002"></div>
-            <div><label class="block mb-1 font-medium">Target TE ETF</label><input id="teETF" type="number" step="0.001" class="w-full px-3 py-2 border rounded-lg" placeholder="0.004"></div>
-          </div>
-        </div>
-        <div class="mt-4 flex gap-3">
-          <button onclick="bandingkanProduk()" class="px-4 py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600">Bandingkan</button>
-          <button onclick="simpanPerbandingan()" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Simpan</button>
-        </div>
-        <div id="hasilBanding" class="mt-4 p-4 rounded-xl bg-amber-50 hidden"></div>
-      </div>
-
-      <!-- Kuis & Catatan -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade lg:col-span-2">
-        <div class="grid lg:grid-cols-2 gap-6">
-          <div>
-            <h3 class="text-xl font-bold">Kuis Cek Pemahaman</h3>
-            <p class="text-sm text-slate-600">Jawaban disimpan di sessionStorage.</p>
-            <ol class="mt-4 space-y-4">
-              <li>
-                <p class="font-medium">1) Metodologi paling umum pada indeks BEI adalah...</p>
-                <div class="mt-2 flex flex-col gap-2">
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q1" value="a"> Price-weighted</label>
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q1" value="b"> Equal-weighted</label>
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q1" value="c"> Free-float market-cap weighted</label>
-                </div>
-              </li>
-              <li>
-                <p class="font-medium">2) Diversifikasi efektif bila korelasi antar aset...</p>
-                <div class="mt-2 flex flex-col gap-2">
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q2" value="a"> = 1</label>
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q2" value="b"> &lt; 1</label>
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q2" value="c"> &gt; 1</label>
-                </div>
-              </li>
-              <li>
-                <p class="font-medium">3) Perbedaan kunci ETF vs Reksa Dana adalah...</p>
-                <div class="mt-2 flex flex-col gap-2">
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q3" value="a"> ETF tidak punya AP/Market Maker</label>
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q3" value="b"> ETF diperdagangkan intraday & punya spread</label>
-                  <label class="inline-flex items-center gap-2"><input type="radio" name="q3" value="c"> Reksa Dana juga diperdagangkan intraday</label>
-                </div>
-              </li>
-            </ol>
-            <div class="mt-4 flex gap-3">
-              <button onclick="koreksiKuis()" class="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">Koreksi</button>
-              <button onclick="unduhSertifikat()" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Unduh Sertifikat</button>
+        <!-- Profile minimal (cookie) -->
+        <div class="mt-6 card rounded-2xl p-4">
+          <div class="flex items-center justify-between gap-3">
+            <div class="w-full">
+              <label class="text-sm text-slate-600">Nama kamu (disimpan sebagai cookie):</label>
+              <input id="namaMahasiswa" type="text" placeholder="cth: Sinta Aulia"
+                class="mt-1 w-full ring-brand rounded-xl border border-slate-300 px-3 py-2"
+              />
+              <p class="mt-2 text-xs text-slate-500">Cookie: <code class="font-mono">pm_nama</code>, berlaku 30 hari.</p>
             </div>
-            <div id="hasilKuis" class="mt-4 p-4 rounded-xl bg-indigo-50 hidden"></div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold">Catatan Pribadi</h3>
-            <textarea id="note" rows="8" class="w-full px-3 py-2 border rounded-xl" placeholder="Tulis ringkasan / catatan pembelajaran Anda di sini..."></textarea>
-            <div class="mt-3 flex gap-3">
-              <button onclick="simpanCatatan()" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Simpan Catatan</button>
-              <button onclick="clearCatatan()" class="px-4 py-2 rounded-lg bg-white border border-slate-200">Bersihkan</button>
-            </div>
-            <ul id="noteList" class="mt-4 space-y-2 text-sm"></ul>
+            <button id="btnSimpanNama" class="mt-7 shrink-0 px-4 py-2 rounded-xl bg-slate-900 text-white hover:opacity-90">Simpan</button>
           </div>
         </div>
+
+        <!-- Link eksternal penting -->
+        <div class="mt-6 grid sm:grid-cols-2 gap-3">
+          <a target="_blank" rel="noopener" href="https://notebooklm.google.com/notebook/52930345-ad7e-4f0b-9585-29c96709c126" class="card rounded-2xl p-4 hover:border-sky-300">
+            <p class="text-xs text-slate-500">Materi 6</p>
+            <p class="font-medium">Chat Materi 6 – Indeks, Portofolio, Reksa Dana, ETF</p>
+          </a>
+          <a target="_blank" rel="noopener" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek" class="card rounded-2xl p-4 hover:border-sky-300">
+            <p class="text-xs text-slate-500">Asisten Kuliah</p>
+            <p class="font-medium">GPT: Pengantar Pasar Modal with Lensetek</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="card rounded-3xl p-6">
+        <h3 class="font-semibold text-lg">Tujuan Pembelajaran (ringkas)</h3>
+        <ul class="mt-3 space-y-2 text-slate-700 list-disc pl-5">
+          <li>Memahami apa itu pasar modal dan manfaatnya.</li>
+          <li>Membedakan instrumen: saham, obligasi, reksa dana, ETF.</li>
+          <li>Mengenali pelaku & lembaga (BEI, OJK, KSEI, perusahaan efek).</li>
+          <li>Mengerti IPO secara sederhana dan hak pemegang saham.</li>
+          <li>Menyadari risiko umum & etika berinvestasi (hindari FOMO, waspada bodong).</li>
+        </ul>
+        <p class="mt-4 text-sm text-slate-500">
+          Tip: baca pelan-pelan; tandai poin selesai di tab <span class="font-medium">Interaktif</span>.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- ALAT & PROMPT IPO AI ANALYZER -->
-  <section id="alat" class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Alat & Prompt</h2>
-    <div class="grid lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-lg font-bold">Tautan Diskusi & Asisten</h3>
-        <ul class="list-disc ml-5 mt-2 text-slate-700 space-y-2 text-sm">
-          <li><a class="text-indigo-700 underline" href="https://notebooklm.google.com/notebook/52930345-ad7e-4f0b-9585-29c96709c126" target="_blank" rel="noopener">Chat Materi 6 (NotebookLM)</a></li>
-          <li><a class="text-indigo-700 underline" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek" target="_blank" rel="noopener">Pengantar Pasar Modal with Lensetek (ChatGPT)</a></li>
-        </ul>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-lg font-bold">IPO AI Analyzer (Value Investor Advisor with Lensetek LLC)</h3>
-        <p class="text-sm text-slate-700">Gunakan alat ini untuk membaca prospektus IPO dan menyusun ringkasan metrik & valuasi.</p>
-        <p class="mt-2 text-sm"><a class="text-indigo-700 underline" href="https://chatgpt.com/g/g-CUB7HlYcl-value-investor-advisor-with-lensetek-llc" target="_blank" rel="noopener">Buka IPO AI Analyzer</a></p>
-        <details class="mt-3 p-3 bg-indigo-50 rounded-xl">
-          <summary class="font-medium cursor-pointer">Cara Pakai Efektif</summary>
-          <ul class="list-disc ml-5 mt-2 text-sm text-slate-700 space-y-1">
-            <li>Siapkan <b>file prospektus (PDF)</b> resmi emiten.</li>
-            <li>Seret & lepas atau unggah dokumen ke jendela chat alat tersebut.</li>
-            <li>Jalankan prompt analisis terstruktur (contoh di bawah).</li>
-            <li>Minta tabel metrik, skenario (Bull/Base/Bear), serta kesimpulan.</li>
+  <!-- Materi -->
+  <section id="materi" class="mx-auto max-w-6xl px-4 py-10">
+    <div class="grid lg:grid-cols-3 gap-6">
+      <article class="card rounded-2xl p-6 lg:col-span-2">
+        <h3 class="text-2xl font-bold">Materi Inti (penjelasan sederhana)</h3>
+
+        <h4 class="mt-6 font-semibold text-lg">1) Apa itu Pasar Modal?</h4>
+        <p class="mt-2 text-slate-700">
+          Pasar modal adalah tempat bertemunya perusahaan yang butuh dana jangka panjang dengan investor yang ingin menanamkan modal.
+          Bayangkan seperti “<em>marketplace</em> untuk kepemilikan bisnis>”: perusahaan menerbitkan surat berharga (saham/obligasi), investor membeli.
+          Manfaat: perusahaan dapat modal, investor berpotensi mendapat imbal hasil. Risiko: harga bisa naik-turun, dan tidak ada jaminan keuntungan.
+        </p>
+
+        <h4 class="mt-6 font-semibold text-lg">2) Saham &amp; Obligasi (gambaran singkat)</h4>
+        <p class="mt-2 text-slate-700">
+          <span class="font-medium">Saham</span> = bukti kepemilikan. Kamu bisa hadir di RUPS dan berhak atas dividen jika dibagikan.
+          <span class="font-medium">Obligasi</span> = surat utang perusahaan/pemerintah. Kamu menerima kupon berkala sampai jatuh tempo.
+          Analogi sederhana: saham seperti “ikut memiliki warung”, obligasi seperti “meminjamkan uang ke warung”.
+        </p>
+
+        <h4 class="mt-6 font-semibold text-lg">3) Reksa Dana &amp; ETF</h4>
+        <p class="mt-2 text-slate-700">
+          Keduanya membantu diversifikasi. Bayangkan keranjang buah: bukan membeli satu jenis saja, tapi berbagai macam.
+          <span class="font-medium">Reksa Dana</span> dikelola Manajer Investasi; pembelian/penjualan lewat MI/agent.
+          <span class="font-medium">ETF</span> mirip reksa dana namun diperdagangkan seperti saham di bursa, jadi bisa dibeli saat jam pasar.
+        </p>
+
+        <h4 class="mt-6 font-semibold text-lg">4) Indeks &amp; Portofolio</h4>
+        <p class="mt-2 text-slate-700">
+          <span class="font-medium">Indeks</span> (mis. IHSG) adalah “nilai rata-rata” sekelompok saham. Ia membantu melihat arah pasar.
+          <span class="font-medium">Portofolio</span> adalah kumpulan asetmu. Prinsip sederhana: jangan menaruh semua telur di satu keranjang.
+        </p>
+
+        <h4 class="mt-6 font-semibold text-lg">5) IPO (Initial Public Offering)</h4>
+        <p class="mt-2 text-slate-700">
+          IPO adalah saat perusahaan pertama kali menjual saham ke publik. Peran <em>underwriter</em> membantu menyiapkan dokumen, harga,
+          dan distribusi. Untuk investor pemula: pahami bisnisnya dan baca prospektus ringkas (risiko utama, tujuan penggunaan dana, dan struktur kepemilikan).
+        </p>
+
+        <div class="mt-6 p-4 rounded-xl bg-sky-50 border border-sky-200">
+          <p class="font-medium">Catatan penting:</p>
+          <ul class="mt-2 list-disc pl-5 text-slate-700">
+            <li><span class="font-medium">Likuiditas</span>: kemudahan jual-beli. Saham likuid cenderung spread lebih ketat.</li>
+            <li><span class="font-medium">Risiko pasar</span>: harga bisa fluktuatif; gunakan horizon waktu yang sesuai.</li>
+            <li><span class="font-medium">Jangan FOMO</span>: punya rencana sederhana, catat alasan beli/jual.</li>
           </ul>
-          <div class="mt-3 text-sm bg-white border border-indigo-200 rounded-xl p-3">
-            <p class="font-semibold">Contoh Prompt (dengan upload PDF prospektus):</p>
-            <pre class="mt-2 whitespace-pre-wrap text-xs">"Saya mengunggah prospektus IPO [NAMA PERUSAHAAN]. Tolong:
-1) Ringkas model bisnis, sumber pendapatan, dan risiko utama.
-2) Buat tabel metrik 3 tahun: pendapatan, laba, margin, DER, ROE, arus kas.
-3) Hitung valuasi wajar: PER & DCF (jelaskan asumsi diskonto & growth).
-4) Buat skenario Bull/Base/Bear + sensitivitas margin & growth.
-5) Bandingkan dengan peer BEI (multiple singkat).
-6) Berikan kesimpulan: katalis & red flags."</pre>
-          </div>
-        </details>
-      </div>
+        </div>
+      </article>
+
+      <!-- Sisi kanan: Tautan & ringkasan -->
+      <aside class="card rounded-2xl p-6 h-max sticky top-20">
+        <h4 class="font-semibold">Tautan Cepat</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="link" target="_blank" rel="noopener" href="https://notebooklm.google.com/notebook/52930345-ad7e-4f0b-9585-29c96709c126">Chat Materi 6 (NotebookLM)</a></li>
+          <li><a class="link" target="_blank" rel="noopener" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek">GPT: Pengantar Pasar Modal with Lensetek</a></li>
+          <li><a class="link" target="_blank" rel="noopener" href="https://chatgpt.com/g/g-CUB7HlYcl-value-investor-advisor-with-lensetek-llc">IPO AI Analyzer (Lensetek)</a></li>
+        </ul>
+
+        <div class="mt-6">
+          <h5 class="font-semibold">Ringkasan cepat</h5>
+          <ul class="mt-2 text-slate-700 text-sm list-disc pl-5">
+            <li>Saham = kepemilikan; Obligasi = pinjaman.</li>
+            <li>Reksa Dana/ETF = cara praktis diversifikasi.</li>
+            <li>Indeks = termometer pasar; Portofolio = keranjang asetmu.</li>
+            <li>IPO = pertama kali saham dijual ke publik; baca prospektus ringkas.</li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <!-- PROGRESS & EKSPOR -->
-  <section id="progress" class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Progress Belajar</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-lg font-bold">Ringkasan Tersimpan</h3>
-        <pre id="dump" class="mt-3 text-xs bg-slate-50 border border-slate-200 rounded-xl p-3 overflow-auto max-h-64">{}</pre>
-        <div class="mt-3 flex gap-3">
-          <button onclick="muatDump()" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Muat</button>
-          <button onclick="unduhJSON()" class="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">Unduh JSON</button>
+  <!-- Interaktif -->
+  <section id="interaktif" class="mx-auto max-w-6xl px-4 py-10">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <!-- Checklist progres (cookies) -->
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-xl font-bold">Checklist Progres</h3>
+        <p class="mt-1 text-slate-700 text-sm">Tandai poin yang sudah kamu kuasai. Disimpan sebagai cookie <code class="font-mono">pm_progress</code>.</p>
+        <div id="checklist" class="mt-4 space-y-3">
+          <!-- item checklist dibuat via JS -->
+        </div>
+        <div class="mt-4 flex items-center gap-3">
+          <button id="btnSimpanChecklist" class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700">Simpan Checklist</button>
+          <span id="savedAt" class="text-xs text-slate-500"></span>
         </div>
       </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm fade">
-        <h3 class="text-lg font-bold">Badge & Gamifikasi</h3>
-        <p class="text-sm text-slate-600">Selesaikan kuis (≥ 2 benar) untuk memperoleh <b>Badge Diversifier</b>. Selesaikan semua langkah untuk memperoleh <b>Badge Index Master</b>.</p>
-        <div id="badges" class="mt-3 flex flex-wrap gap-2"></div>
+
+      <!-- Catatan sesi (sessionStorage) -->
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-xl font-bold">Catatan Sesi</h3>
+        <p class="mt-1 text-slate-700 text-sm">Ini hanya tersimpan di <span class="font-medium">session</span> (hilang ketika tab ditutup). Kegunaan: latihan menulis alasan beli/jual, atau rangkum materi.</p>
+        <textarea id="catatan" rows="8" class="mt-3 w-full rounded-xl border border-slate-300 px-3 py-2 ring-brand" placeholder="Tulis poin penting versi kamu..."></textarea>
+        <div class="mt-3 flex items-center gap-3">
+          <button id="btnSimpanCatatan" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">Simpan Catatan</button>
+          <span id="savedNote" class="text-xs text-slate-500"></span>
+        </div>
+      </div>
+
+      <!-- Mini kuis (cookie skor) -->
+      <div class="card rounded-2xl p-6 lg:col-span-2">
+        <h3 class="text-xl font-bold">Mini Kuis (tanpa hitung-hitungan)</h3>
+        <p class="mt-1 text-slate-700 text-sm">Jawab singkat. Skor disimpan di cookie <code class="font-mono">pm_quiz</code>.</p>
+        <form id="quizForm" class="mt-4 space-y-6">
+          <div>
+            <label class="font-medium">1) Saham menunjukkan kepemilikan perusahaan.</label>
+            <div class="mt-2 space-x-4">
+              <label><input type="radio" name="q1" value="true" class="mr-1">Benar</label>
+              <label><input type="radio" name="q1" value="false" class="mr-1">Salah</label>
+            </div>
+          </div>
+          <div>
+            <label class="font-medium">2) ETF paling mirip dengan...</label>
+            <div class="mt-2 space-y-2">
+              <label class="block"><input type="radio" name="q2" value="a" class="mr-1"> Tabungan berjangka</label>
+              <label class="block"><input type="radio" name="q2" value="b" class="mr-1"> Reksa dana yang bisa diperdagangkan di bursa</label>
+              <label class="block"><input type="radio" name="q2" value="c" class="mr-1"> E-money</label>
+            </div>
+          </div>
+          <div>
+            <label class="font-medium">3) Indeks saham seperti IHSG berfungsi sebagai...</label>
+            <div class="mt-2 space-y-2">
+              <label class="block"><input type="radio" name="q3" value="a" class="mr-1"> Jaminan keuntungan</label>
+              <label class="block"><input type="radio" name="q3" value="b" class="mr-1"> Termometer yang menggambarkan kinerja kelompok saham</label>
+              <label class="block"><input type="radio" name="q3" value="c" class="mr-1"> Aplikasi mobile trading</label>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 text-white hover:opacity-90">Kumpulkan</button>
+            <span id="quizResult" class="text-sm"></span>
+          </div>
+        </form>
       </div>
     </div>
   </section>
 
-  <footer class="border-t border-slate-200 py-8 text-center text-sm text-slate-600 bg-white">
-    <p>© 2025 Pengantar Pasar Modal – Materi 6. Aided learning dengan Tailwind, animasi vanilla JS, dan penyimpanan cookies/session.</p>
+  <!-- Video -->
+  <section id="video" class="mx-auto max-w-6xl px-4 py-10">
+    <div class="card rounded-2xl p-6">
+      <h3 class="text-xl font-bold">Video Materi</h3>
+      <p class="mt-1 text-slate-700 text-sm">Tonton pelan-pelan, lalu tandai progres di checklist.</p>
+      <div class="mt-4 aspect-video rounded-xl overflow-hidden">
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/626saJZRauw?si=ZR1Lro88TM3WxICN"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alat Bantu -->
+  <section id="alat" class="mx-auto max-w-6xl px-4 py-10">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <!-- IPO AI Analyzer -->
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-xl font-bold">IPO AI Analyzer (Lensetek)</h3>
+        <p class="mt-2 text-slate-700">
+          Cocok untuk memahami <em>prospektus</em> tanpa pusing. Kamu bisa <span class="font-medium">unggah file prospektus (PDF)</span>, lalu minta ringkasan bagian penting:
+          model bisnis, penggunaan dana IPO, risiko utama, dan struktur pemegang saham.
+        </p>
+
+        <div class="mt-4 p-4 rounded-xl bg-sky-50 border border-sky-200">
+          <p class="font-medium">Cara pakai yang efektif:</p>
+          <ol class="mt-2 list-decimal pl-5 text-slate-700 space-y-2">
+            <li>Buka <a class="link" target="_blank" rel="noopener" href="https://chatgpt.com/g/g-CUB7HlYcl-value-investor-advisor-with-lensetek-llc">IPO AI Analyzer</a>.</li>
+            <li>Unggah file prospektus IPO (PDF). Bisa versi ringkas jika ukuran besar.</li>
+            <li>Berikan perintah jelas: apa yang ingin diambil (ringkasan bisnis, risiko, valuasi sederhana tanpa hitung, dll.).</li>
+            <li>Minta tabel ringkasan dan daftar tanya-lanjut (apa yang perlu dicek sebelum keputusan).</li>
+          </ol>
+        </div>
+
+        <div class="mt-4">
+          <p class="font-medium">Contoh prompt (setelah unggah PDF):</p>
+          <pre class="mt-2 p-4 bg-slate-100 rounded-xl text-sm overflow-x-auto">
+Ringkas prospektus ini dalam 10 poin paling penting, fokus pada:
+- model bisnis & sumber pendapatan,
+- penggunaan dana IPO,
+- risiko utama (operasional, regulasi, likuiditas),
+- struktur pemegang saham dan potensi <i>dilution</i>.
+Buat tabel ringkasan di akhir, lalu berikan 5 pertanyaan klarifikasi untuk <i>due diligence</i> pemula.
+          </pre>
+          <p class="mt-2 text-sm text-slate-600">Tip: gunakan <span class="kbd">Shift</span> + <span class="kbd">Enter</span> untuk baris baru saat mengetik prompt.</p>
+        </div>
+      </div>
+
+      <!-- GPT Asisten Kuliah -->
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-xl font-bold">Asisten Kuliah: Pengantar Pasar Modal (Lensetek)</h3>
+        <p class="mt-2 text-slate-700">
+          Gunakan GPT ini untuk bertanya konsep secara sederhana. Contoh:
+        </p>
+        <ul class="mt-2 list-disc pl-5 text-slate-700">
+          <li>“Bedanya reksa dana dan ETF apa, jelaskan pakai analogi?”</li>
+          <li>“Apa itu IPO? Bagian prospektus mana yang harus saya baca lebih dulu?”</li>
+          <li>“Apa arti likuiditas dan kenapa penting untuk investor pemula?”</li>
+        </ul>
+        <div class="mt-4">
+          <a class="px-4 py-2 rounded-xl bg-slate-900 text-white hover:opacity-90 inline-block"
+             target="_blank" rel="noopener"
+             href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek">
+             Buka GPT Asisten Kuliah
+          </a>
+        </div>
+
+        <div class="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200">
+          <p class="font-medium">Catatan Etika & Risiko:</p>
+          <p class="text-slate-700 text-sm mt-1">
+            AI memberi ringkasan, bukan rekomendasi beli/jual. Tetap baca dokumen asli, pahami risikonya, dan gunakan akal sehat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-10 border-t border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-600">
+      <div class="flex items-center justify-between">
+        <p>&copy; <span id="tahun"></span> Pengantar Pasar Modal – Lensetek. Light theme. Semua penjelasan dibuat sederhana.</p>
+        <a class="link" href="#top">Kembali ke atas</a>
+      </div>
+    </div>
   </footer>
 
+  <!-- Data & Script -->
   <script>
-    // ===== Utilities: Cookie & Session =====
-    const Cookie = {
-      set: function(name, value, days = 60){
-        const d = new Date();
-        d.setTime(d.getTime() + (days*24*60*60*1000));
-        document.cookie = `${name}=${encodeURIComponent(value)};expires=${d.toUTCString()};path=/`;
-      },
-      get: function(name){
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? decodeURIComponent(match[2]) : null;
-      },
-      del: function(name){ document.cookie = name+'=; Max-Age=0; path=/'; }
+    // ---------- Util Cookie ----------
+    function setCookie(name, value, days=30) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days*24*60*60*1000));
+      document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + d.toUTCString() + ";path=/";
+    }
+    function getCookie(name) {
+      const cname = name + "=";
+      const ca = document.cookie.split(';');
+      for (let c of ca) {
+        c = c.trim();
+        if (c.indexOf(cname) === 0) return decodeURIComponent(c.substring(cname.length, c.length));
+      }
+      return null;
+    }
+    function eraseCookie(name) {
+      document.cookie = name + "=; Max-Age=-99999999; path=/";
     }
 
-    // ===== DB structure =====
-    const DBKEY = 'm6-aided-db';
-    function dbLoad(){
-      const raw = Cookie.get(DBKEY);
-      return raw ? JSON.parse(raw) : { nama:"", stepsDone:[], kalkulator:[], banding:[], kuis:{}, badges:[], notes:[] };
-    }
-    function dbSave(data){ Cookie.set(DBKEY, JSON.stringify(data)); refreshDump(); renderBadges(); }
-
-    // ===== Greeting =====
-    const namaInput = document.getElementById('namaInput');
-    const simpanNama = document.getElementById('simpanNama');
-    const sapaan = document.getElementById('sapaan');
-    const state = dbLoad();
-    if(state.nama){ namaInput.value = state.nama; sapaan.textContent = `Halo, ${state.nama}!`; }
-    simpanNama.addEventListener('click', ()=>{
-      const val = (namaInput.value||'').trim();
-      const s = dbLoad(); s.nama = val; dbSave(s); sapaan.textContent = val?`Halo, ${val}!`:''; confetti();
-    });
-
-    // ===== Fade-in on scroll =====
-    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }) }, { threshold: .12 });
-    document.querySelectorAll('.fade').forEach(el=> io.observe(el));
-
-    // ===== Aided Learning Steps =====
-    const STEPS = [
-      { id:1, title:'Kenali Indeks', goal:'Memahami fungsi & metodologi indeks.', action:'Baca ringkasan indeks dan contoh IHSG/LQ45.', check:'Saya paham fungsi indeks & metodologi.' },
-      { id:2, title:'Rancang Portofolio', goal:'Menghitung return & risiko 2-aset.', action:'Gunakan kalkulator & simpan hasil.', check:'Saya sudah mencoba kalkulator dan memahami hasilnya.' },
-      { id:3, title:'Pilih Wadah', goal:'Membedakan RD Indeks vs ETF.', action:'Bandingkan biaya & tracking difference.', check:'Saya sudah melakukan perbandingan & membaca hasil.' },
-      { id:4, title:'Validasi Pemahaman', goal:'Menjawab kuis singkat.', action:'Kerjakan kuis (≥2 benar).', check:'Saya lulus kuis (≥2 benar).'},
-      { id:5, title:'Refleksi & Sumber', goal:'Mencatat insight & akses alat.', action:'Tulis catatan ringkas + buka tautan asisten.', check:'Saya menulis 1 catatan dan melihat tautan asisten.' }
+    // ---------- Checklist Data ----------
+    const checklistItems = [
+      { id: "c1", text: "Saya paham beda saham vs obligasi." },
+      { id: "c2", text: "Saya tahu fungsi indeks (mis. IHSG) sebagai termometer pasar." },
+      { id: "c3", text: "Saya mengerti ide portofolio: jangan satu keranjang." },
+      { id: "c4", text: "Saya kenal reksa dana & ETF sebagai cara praktis diversifikasi." },
+      { id: "c5", text: "Saya tahu gambaran IPO dan pentingnya baca prospektus ringkas." },
+      { id: "c6", text: "Saya sadar risiko pasar dan pentingnya rencana (hindari FOMO)." }
     ];
 
-    function renderSteps(){
-      const wrap = document.getElementById('steps'); wrap.innerHTML='';
-      const done = new Set(dbLoad().stepsDone);
-      STEPS.forEach((st, idx)=>{
-        const li = document.createElement('li');
-        li.className = `border rounded-2xl p-4 bg-white shadow-sm ${done.has(st.id)?'step-done':'hover:border-indigo-200'} ${idx===sessionStep()? 'step-active':''}`;
-        li.innerHTML = `
-          <div class="flex items-center justify-between">
-            <div class="text-sm px-2 py-0.5 rounded-full ${done.has(st.id)?'bg-emerald-100 text-emerald-700':'bg-indigo-100 text-indigo-700'}">Langkah ${st.id}</div>
-            <button class="text-xs px-2 py-1 rounded-lg border ${done.has(st.id)?'border-emerald-200 text-emerald-700':'border-slate-200 text-slate-600'}" onclick="toggleStep(${st.id})">${done.has(st.id)?'Batalkan':'Tandai Selesai'}</button>
-          </div>
-          <h4 class="mt-3 text-lg font-bold">${st.title}</h4>
-          <p class="text-sm text-slate-600 mt-1"><b>Tujuan:</b> ${st.goal}</p>
-          <p class="text-sm text-slate-600 mt-1"><b>Aksi:</b> ${st.action}</p>
-          <p class="text-xs text-slate-500 mt-2">Checklist: ${st.check}</p>
+    // ---------- Render Checklist ----------
+    const checklistEl = document.getElementById('checklist');
+    function renderChecklist() {
+      const saved = getCookie('pm_progress');
+      let done = {};
+      if (saved) { try { done = JSON.parse(saved); } catch(e){} }
+      checklistEl.innerHTML = '';
+      checklistItems.forEach(item => {
+        const wrap = document.createElement('label');
+        wrap.className = "flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50";
+        wrap.innerHTML = `
+          <input type="checkbox" class="mt-1" data-id="${item.id}" ${done[item.id] ? 'checked' : ''}>
+          <span>${item.text}</span>
         `;
-        wrap.appendChild(li);
-      });
-      updateBar(); maybeGiveIndexMaster();
-    }
-
-    function toggleStep(id){
-      const s = dbLoad();
-      if(s.stepsDone.includes(id)){ s.stepsDone = s.stepsDone.filter(x=>x!==id); }
-      else { s.stepsDone.push(id); }
-      dbSave(s); renderSteps(); confetti();
-    }
-
-    function updateBar(){
-      const pct = Math.round((dbLoad().stepsDone.length / STEPS.length)*100);
-      document.getElementById('bar').style.width = pct+'%';
-      document.getElementById('barTxt').textContent = pct+'%';
-    }
-
-    function sessionStep(){
-      // session indicates current focus step (default 1)
-      let cur = parseInt(sessionStorage.getItem('curStep')||'1');
-      if(cur<1||cur>STEPS.length) cur=1; return cur;
-    }
-
-    // ===== Kalkulator Portofolio =====
-    function exampleFill(){ wA.value=0.6; eA.value=0.10; sA.value=0.20; wB.value=0.4; eB.value=0.06; sB.value=0.10; rho.value=0.30; }
-    function hitungPortofolio(){
-      const WA = parseFloat(wA.value), WB = parseFloat(wB.value);
-      const EA = parseFloat(eA.value), EB = parseFloat(eB.value);
-      const SA = parseFloat(sA.value), SB = parseFloat(sB.value);
-      const RHO = parseFloat(rho.value);
-      if(isNaN(WA)||isNaN(WB)||Math.abs(WA+WB-1)>1e-6){ alert('Bobot harus angka dan jumlahnya = 1'); return; }
-      const ER = WA*EA + WB*EB;
-      const VAR = WA*WA*SA*SA + WB*WB*SB*SB + 2*WA*WB*SA*SB*RHO; const SD = Math.sqrt(Math.max(VAR,0));
-      const out = document.getElementById('hasil');
-      out.innerHTML = `<b>Ekspektasi Return Portofolio:</b> ${(ER*100).toFixed(2)}%<br/><b>Volatilitas (σ):</b> ${(SD*100).toFixed(2)}%`;
-      out.classList.remove('hidden');
-      sessionStorage.setItem('lastCalc', JSON.stringify({WA,WB,EA,EB,SA,SB,RHO,ER,SD, ts:Date.now()}));
-    }
-    function simpanHitung(){
-      const last = sessionStorage.getItem('lastCalc'); if(!last){ alert('Hitung dulu ya.'); return; }
-      const s = dbLoad(); s.kalkulator.push(JSON.parse(last)); if(!s.stepsDone.includes(2)) s.stepsDone.push(2); dbSave(s); renderSteps(); confetti();
-    }
-
-    // ===== Bandingkan RD vs ETF =====
-    function bandingkanProduk(){
-      const erRD = parseFloat(document.getElementById('erRD').value||0);
-      const miscRD = parseFloat(document.getElementById('miscRD').value||0);
-      const teRD = parseFloat(document.getElementById('teRD').value||0);
-      const erETF = parseFloat(document.getElementById('erETF').value||0);
-      const spreadETF = parseFloat(document.getElementById('spreadETF').value||0);
-      const teETF = parseFloat(document.getElementById('teETF').value||0);
-      const costRD = erRD + miscRD; const costETF = erETF + spreadETF;
-      const tdRD = costRD + teRD, tdETF = costETF + teETF;
-      const better = tdRD < tdETF ? 'Reksa Dana Indeks' : (tdRD > tdETF ? 'ETF' : 'Setara');
-      const box = document.getElementById('hasilBanding');
-      box.innerHTML = `Biaya Efektif RD: <b>${(costRD*100).toFixed(2)}%</b> | ETF: <b>${(costETF*100).toFixed(2)}%</b><br/>Perkiraan Tracking Diff RD: <b>${(tdRD*100).toFixed(2)}%</b> | ETF: <b>${(tdETF*100).toFixed(2)}%</b><br/><br/><b>Rekomendasi matematis:</b> ${better}`;
-      box.classList.remove('hidden');
-      sessionStorage.setItem('lastCompare', JSON.stringify({erRD,miscRD,teRD,erETF,spreadETF,teETF,costRD,costETF,tdRD,tdETF, ts:Date.now()}));
-    }
-    function simpanPerbandingan(){
-      const last = sessionStorage.getItem('lastCompare'); if(!last){ alert('Bandingkan dulu ya.'); return; }
-      const s = dbLoad(); s.banding.push(JSON.parse(last)); if(!s.stepsDone.includes(3)) s.stepsDone.push(3); dbSave(s); renderSteps(); confetti();
-    }
-
-    // ===== Kuis =====
-    const kunci = { q1:'c', q2:'b', q3:'b' };
-    function koreksiKuis(){
-      const ans = { q1: getChecked('q1'), q2: getChecked('q2'), q3: getChecked('q3') };
-      sessionStorage.setItem('quizAns', JSON.stringify(ans));
-      let benar = 0; Object.keys(kunci).forEach(k=>{ if(ans[k]===kunci[k]) benar++; });
-      const box = document.getElementById('hasilKuis');
-      box.innerHTML = `Skor: <b>${benar}/3</b> ${benar>=2?'🎉 Hebat!':'Ayo coba lagi!'} <br/>Kunci: (1) c, (2) b, (3) b`;
-      box.classList.remove('hidden');
-      const s = dbLoad(); s.kuis = ans; if(benar>=2 && !s.badges.includes('Diversifier')) s.badges.push('Diversifier'); if(benar>=2 && !s.stepsDone.includes(4)) s.stepsDone.push(4); dbSave(s);
-      renderBadges(); confetti();
-    }
-    function getChecked(name){ const el = document.querySelector(`input[name="${name}"]:checked`); return el?el.value:null; }
-
-    // ===== Catatan =====
-    function simpanCatatan(){
-      const val = (document.getElementById('note').value||'').trim(); if(!val){ alert('Catatan kosong.'); return; }
-      const s = dbLoad(); s.notes.push({ text: val, ts: Date.now() }); if(!s.stepsDone.includes(5)) s.stepsDone.push(5); dbSave(s); renderNotes(); renderSteps(); document.getElementById('note').value=''; confetti();
-    }
-    function clearCatatan(){ document.getElementById('note').value=''; }
-    function renderNotes(){
-      const ul = document.getElementById('noteList'); ul.innerHTML='';
-      dbLoad().notes.forEach((n,i)=>{
-        const li = document.createElement('li');
-        li.className='p-2 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between';
-        li.innerHTML = `<span class="text-slate-700 text-sm">${n.text}</span><button class="text-xs px-2 py-1 border rounded-lg" onclick="hapusCatatan(${i})">Hapus</button>`;
-        ul.appendChild(li);
+        checklistEl.appendChild(wrap);
       });
     }
-    function hapusCatatan(i){ const s = dbLoad(); s.notes.splice(i,1); dbSave(s); renderNotes(); }
 
-    // ===== Progress Dump & Badges =====
-    function refreshDump(){ document.getElementById('dump').textContent = JSON.stringify(dbLoad(), null, 2); }
-    function muatDump(){ refreshDump(); confetti(); }
-    function unduhJSON(){ const blob = new Blob([JSON.stringify(dbLoad(), null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'progress_materi6.json'; a.click(); URL.revokeObjectURL(url); }
-    function renderBadges(){ const wrap = document.getElementById('badges'); wrap.innerHTML=''; dbLoad().badges.forEach(b=>{ const el = document.createElement('div'); el.className='px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm border border-emerald-200'; el.textContent = `🏅 ${b}`; wrap.appendChild(el); }); }
-    function maybeGiveIndexMaster(){ const s = dbLoad(); if(s.stepsDone.length===STEPS.length && !s.badges.includes('Index Master')){ s.badges.push('Index Master'); dbSave(s); } }
+    // ---------- Save Checklist ----------
+    document.getElementById('btnSimpanChecklist').addEventListener('click', () => {
+      const inputs = checklistEl.querySelectorAll('input[type="checkbox"]');
+      const obj = {};
+      inputs.forEach(i => obj[i.getAttribute('data-id')] = i.checked);
+      setCookie('pm_progress', JSON.stringify(obj), 30);
+      const t = new Date().toLocaleString();
+      setCookie('pm_progress_saved', t, 30);
+      document.getElementById('savedAt').textContent = "Tersimpan: " + t;
+    });
 
-    // ===== Sertifikat =====
-    function unduhSertifikat(){ const nama = dbLoad().nama || 'Mahasiswa'; const text = `Sertifikat Penyelesaian
-Materi 6 – Indeks, Portofolio, Reksa Dana & ETF
+    // ---------- Nama (cookie) ----------
+    const namaInput = document.getElementById('namaMahasiswa');
+    function loadNama() {
+      const v = getCookie('pm_nama');
+      if (v) namaInput.value = v;
+    }
+    document.getElementById('btnSimpanNama').addEventListener('click', () => {
+      const v = (namaInput.value || '').trim();
+      if (!v) { alert('Isi nama terlebih dulu ya.'); return; }
+      setCookie('pm_nama', v, 30);
+      alert('Nama disimpan sebagai cookie selama 30 hari.');
+    });
 
-Diberikan kepada: ${nama}
-Tanggal: ${new Date().toLocaleDateString()}
-`; const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `Sertifikat_Materi6_${nama}.txt`; a.click(); URL.revokeObjectURL(url); }
+    // ---------- Catatan (sessionStorage) ----------
+    const catatanEl = document.getElementById('catatan');
+    function loadCatatan() {
+      const v = sessionStorage.getItem('pm_catatan') || '';
+      catatanEl.value = v;
+      if (v) document.getElementById('savedNote').textContent = "Dimuat dari session";
+    }
+    document.getElementById('btnSimpanCatatan').addEventListener('click', () => {
+      sessionStorage.setItem('pm_catatan', catatanEl.value || '');
+      document.getElementById('savedNote').textContent = "Tersimpan di session";
+    });
 
-    // ===== Reset All =====
-    document.getElementById('resetAll').addEventListener('click', ()=>{ if(confirm('Hapus semua progress?')){ Cookie.del(DBKEY); sessionStorage.clear(); refreshDump(); renderBadges(); renderSteps(); renderNotes(); } });
+    // ---------- Quiz (cookie skor) ----------
+    const quizForm = document.getElementById('quizForm');
+    quizForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ans = {
+        q1: quizForm.q1?.value,
+        q2: quizForm.q2?.value,
+        q3: quizForm.q3?.value,
+      };
+      let score = 0;
+      if (ans.q1 === 'true') score++;
+      if (ans.q2 === 'b') score++;
+      if (ans.q3 === 'b') score++;
+      setCookie('pm_quiz', String(score), 30);
+      document.getElementById('quizResult').textContent = `Skor: ${score}/3 — bagus!`;
+    });
 
-    // ===== Confetti (mini) =====
-    function confetti(){ const colors = ['#6366f1','#f472b6','#34d399','#f59e0b']; for(let i=0;i<18;i++){ const s = document.createElement('span'); s.style.position='fixed'; s.style.left=(Math.random()*100)+'%'; s.style.top='-10px'; s.style.width=s.style.height=(6+Math.random()*6)+'px'; s.style.background=colors[Math.floor(Math.random()*colors.length)]; s.style.borderRadius='9999px'; s.style.boxShadow='0 0 0 2px rgba(255,255,255,.6) inset'; s.style.zIndex=9999; s.style.opacity=.9; document.body.appendChild(s); const dur = 1000+Math.random()*1200, dx = (Math.random()*2-1)*120; s.animate([{transform:`translate(0,0)`},{transform:`translate(${dx}px, 120vh)`},{transform:`translate(${dx*1.2}px, 130vh)`}],{duration:dur, easing:'cubic-bezier(.22,1,.36,1)'}).onfinish=()=>s.remove(); } }
+    // ---------- Reset Data ----------
+    document.getElementById('btnReset').addEventListener('click', () => {
+      ['pm_nama','pm_progress','pm_progress_saved','pm_quiz'].forEach(eraseCookie);
+      sessionStorage.removeItem('pm_catatan');
+      renderChecklist();
+      loadNama();
+      loadCatatan();
+      document.getElementById('savedAt').textContent = '';
+      document.getElementById('savedNote').textContent = '';
+      document.getElementById('quizResult').textContent = '';
+      alert('Data cookie & session sudah dihapus.');
+    });
 
-    // ===== Init =====
-    refreshDump(); renderBadges(); renderSteps(); renderNotes();
+    // ---------- Init ----------
+    (function init() {
+      document.getElementById('tahun').textContent = new Date().getFullYear();
+      renderChecklist();
+      loadNama();
+      loadCatatan();
+      const last = getCookie('pm_progress_saved');
+      if (last) document.getElementById('savedAt').textContent = "Terakhir simpan: " + last;
+    })();
   </script>
 </body>
 </html>
