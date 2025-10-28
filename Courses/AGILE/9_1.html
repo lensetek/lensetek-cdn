@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pertemuan 9 – Prinsip Dasar Agile & Scrum</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    .glass { backdrop-filter: blur(10px); }
+    .tick::before{ content:"✔"; display:inline-block; margin-right:.5rem; }
+    .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    .chip{ @apply inline-flex items-center px-3 py-1 rounded-full border border-gray-200 text-xs; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Toast -->
+  <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden">
+    <div class="px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow-lg">Disimpan ke cookie ✅</div>
+  </div>
+
+  <!-- Header / Hero -->
+  <header class="relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-amber-100 via-white to-sky-50"></div>
+    <div class="relative max-w-7xl mx-auto px-6 pt-10 pb-16">
+      <nav class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-2xl bg-amber-400/70 grid place-content-center shadow-soft">🌀</div>
+          <div class="font-extrabold tracking-tight text-lg">Agile Method (MBD341)</div>
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#materi" class="hover:opacity-70">Materi</a>
+          <a href="#interaktif" class="hover:opacity-70">Interaktif</a>
+          <a href="#quiz" class="hover:opacity-70">Kuis</a>
+          <a href="#referensi" class="hover:opacity-70">Referensi</a>
+        </div>
+      </nav>
+
+      <div class="mt-12 grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs text-gray-600 border border-gray-200 px-3 py-1 rounded-full">
+            <span class="uppercase tracking-wider">Pertemuan 9</span>
+            <span class="w-1 h-1 rounded bg-gray-300"></span>
+            <span>Prinsip Dasar Agile & Scrum</span>
+          </div>
+          <h1 class="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">Bangun Mindset <span class="text-amber-600">Agile</span>, Kuasai <span class="text-sky-700">Scrum</span>.</h1>
+          <p class="mt-4 text-gray-600 max-w-prose">Pelajari nilai dan prinsip Agile, pilar Scrum, peran, artefak, dan seremoni melalui materi interaktif, kuis, serta pelacakan progres berbasis cookie.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="https://chatgpt.com/g/g-67b2ce6e030c8191a92e480c533b19e0-agile-method-course-with-lensetek-llc" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-900 text-white shadow-soft hover:opacity-90">
+              🤖 AI Companion
+            </a>
+            <a href="#materi" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 hover:bg-gray-50">Mulai Belajar</a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-amber-200/60 via-white to-sky-200/60 rounded-3xl blur-xl"></div>
+          <div class="relative bg-white rounded-3xl p-6 shadow-soft border border-gray-100">
+            <div class="flex items-center gap-3 text-sm">
+              <span class="chip">Iteratif</span>
+              <span class="chip">Kolaboratif</span>
+              <span class="chip">Adaptif</span>
+            </div>
+            <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+              <div class="p-4 rounded-2xl bg-amber-50 border border-amber-100">
+                <div class="text-3xl">⚙️</div>
+                <div class="mt-2 text-xs font-semibold">Nilai & Prinsip Agile</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-sky-50 border border-sky-100">
+                <div class="text-3xl">🧭</div>
+                <div class="mt-2 text-xs font-semibold">Scrum Framework</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
+                <div class="text-3xl">📈</div>
+                <div class="mt-2 text-xs font-semibold">Progres Belajar</div>
+              </div>
+            </div>
+            <div class="mt-5 text-xs text-gray-500">Progres Anda: <span id="progressLabel">0%</span>
+              <div class="w-full h-2 bg-gray-100 rounded-full mt-2">
+                <div id="progressBar" class="h-2 bg-amber-500 rounded-full" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Materi Section -->
+  <section id="materi" class="max-w-7xl mx-auto px-6 py-14">
+    <h2 class="text-2xl md:text-3xl font-extrabold">Materi Inti</h2>
+    <p class="text-gray-600 mt-2">Fokus pada dasar Agile Method dan Scrum Framework sesuai RPS.</p>
+
+    <!-- Accordion Cards -->
+    <div class="mt-8 grid md:grid-cols-2 gap-6">
+      <!-- Card 1 -->
+      <article class="border border-gray-200 rounded-2xl p-5 shadow-soft" data-section="agile-values">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-lg">4 Nilai Utama Agile</h3>
+            <p class="text-sm text-gray-600">Mindset yang menuntun semua praktik Agile.</p>
+          </div>
+          <button class="toggle text-sm px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Buka</button>
+        </header>
+        <div class="content mt-4 hidden space-y-2 text-sm">
+          <div class="tick">Individu & interaksi <span class="text-gray-500">lebih penting</span> daripada proses & alat.</div>
+          <div class="tick">Perangkat lunak berfungsi <span class="text-gray-500">lebih penting</span> daripada dokumentasi lengkap.</div>
+          <div class="tick">Kolaborasi dengan pelanggan <span class="text-gray-500">lebih penting</span> daripada negosiasi kontrak.</div>
+          <div class="tick">Menanggapi perubahan <span class="text-gray-500">lebih penting</span> daripada mengikuti rencana.</div>
+          <button class="mt-3 mark-done text-xs px-3 py-1 rounded-lg bg-emerald-600 text-white">Tandai Selesai</button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="border border-gray-200 rounded-2xl p-5 shadow-soft" data-section="agile-principles">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-lg">12 Prinsip Agile (Ringkas)</h3>
+            <p class="text-sm text-gray-600">Pengiriman nilai berkelanjutan, adaptif, dan berkualitas.</p>
+          </div>
+          <button class="toggle text-sm px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Buka</button>
+        </header>
+        <ul class="content mt-4 hidden list-disc pl-5 text-sm space-y-1">
+          <li>Kepuasan pelanggan melalui delivery berkelanjutan.</li>
+          <li>Menyambut perubahan kebutuhan, bahkan di akhir.</li>
+          <li>Pengiriman berkala (iterasi/sprint) dalam hitungan minggu.</li>
+          <li>Kolaborasi erat bisnis–developer.</li>
+          <li>Bangun tim termotivasi & dipercaya.</li>
+          <li>Komunikasi langsung paling efektif.</li>
+          <li>Produk berfungsi = ukuran kemajuan.</li>
+          <li>Irama kerja berkelanjutan.</li>
+          <li>Teknik & desain berkualitas meningkatkan agility.</li>
+          <li>Kesederhanaan (less but better).</li>
+          <li>Tim self-organizing menghasilkan desain terbaik.</li>
+          <li>Refleksi & perbaikan terus-menerus.</li>
+        </ul>
+        <div class="content mt-3 hidden">
+          <button class="mark-done text-xs px-3 py-1 rounded-lg bg-emerald-600 text-white">Tandai Selesai</button>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="border border-gray-200 rounded-2xl p-5 shadow-soft" data-section="scrum-pillars">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-lg">3 Pilar Scrum</h3>
+            <p class="text-sm text-gray-600">Transparansi, Inspeksi, Adaptasi.</p>
+          </div>
+          <button class="toggle text-sm px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Buka</button>
+        </header>
+        <div class="content mt-4 hidden text-sm space-y-2">
+          <p><strong>Transparansi</strong> memastikan semua pihak memahami status pekerjaan.</p>
+          <p><strong>Inspeksi</strong> dilakukan rutin pada artefak & kemajuan.</p>
+          <p><strong>Adaptasi</strong> menindaklanjuti hasil inspeksi dengan perubahan cepat.</p>
+          <button class="mark-done text-xs px-3 py-1 rounded-lg bg-emerald-600 text-white">Tandai Selesai</button>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="border border-gray-200 rounded-2xl p-5 shadow-soft" data-section="scrum-roles">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-lg">Peran Scrum</h3>
+            <p class="text-sm text-gray-600">Product Owner, Scrum Master, Development Team.</p>
+          </div>
+          <button class="toggle text-sm px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Buka</button>
+        </header>
+        <div class="content mt-4 hidden text-sm space-y-2">
+          <p><strong>Product Owner</strong>: visi produk & prioritas backlog untuk nilai maksimum.</p>
+          <p><strong>Scrum Master</strong>: fasilitator, hilangkan hambatan, jaga praktik Scrum.</p>
+          <p><strong>Development Team</strong>: tim lintas fungsi, self-organizing, hasilkan increment.</p>
+          <button class="mark-done text-xs px-3 py-1 rounded-lg bg-emerald-600 text-white">Tandai Selesai</button>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="border border-gray-200 rounded-2xl p-5 shadow-soft" data-section="scrum-artifacts">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-lg">Artefak Scrum</h3>
+            <p class="text-sm text-gray-600">Product Backlog, Sprint Backlog, Increment.</p>
+          </div>
+          <button class="toggle text-sm px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Buka</button>
+        </header>
+        <div class="content mt-4 hidden text-sm space-y-2">
+          <p><strong>Product Backlog</strong>: daftar prioritas kebutuhan/fitur.</p>
+          <p><strong>Sprint Backlog</strong>: subset untuk satu Sprint.</p>
+          <p><strong>Increment</strong>: hasil bernilai & siap diuji di akhir Sprint.</p>
+          <button class="mark-done text-xs px-3 py-1 rounded-lg bg-emerald-600 text-white">Tandai Selesai</button>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="border border-gray-200 rounded-2xl p-5 shadow-soft" data-section="scrum-events">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-lg">Seremoni Scrum</h3>
+            <p class="text-sm text-gray-600">Planning, Daily, Review, Retrospective.</p>
+          </div>
+          <button class="toggle text-sm px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Buka</button>
+        </header>
+        <div class="content mt-4 hidden text-sm">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 rounded-xl bg-gray-50 border"><strong>Planning</strong> – tujuan & backlog Sprint.</div>
+            <div class="p-3 rounded-xl bg-gray-50 border"><strong>Daily</strong> – sinkronisasi 15 menit.</div>
+            <div class="p-3 rounded-xl bg-gray-50 border"><strong>Review</strong> – demo & feedback.
+            </div>
+            <div class="p-3 rounded-xl bg-gray-50 border"><strong>Retrospective</strong> – refleksi & perbaikan.</div>
+          </div>
+          <button class="mt-3 mark-done text-xs px-3 py-1 rounded-lg bg-emerald-600 text-white">Tandai Selesai</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-6 flex items-center gap-3 text-sm">
+      <button id="resetProgress" class="px-3 py-1 rounded-lg border border-gray-200 hover:bg-gray-50">Reset Progres</button>
+      <span class="text-gray-500">Progress disimpan via cookie (client-side).</span>
+    </div>
+  </section>
+
+  <!-- Interaktif + Video -->
+  <section id="interaktif" class="max-w-7xl mx-auto px-6 py-14 border-t border-gray-100">
+    <div class="grid md:grid-cols-3 gap-8 items-start">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Materi Interaktif & Video</h2>
+        <p class="text-gray-600 mt-2">Jelajahi materi terkurasi dan ringkasan video melalui NotebookLM.</p>
+        <a class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl bg-sky-600 text-white shadow-soft hover:opacity-90" target="_blank" href="https://notebooklm.google.com/notebook/be0574ce-f600-44b7-a4a7-02609449d7eb">
+          📘 Buka Notebook Interaktif
+        </a>
+        <div class="mt-6 p-4 rounded-2xl border border-gray-200 bg-white">
+          <h3 class="font-semibold">Catatan</h3>
+          <p class="text-sm text-gray-600 mt-1">Beberapa platform Google mungkin tidak mengizinkan <em>embedding</em> langsung. Tautan di atas akan membuka tab baru.</p>
+        </div>
+      </div>
+      <aside class="md:col-span-1 bg-white border border-gray-200 rounded-2xl p-5 shadow-soft">
+        <h4 class="font-bold">Tujuan Pembelajaran</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li class="tick">Jelaskan nilai & prinsip Agile.</li>
+          <li class="tick">Pahami pilar, peran, artefak, event Scrum.</li>
+          <li class="tick">Hubungkan Agile mindset ↔ Scrum process.</li>
+        </ul>
+        <button id="markAll" class="mt-4 w-full text-sm px-3 py-2 rounded-xl bg-emerald-600 text-white">Tandai Semua Selesai</button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Kuis Section -->
+  <section id="quiz" class="max-w-7xl mx-auto px-6 py-14 border-t border-gray-100">
+    <h2 class="text-2xl md:text-3xl font-extrabold">Kuis Cepat</h2>
+    <p class="text-gray-600 mt-2">Uji pemahaman Anda. Skor tersimpan di cookie.</p>
+
+    <form id="quizForm" class="mt-6 space-y-6">
+      <!-- Q1 -->
+      <div class="p-5 border border-gray-200 rounded-2xl">
+        <div class="font-semibold">1) Manakah yang <em>lebih penting</em> menurut Agile Manifesto?</div>
+        <div class="mt-3 space-y-2 text-sm">
+          <label class="flex items-center gap-2"><input type="radio" name="q1" value="A"> Dokumentasi lengkap daripada perangkat lunak berfungsi</label>
+          <label class="flex items-center gap-2"><input type="radio" name="q1" value="B"> Proses & alat daripada individu & interaksi</label>
+          <label class="flex items-center gap-2"><input type="radio" name="q1" value="C"> Menanggapi perubahan daripada mengikuti rencana</label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="p-5 border border-gray-200 rounded-2xl">
+        <div class="font-semibold">2) Apa tujuan Sprint Review?</div>
+        <div class="mt-3 space-y-2 text-sm">
+          <label class="flex items-center gap-2"><input type="radio" name="q2" value="A"> Menentukan tujuan Sprint berikutnya</label>
+          <label class="flex items-center gap-2"><input type="radio" name="q2" value="B"> Demo hasil dan dapatkan umpan balik</label>
+          <label class="flex items-center gap-2"><input type="radio" name="q2" value="C"> Sinkronisasi harian tim</label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="p-5 border border-gray-200 rounded-2xl">
+        <div class="font-semibold">3) Siapa yang bertanggung jawab memaksimalkan nilai dari produk?</div>
+        <div class="mt-3 space-y-2 text-sm">
+          <label class="flex items-center gap-2"><input type="radio" name="q3" value="A"> Scrum Master</label>
+          <label class="flex items-center gap-2"><input type="radio" name="q3" value="B"> Product Owner</label>
+          <label class="flex items-center gap-2"><input type="radio" name="q3" value="C"> Development Team</label>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button type="submit" class="px-4 py-2 rounded-xl bg-gray-900 text-white shadow-soft">Submit</button>
+        <div id="quizResult" class="text-sm text-gray-600"></div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Referensi -->
+  <section id="referensi" class="max-w-7xl mx-auto px-6 py-14 border-t border-gray-100">
+    <h2 class="text-2xl md:text-3xl font-extrabold">Referensi</h2>
+    <ul class="mt-4 space-y-3 text-sm">
+      <li>Mike Cohn — <em>Agile Estimating and Planning</em></li>
+      <li>Jeff Sutherland — <em>Scrum: A Breathtakingly Brief and Agile Introduction</em></li>
+      <li>Eric Ries — <em>The Lean Startup</em></li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-10 text-sm text-gray-600">
+      © 2025 Agile Method Course with Lensetek LLC · Theme: Light · Progres disimpan lokal via cookie
+    </div>
+  </footer>
+
+  <script>
+    // ===== Cookie Helpers =====
+    function setCookie(name, value, days = 180) {
+      const d = new Date();
+      d.setTime(d.getTime() + days*24*60*60*1000);
+      document.cookie = `${name}=${encodeURIComponent(value)};expires=${d.toUTCString()};path=/`;
+    }
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+    function showToast() {
+      const t = document.getElementById('toast');
+      t.classList.remove('hidden');
+      setTimeout(()=> t.classList.add('hidden'), 1300);
+    }
+
+    // ===== Progress State =====
+    const defaultState = { completed: {}, quizScore: 0 };
+    function loadState(){
+      try { return JSON.parse(getCookie('agile_p9_state') || JSON.stringify(defaultState)); }
+      catch { return {...defaultState}; }
+    }
+    function saveState(state){ setCookie('agile_p9_state', JSON.stringify(state)); showToast(); }
+
+    function updateProgressUI(state){
+      const total = document.querySelectorAll('[data-section]').length;
+      const done = Object.values(state.completed).filter(Boolean).length;
+      const pct = Math.round((done/total)*100);
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressLabel').textContent = pct + '%';
+    }
+
+    // ===== Accordion & Mark Done =====
+    document.querySelectorAll('article[data-section]').forEach(card =>{
+      const content = card.querySelectorAll('.content');
+      const toggleBtn = card.querySelector('.toggle');
+      const doneBtn = card.querySelector('.mark-done');
+      const key = card.getAttribute('data-section');
+
+      if (toggleBtn) toggleBtn.addEventListener('click', ()=>{
+        content.forEach(c => c.classList.toggle('hidden'));
+        toggleBtn.textContent = content[0].classList.contains('hidden') ? 'Buka' : 'Tutup';
+      });
+
+      if (doneBtn) doneBtn.addEventListener('click', ()=>{
+        const st = loadState();
+        st.completed[key] = true;
+        saveState(st);
+        updateProgressUI(st);
+        card.classList.add('ring-2','ring-emerald-400','ring-offset-2');
+      });
+    });
+
+    // ===== Reset & Mark All =====
+    document.getElementById('resetProgress').addEventListener('click', ()=>{
+      const st = {...defaultState};
+      saveState(st);
+      updateProgressUI(st);
+      document.querySelectorAll('article[data-section]').forEach(a=> a.classList.remove('ring-2','ring-emerald-400','ring-offset-2'));
+      document.getElementById('quizResult').textContent = '';
+    });
+    document.getElementById('markAll').addEventListener('click', ()=>{
+      const st = loadState();
+      document.querySelectorAll('article[data-section]').forEach(a=> st.completed[a.getAttribute('data-section')] = true);
+      saveState(st);
+      updateProgressUI(st);
+      document.querySelectorAll('article[data-section]').forEach(a=> a.classList.add('ring-2','ring-emerald-400','ring-offset-2'));
+    });
+
+    // ===== Quiz =====
+    document.getElementById('quizForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ans = { q1:'C', q2:'B', q3:'B' };
+      let score = 0; let total = 3;
+      Object.keys(ans).forEach(k=>{
+        const sel = document.querySelector(`input[name="${k}"]:checked`);
+        if (sel && sel.value === ans[k]) score++;
+      });
+      const st = loadState();
+      st.quizScore = score;
+      saveState(st);
+      const msg = `Skor: ${score}/${total} ${score===total ? '🎉 Sempurna!' : score>=2 ? '👍 Bagus!' : '🔁 Coba lagi'}`;
+      const res = document.getElementById('quizResult');
+      res.textContent = msg;
+    });
+
+    // ===== Init from Cookie =====
+    (function init(){
+      const st = loadState();
+      // mark completed visuals
+      document.querySelectorAll('article[data-section]').forEach(card=>{
+        const key = card.getAttribute('data-section');
+        if (st.completed[key]) card.classList.add('ring-2','ring-emerald-400','ring-offset-2');
+      });
+      if (st.quizScore){
+        document.getElementById('quizResult').textContent = `Skor terakhir: ${st.quizScore}/3`;
+      }
+      updateProgressUI(st);
+    })();
+  </script>
+</body>
+</html>
