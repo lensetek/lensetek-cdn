@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pertemuan 9 – Efek Digitalisasi pada MSDM</title>
+  <meta name="description" content="Landing page interaktif materi Pertemuan 9: Efek Positif & Negatif Digitalisasi pada MSDM (Managing Digital Organization)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #fffdf9;
+      --card: #ffffff;
+      --ink: #1b1b1f;
+      --muted: #636a76;
+      --brand: #ff7b54; /* coral */
+      --brand-2: #ffd166; /* sunshine */
+      --brand-3: #7bdff2; /* sky */
+      --brand-4: #c3f584; /* lime */
+      --outline: #e9ecf1;
+      --shadow: 0 10px 20px rgba(0,0,0,.06);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji"; 
+      color:var(--ink); background:linear-gradient(180deg,var(--bg), #fff);
+    }
+    a{color:var(--brand); text-decoration:none}
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(8px);
+      background:rgba(255,255,255,.8); border-bottom:1px solid var(--outline);
+    }
+    .nav{max-width:1100px; margin:0 auto; padding:12px 20px; display:flex; gap:18px; align-items:center; justify-content:space-between}
+    .logo{display:flex; gap:10px; align-items:center; font-weight:800}
+    .logo .dot{width:10px;height:10px;border-radius:50%; background:var(--brand)}
+    .nav a{font-weight:600; margin:0 8px}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:12px; border:1px solid var(--outline); background:var(--card); box-shadow:var(--shadow); cursor:pointer; font-weight:700}
+    .btn:active{transform:translateY(1px)}
+    .hero{max-width:1100px; margin:0 auto; padding:40px 20px 10px}
+    .hero-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
+    .badge{display:inline-flex; align-items:center; gap:10px; padding:6px 10px; border-radius:999px; border:1px dashed var(--brand); color:#9b361e; background:linear-gradient(90deg,#fff7f2,#fff)}
+    h1{font-size:clamp(28px,3.4vw,44px); line-height:1.1; margin:14px 0}
+    .sub{color:var(--muted)}
+    .card{background:var(--card); border:1px solid var(--outline); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card-pad{padding:20px}
+    .grid{display:grid; gap:16px}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .section{max-width:1100px; margin:26px auto; padding:0 20px}
+    .pill{display:inline-block; padding:8px 12px; border-radius:999px; background:#f6fafc; border:1px solid var(--outline); font-weight:600; color:#334}
+    summary{cursor:pointer; font-weight:700}
+    details{border:1px solid var(--outline); border-radius:14px; padding:14px 16px; background:#fff}
+    details + details{margin-top:10px}
+    .progress-wrap{position:sticky; top:64px; background:rgba(255,255,255,.9); backdrop-filter:blur(8px); border-bottom:1px dashed var(--outline)}
+    .progress{height:8px; width:100%; background:#f3f5f8}
+    .bar{height:8px; width:0; background:linear-gradient(90deg,var(--brand),var(--brand-2),var(--brand-3),var(--brand-4)); border-radius:999px; transition:width .5s ease}
+    .checklist label{display:flex; gap:10px; align-items:flex-start; padding:10px; border-radius:12px; border:1px solid var(--outline)}
+    .tag{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--outline); background:#fff}
+    .quiz-question{padding:16px; border-radius:14px; border:1px solid var(--outline); background:#fff}
+    .toast{position:fixed; right:16px; bottom:16px; padding:14px 16px; border-radius:14px; background:#101828; color:#fff; box-shadow:var(--shadow); display:none}
+    .footer{padding:30px 20px; color:#667085; border-top:1px solid var(--outline); text-align:center}
+    .confetti{position:fixed; inset:0; pointer-events:none}
+    /* cheerful chips */
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background:#fff; border:1px solid var(--outline); border-radius:999px}
+    .emoji{filter:saturate(120%)}
+    .notice{border-left:5px solid var(--brand); background:#fff7f2; padding:12px 14px; border-radius:12px}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr} .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <canvas class="confetti" id="confetti"></canvas>
+  <header>
+    <div class="nav">
+      <div class="logo"><span class="dot"></span><span>MD Org • Pert. 9</span></div>
+      <nav>
+        <a href="#materi">Materi</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#aktivitas">Aktivitas</a>
+        <a href="#referensi">Referensi</a>
+      </nav>
+      <button class="btn" id="saveNameBtn">👋 <span id="hello">Sapa Saya</span></button>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="section" style="padding:10px 20px; display:flex; align-items:center; gap:12px">
+      <span class="pill">📈 Progress Belajar <b id="progressLabel">0%</b></span>
+      <div class="progress" style="flex:1"><div class="bar" id="bar"></div></div>
+      <button class="btn" id="resetBtn" title="Hapus data cookie">♻️ Reset</button>
+    </div>
+  </div>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <span class="badge">Pertemuan 9 • Managing Digital Organization</span>
+        <h1>Efek Positif & Negatif <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Digitalisasi</span> pada MSDM</h1>
+        <p class="sub">Pelajari bagaimana teknologi mengubah <b>sifat kerja</b>, <b>kontrak</b>, dan <b>hubungan kerja</b>, serta strategi HR untuk menyeimbangkan otomatisasi dan humanisasi.</p>
+        <div class="grid" style="margin-top:16px">
+          <div class="chip">🌍 Work From Anywhere</div>
+          <div class="chip">🤖 AI & Otomasi</div>
+          <div class="chip">📊 People Analytics</div>
+          <div class="chip">🧠 Upskilling</div>
+        </div>
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn" href="#materi">🚀 Mulai Belajar</a>
+          <button class="btn" id="bookmarkBtn">🔖 Tandai Materi</button>
+        </div>
+        <p class="notice" style="margin-top:14px">💡 Tip: Nama kamu akan disimpan dalam <b>cookie</b> agar sapaannya muncul otomatis saat kembali ke halaman ini.</p>
+      </div>
+      <div class="card card-pad">
+        <h3 style="margin:0 0 8px">Masukkan Nama</h3>
+        <p class="sub" style="margin-top:0">Agar kami bisa menyapa kamu dan menyimpan progres.</p>
+        <div style="display:flex; gap:8px; align-items:center; margin-top:8px">
+          <input id="nameInput" type="text" placeholder="Nama lengkap" style="flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--outline)"/>
+          <button class="btn" id="storeName">Simpan</button>
+        </div>
+        <div id="greet" class="sub" style="margin-top:10px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="materi">
+    <h2>Materi Inti</h2>
+    <p class="sub">Klik setiap topik untuk membuka ringkasan. Menandai topik sebagai selesai akan menaikkan progress (tersimpan di cookie).</p>
+
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card card-pad">
+        <span class="tag">📘 Pendahuluan</span>
+        <details data-check>
+          <summary>Digitalisasi & Transformasi SDM</summary>
+          <p>Teknologi (AI, cloud, data) mentransformasi rekrutmen, pelatihan, penilaian kinerja, dan pengalaman karyawan. HR bergeser dari administratif ke <b>strategis & analitis</b>.</p>
+        </details>
+        <details data-check>
+          <summary>Perubahan Sifat Kerja</summary>
+          <ul>
+            <li>Fleksibel: remote/WFA, berbasis proyek & hasil.</li>
+            <li>Otomasi tugas rutin; muncul role baru (data, UX, AI).</li>
+          </ul>
+        </details>
+        <details data-check>
+          <summary>Kontrak & Tenaga Kerja</summary>
+          <ul>
+            <li>Gig/platform work, tenaga kerja on-demand.</li>
+            <li>Talenta lintas batas; isu hukum & budaya.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="card card-pad">
+        <span class="tag">⚖️ Dampak</span>
+        <details data-check>
+          <summary>Efek Positif</summary>
+          <ul>
+            <li>Efisiensi HRIS; otomasi administrasi.</li>
+            <li>People analytics → keputusan berbasis data.</li>
+            <li>Fleksibilitas & kepuasan; e-learning.</li>
+          </ul>
+        </details>
+        <details data-check>
+          <summary>Efek Negatif</summary>
+          <ul>
+            <li>Disrupsi pekerjaan; job insecurity.</li>
+            <li>Isolasi & digital fatigue (remote).</li>
+            <li>Privasi & etika pemantauan; kesenjangan digital.</li>
+          </ul>
+        </details>
+        <details data-check>
+          <summary>Strategi Mengelola SDM Digital</summary>
+          <ol>
+            <li>Digital HR Strategy & integrasi sistem.</li>
+            <li>Upskilling/reskilling berkelanjutan.</li>
+            <li>Ethical data governance & EX (employee experience).</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+
+    <div class="card card-pad" style="margin-top:16px">
+      <span class="tag">🌍 Tren</span>
+      <details data-check>
+        <summary>Work From Anywhere (WFA)</summary>
+        <div class="grid grid-2" style="margin-top:8px">
+          <div>
+            <h4>Pro</h4>
+            <ul>
+              <li>Akses talenta global, biaya turun.</li>
+              <li>Fleksibilitas & kepuasan meningkat.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Kontra</h4>
+            <ul>
+              <li>Koordinasi lintas zona waktu.</li>
+              <li>Engagement & kepatuhan pajak/hukum.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details data-check>
+        <summary>Studi Kasus: Unilever</summary>
+        <p>AI membantu screening CV & wawancara awal → waktu rekrutmen -75%, biaya -50%. Catatan: mitigasi <i>bias algoritma</i> tetap krusial.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="section" id="aktivitas">
+    <h2>Aktivitas Kelas</h2>
+    <div class="grid grid-3" style="margin-top:12px">
+      <div class="card card-pad">
+        <h3>Checklist Belajar ✅</h3>
+        <div class="checklist">
+          <label><input type="checkbox" data-task> Baca pendahuluan</label>
+          <label><input type="checkbox" data-task> Pahami efek positif</label>
+          <label><input type="checkbox" data-task> Pahami efek negatif</label>
+          <label><input type="checkbox" data-task> Catat 3 strategi HR</label>
+          <label><input type="checkbox" data-task> Diskusikan studi kasus</label>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <h3>Catatan Cepat 📝</h3>
+        <textarea id="notes" rows="8" style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--outline)" placeholder="Tulis insight kamu di sini... (akan disimpan di cookie)"></textarea>
+        <div style="display:flex; gap:8px; margin-top:8px">
+          <button class="btn" id="saveNotes">💾 Simpan</button>
+          <button class="btn" id="clearNotes">🧹 Bersihkan</button>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <h3>Emoji Feedback 😄</h3>
+        <p class="sub">Bagaimana perasaanmu tentang materi ini?</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <button class="btn emoji" data-emoji="😍">😍</button>
+          <button class="btn emoji" data-emoji="🙂">🙂</button>
+          <button class="btn emoji" data-emoji="🤔">🤔</button>
+          <button class="btn emoji" data-emoji="😵‍💫">😵‍💫</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quiz">
+    <h2>Quiz Mini (3 Soal)</h2>
+    <p class="sub">Nilai & jawaban tersimpan di cookie. Raih 100% untuk konfeti 🎉</p>
+
+    <form id="quizForm" class="grid" style="margin-top:12px">
+      <div class="quiz-question">
+        <b>1) Apa dampak positif <i>people analytics</i> bagi HR?</b>
+        <label><input type="radio" name="q1" value="a"> Membuat keputusan berbasis intuisi</label><br>
+        <label><input type="radio" name="q1" value="b"> Membantu keputusan berbasis data</label><br>
+        <label><input type="radio" name="q1" value="c"> Menambah beban administrasi</label>
+      </div>
+      <div class="quiz-question">
+        <b>2) Risiko etika dalam pemantauan produktivitas digital adalah...</b>
+        <label><input type="radio" name="q2" value="a"> Peningkatan kolaborasi</label><br>
+        <label><input type="radio" name="q2" value="b"> Pelanggaran privasi</label><br>
+        <label><input type="radio" name="q2" value="c"> Perbaikan EX</label>
+      </div>
+      <div class="quiz-question">
+        <b>3) Salah satu tantangan WFA adalah...</b>
+        <label><input type="radio" name="q3" value="a"> Akses talenta terbatas</label><br>
+        <label><input type="radio" name="q3" value="b"> Koordinasi lintas zona waktu</label><br>
+        <label><input type="radio" name="q3" value="c"> Biaya kantor meningkat</label>
+      </div>
+      <div>
+        <button class="btn" type="submit">🧮 Nilai</button>
+        <span id="scoreLabel" class="pill" style="margin-left:8px">Skor: 0/3</span>
+      </div>
+    </form>
+  </section>
+
+  <section class="section" id="referensi">
+    <h2>Referensi (RPS)</h2>
+    <div class="grid grid-2" style="margin-top:8px">
+      <div class="card card-pad">
+        <ul>
+          <li>Laudon & Laudon (2022) – <i>Management Information Systems</i></li>
+          <li>Merrell (2022) – <i>Digitizing Talent</i></li>
+          <li>Klikauer (2022) – <i>Global Guide to HRM</i></li>
+          <li>Christiansen et al. (2024) – <i>HRM Casebook</i></li>
+        </ul>
+      </div>
+      <div class="card card-pad">
+        <p class="sub">Gunakan daftar ini untuk eksplorasi lanjut & tugas.</p>
+        <button class="btn" id="printBtn">🖨️ Cetak / Simpan PDF</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast">Tersimpan ke cookie 🍪</div>
+  
+  <footer class="footer">© 2025 Managing Digital Organization • Pertemuan 9 • Light Theme Ceria</footer>
+
+  <script>
+    // --- Cookie helpers ---
+    function setCookie(name, value, days){
+      const d = new Date();
+      d.setTime(d.getTime() + (days*24*60*60*1000));
+      const expires = "expires="+ d.toUTCString();
+      document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+    }
+    function getCookie(name){
+      const cname = name + "=";
+      const ca = decodeURIComponent(document.cookie).split(';');
+      for(let c of ca){
+        while(c.charAt(0)==' ') c = c.substring(1);
+        if(c.indexOf(cname) == 0) return c.substring(cname.length, c.length);
+      }
+      return "";
+    }
+    function eraseCookie(name){ setCookie(name, '', -1); }
+
+    const COOKIE_KEY = 'md9_prefs';
+    function readPrefs(){
+      try{ return JSON.parse(getCookie(COOKIE_KEY) || '{}'); }catch(e){ return {}; }
+    }
+    function writePrefs(p){ setCookie(COOKIE_KEY, JSON.stringify(p), 365); showToast(); }
+    function showToast(){ const t = document.getElementById('toast'); t.style.display='block'; setTimeout(()=>t.style.display='none', 1400); }
+
+    // --- Greeting & name storage ---
+    const nameInput = document.getElementById('nameInput');
+    const greet = document.getElementById('greet');
+    const saveNameBtn = document.getElementById('saveNameBtn');
+    const storeName = document.getElementById('storeName');
+    const hello = document.getElementById('hello');
+
+    function applyName(){
+      const prefs = readPrefs();
+      const n = prefs.name || '';
+      if(n){
+        hello.textContent = 'Hi, ' + n + '!';
+        greet.textContent = 'Selamat datang kembali, ' + n + ' 👋';
+        nameInput.value = n;
+      } else {
+        hello.textContent = 'Sapa Saya';
+        greet.textContent = '';
+      }
+    }
+
+    saveNameBtn.addEventListener('click', ()=>{
+      document.getElementById('nameInput').focus();
+    });
+    storeName.addEventListener('click', ()=>{
+      const n = nameInput.value.trim();
+      const prefs = readPrefs();
+      prefs.name = n;
+      writePrefs(prefs);
+      applyName();
+      burstConfetti();
+    });
+
+    // --- Bookmark ---
+    document.getElementById('bookmarkBtn').addEventListener('click', ()=>{
+      const prefs = readPrefs();
+      prefs.bookmark = '#materi';
+      writePrefs(prefs);
+    });
+
+    // --- Notes ---
+    const notes = document.getElementById('notes');
+    document.getElementById('saveNotes').addEventListener('click', ()=>{
+      const prefs = readPrefs();
+      prefs.notes = notes.value || '';
+      writePrefs(prefs);
+    });
+    document.getElementById('clearNotes').addEventListener('click', ()=>{
+      notes.value = '';
+      const prefs = readPrefs();
+      prefs.notes = '';
+      writePrefs(prefs);
+    });
+
+    // --- Checklist & progress ---
+    const tasks = Array.from(document.querySelectorAll('[data-task]'));
+    function updateProgress(){
+      const prefs = readPrefs();
+      const total = tasks.length + checkables.length + 3; // +3 for opened sections count bucket
+      const done = (prefs.tasks || []).length + (prefs.opened || []).length + (prefs.quizScore===3?1:0) + (prefs.name?1:0);
+      const pct = Math.min(100, Math.round((done/total)*100));
+      document.getElementById('bar').style.width = pct + '%';
+      document.getElementById('progressLabel').textContent = pct + '%';
+    }
+    tasks.forEach((el, idx)=>{
+      el.addEventListener('change', ()=>{
+        const prefs = readPrefs();
+        const set = new Set(prefs.tasks || []);
+        if(el.checked) set.add(idx); else set.delete(idx);
+        prefs.tasks = Array.from(set);
+        writePrefs(prefs);
+        updateProgress();
+      });
+    });
+
+    // --- Expandable details tracking ---
+    const checkables = Array.from(document.querySelectorAll('[data-check]'));
+    checkables.forEach((d, i)=>{
+      d.addEventListener('toggle', ()=>{
+        const prefs = readPrefs();
+        const set = new Set(prefs.opened || []);
+        if(d.open) set.add(i); else set.delete(i);
+        prefs.opened = Array.from(set);
+        writePrefs(prefs); updateProgress();
+      });
+    });
+
+    // --- Emoji Feedback ---
+    document.querySelectorAll('.emoji').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const prefs = readPrefs();
+        prefs.mood = btn.getAttribute('data-emoji');
+        writePrefs(prefs);
+        burstConfetti();
+      });
+    });
+
+    // --- Quiz ---
+    const quizForm = document.getElementById('quizForm');
+    const scoreLabel = document.getElementById('scoreLabel');
+    const ANSWERS = { q1:'b', q2:'b', q3:'b' };
+    quizForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      let score = 0;
+      Object.keys(ANSWERS).forEach(q=>{
+        const sel = quizForm.querySelector(`input[name="${q}"]:checked`);
+        if(sel && sel.value === ANSWERS[q]) score++;
+      });
+      scoreLabel.textContent = `Skor: ${score}/3`;
+      const prefs = readPrefs();
+      prefs.quizScore = score;
+      writePrefs(prefs);
+      updateProgress();
+      if(score===3) burstConfetti();
+    });
+
+    // --- Print ---
+    document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+
+    // --- Reset ---
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      eraseCookie(COOKIE_KEY);
+      location.reload();
+    });
+
+    // --- Confetti (tiny, canvas-based) ---
+    const c = document.getElementById('confetti');
+    const ctx = c.getContext('2d');
+    let confs = [];
+    function resize(){ c.width = innerWidth; c.height = innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    function burstConfetti(){
+      for(let i=0;i<120;i++){
+        confs.push({
+          x: Math.random()*c.width,
+          y: -10,
+          r: 4+Math.random()*6,
+          v: 2+Math.random()*4,
+          a: Math.random()*Math.PI,
+          color: ['#ff7b54','#ffd166','#7bdff2','#c3f584'][i%4]
+        });
+      }
+    }
+    function tick(){
+      ctx.clearRect(0,0,c.width,c.height);
+      confs.forEach(p=>{
+        p.y += p.v; p.x += Math.sin(p.a+=0.05);
+        ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      });
+      confs = confs.filter(p=>p.y < c.height+20);
+      requestAnimationFrame(tick);
+    } tick();
+
+    // --- Init from cookie ---
+    (function init(){
+      const prefs = readPrefs();
+      if(prefs.name){ nameInput.value = prefs.name; }
+      if(prefs.notes){ notes.value = prefs.notes; }
+      if(Array.isArray(prefs.tasks)){
+        prefs.tasks.forEach(i=>{ if(tasks[i]) tasks[i].checked = true; });
+      }
+      if(Array.isArray(prefs.opened)){
+        prefs.opened.forEach(i=>{ if(checkables[i]) checkables[i].open = true; });
+      }
+      if(typeof prefs.quizScore==='number'){ scoreLabel.textContent = `Skor: ${prefs.quizScore}/3`; }
+      applyName();
+      updateProgress();
+      // auto scroll to bookmark
+      if(prefs.bookmark){ try{ document.querySelector(prefs.bookmark).scrollIntoView({behavior:'smooth'}); } catch(e){} }
+    })();
+  </script>
+</body>
+</html>
