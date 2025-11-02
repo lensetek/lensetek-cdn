@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengantar Pasar Modal – SCF & Waspada Investasi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Landing page mata kuliah Pengantar Pasar Modal – progres belajar tersimpan otomatis, badge kelulusan dapat diunduh."/>
+  <style>
+    /* Fallback when Tailwind hasn't finished loading */
+    .no-tailwind { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 grid place-items-center text-white font-bold">PM</div>
+        <div>
+          <h1 class="text-lg font-semibold">Pengantar Pasar Modal</h1>
+          <p class="text-xs text-slate-500">Program Studi S1 Manajemen</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#materi" class="hover:text-indigo-600">Materi</a>
+        <a href="#progress" class="hover:text-indigo-600">Progres</a>
+        <a href="#badge" class="hover:text-indigo-600">Badge</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-indigo-600 via-blue-600 to-emerald-500 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="text-sm uppercase tracking-widest text-white/80 mb-2">Materi Ke-7</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">SCF & Waspada Investasi</h2>
+        <p class="mt-4 text-white/90">Pelajari Securities Crowdfunding (SCF), bedanya dengan ECF, serta cara mengenali ciri-ciri investasi bodong. Progres belajarmu tersimpan otomatis dan dapatkan <span class="font-semibold">Completion Badge</span> saat mencapai 100%.</p>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a target="_blank" rel="noopener" href="https://notebooklm.google.com/notebook/79530e8d-d56a-4525-b578-0e793b5fca9c" class="px-4 py-3 rounded-xl bg-white text-slate-900 font-medium hover:shadow-lg hover:-translate-y-0.5 transition">
+            📓 NotebookLM – Pembelajaran Mendalam
+          </a>
+          <a target="_blank" rel="noopener" href="https://chatgpt.com/g/g-68ce998cc58081919e3237b0d1043c7b-pengantar-pasar-modal-with-lensetek" class="px-4 py-3 rounded-xl bg-slate-900/30 ring-1 ring-white/30 text-white font-medium hover:bg-slate-900/40 transition">
+            🤖 AI Companion – Lensetek GPT
+          </a>
+        </div>
+
+        <div class="mt-6 flex items-center gap-3 text-sm">
+          <span class="px-2 py-1 rounded-lg bg-white/15">⏱️ 1–2 jam</span>
+          <span class="px-2 py-1 rounded-lg bg-white/15">🎯 CPMK: Analisis peluang & risiko</span>
+        </div>
+      </div>
+      <div class="md:justify-self-end w-full">
+        <div class="rounded-2xl bg-white/10 backdrop-blur p-5 ring-1 ring-white/20 shadow-2xl">
+          <h3 class="font-semibold mb-3">Progres Kamu</h3>
+          <div class="w-full bg-white/20 rounded-xl h-3 overflow-hidden">
+            <div id="progressBar" class="h-3 bg-white rounded-xl" style="width:0%"></div>
+          </div>
+          <div class="flex items-center justify-between mt-3 text-sm">
+            <span><strong id="progressPct">0%</strong> selesai</span>
+            <button id="resetProgressHero" class="text-white/90 underline hover:text-white">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Materi List -->
+  <section id="materi" class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="md:col-span-2">
+        <h3 class="text-2xl font-bold mb-1">Struktur Materi</h3>
+        <p class="text-sm text-slate-600 mb-6">Centang setiap bagian yang sudah kamu kuasai. Progres akan otomatis tersimpan di perangkatmu (localStorage & cookie).</p>
+
+        <div id="checklist" class="space-y-3">
+          <!-- Items injected by JS -->
+        </div>
+
+        <div class="mt-6 flex items-center gap-3">
+          <button id="markAll" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700">Tandai Semua Selesai</button>
+          <button id="resetProgress" class="px-4 py-2 rounded-xl bg-white ring-1 ring-slate-200 hover:bg-slate-50">Reset</button>
+        </div>
+      </div>
+
+      <aside class="md:col-span-1">
+        <div class="sticky top-24">
+          <div class="rounded-2xl border border-slate-200 p-5 bg-white shadow-sm">
+            <h4 class="font-semibold mb-3">Nama Peserta</h4>
+            <input id="participantName" type="text" placeholder="Ketik nama lengkap" class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-slate-500 mt-2">Nama ini akan dicetak pada <span class="font-medium">Completion Badge</span>.</p>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 p-5 bg-white shadow-sm mt-4" id="progress">
+            <h4 class="font-semibold mb-2">Ringkasan Progres</h4>
+            <p class="text-sm">Bagian selesai: <span id="doneCount">0</span>/<span id="totalCount">0</span></p>
+            <div class="w-full bg-slate-100 rounded-xl h-3 mt-2 overflow-hidden">
+              <div id="progressBar2" class="h-3 bg-indigo-600 rounded-xl" style="width:0%"></div>
+            </div>
+            <p class="mt-2 text-xs text-slate-500">Tersimpan otomatis. Data hanya di perangkat ini.</p>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 p-5 bg-white shadow-sm mt-4" id="badge">
+            <h4 class="font-semibold mb-2">Completion Badge</h4>
+            <p class="text-sm mb-3">Tersedia saat progres mencapai 100%.</p>
+            <button id="generateBadge" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40" disabled>Generate & Unduh Badge</button>
+            <a id="downloadLink" class="hidden mt-3 inline-block px-4 py-2 rounded-xl bg-slate-900 text-white" download="badge.png">Unduh Badge</a>
+            <canvas id="badgeCanvas" width="1200" height="675" class="hidden"></canvas>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-slate-600">
+      <p class="font-medium">&copy; <span id="year"></span> Pengantar Pasar Modal – Materi 7 (SCF & Waspada Investasi).</p>
+      <p class="mt-1">Dosen: Franky Kesuma, MSM • Program Studi S1 Manajemen</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===========================
+    // Data Materi (checklist)
+    // ===========================
+    const MATERI_ITEMS = [
+      { id: 'm1', title: 'Pendahuluan & Tujuan Pembelajaran' },
+      { id: 'm2', title: 'Definisi & Dasar Hukum SCF (POJK 57/2020)' },
+      { id: 'm3', title: 'Perbedaan SCF vs ECF' },
+      { id: 'm4', title: 'Pihak-pihak dalam SCF (Issuer, Platform, Investor, OJK)' },
+      { id: 'm5', title: 'Manfaat SCF bagi Penerbit & Investor' },
+      { id: 'm6', title: 'Risiko SCF (gagal bayar, likuiditas, operasional, regulasi)' },
+      { id: 'm7', title: 'Ciri-ciri Investasi Bodong' },
+      { id: 'm8', title: 'Peran Satgas Waspada Investasi (SWI)' },
+      { id: 'm9', title: 'Langkah Aman Berinvestasi (Cek Izin OJK, pahami produk, risiko)' },
+      { id: 'm10', title: 'Studi Kasus: Platform SCF berizin & contoh penipuan umum' },
+      { id: 'm11', title: 'Kuis Ringan (opsional)' }
+    ];
+
+    const LS_KEY = 'ppm7_progress_v1';
+    const LS_NAME = 'ppm7_name_v1';
+
+    // Simple cookie helpers for mirroring state
+    function setCookie(name, value, days=365) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days*24*60*60*1000));
+      document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/';
+    }
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    function loadState() {
+      let state = null;
+      try { state = JSON.parse(localStorage.getItem(LS_KEY)); } catch(e) {}
+      if (!state) {
+        const cookieState = getCookie(LS_KEY);
+        if (cookieState) {
+          try { state = JSON.parse(cookieState); } catch(e) {}
+        }
+      }
+      if (!state) state = { done: {} };
+      return state;
+    }
+
+    function saveState(state) {
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+      setCookie(LS_KEY, JSON.stringify(state));
+    }
+
+    function loadName() {
+      const fromLS = localStorage.getItem(LS_NAME);
+      if (fromLS) return fromLS;
+      const fromCookie = getCookie(LS_NAME);
+      return fromCookie || '';
+    }
+
+    function saveName(name) {
+      localStorage.setItem(LS_NAME, name);
+      setCookie(LS_NAME, name);
+    }
+
+    // Render checklist
+    const checklistEl = document.getElementById('checklist');
+    const progressBar = document.getElementById('progressBar');
+    const progressBar2 = document.getElementById('progressBar2');
+    const progressPct = document.getElementById('progressPct');
+    const doneCountEl = document.getElementById('doneCount');
+    const totalCountEl = document.getElementById('totalCount');
+    const participantInput = document.getElementById('participantName');
+    const generateBtn = document.getElementById('generateBadge');
+    const downloadLink = document.getElementById('downloadLink');
+    const badgeCanvas = document.getElementById('badgeCanvas');
+
+    let state = loadState();
+
+    function renderChecklist() {
+      checklistEl.innerHTML = '';
+      MATERI_ITEMS.forEach(item => {
+        const wrapper = document.createElement('label');
+        wrapper.className = 'flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:border-indigo-300 hover:shadow-sm cursor-pointer';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'mt-1 h-5 w-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500';
+        cb.checked = !!state.done[item.id];
+        cb.addEventListener('change', () => {
+          state.done[item.id] = cb.checked;
+          saveState(state);
+          updateProgressUI();
+        });
+        const title = document.createElement('span');
+        title.className = 'text-sm md:text-base';
+        title.textContent = item.title;
+        wrapper.appendChild(cb);
+        wrapper.appendChild(title);
+        checklistEl.appendChild(wrapper);
+      });
+      totalCountEl.textContent = MATERI_ITEMS.length;
+    }
+
+    function calcProgress() {
+      const total = MATERI_ITEMS.length;
+      const done = Object.values(state.done).filter(Boolean).length;
+      const pct = Math.round((done / total) * 100) || 0;
+      return { total, done, pct };
+    }
+
+    function updateProgressUI() {
+      const { total, done, pct } = calcProgress();
+      progressBar.style.width = pct + '%';
+      progressBar2.style.width = pct + '%';
+      progressPct.textContent = pct + '%';
+      doneCountEl.textContent = done;
+      totalCountEl.textContent = total;
+
+      const canGenerate = pct === 100;
+      generateBtn.disabled = !canGenerate;
+      if (!canGenerate) {
+        downloadLink.classList.add('hidden');
+      }
+    }
+
+    // Buttons
+    document.getElementById('markAll').addEventListener('click', () => {
+      MATERI_ITEMS.forEach(i => state.done[i.id] = true);
+      saveState(state);
+      renderChecklist();
+      updateProgressUI();
+    });
+    function resetProgressAll() {
+      state = { done: {} };
+      saveState(state);
+      renderChecklist();
+      updateProgressUI();
+    }
+    document.getElementById('resetProgress').addEventListener('click', resetProgressAll);
+    document.getElementById('resetProgressHero').addEventListener('click', resetProgressAll);
+
+    // Name persistence
+    participantInput.value = loadName();
+    participantInput.addEventListener('input', (e) => {
+      saveName(e.target.value.trim());
+    });
+
+    // Badge generation (Canvas PNG)
+    function drawBadge(name) {
+      const ctx = badgeCanvas.getContext('2d');
+      const W = badgeCanvas.width;
+      const H = badgeCanvas.height;
+
+      // Background gradient
+      const grad = ctx.createLinearGradient(0,0,W,H);
+      grad.addColorStop(0, '#4f46e5');
+      grad.addColorStop(0.5, '#2563eb');
+      grad.addColorStop(1, '#10b981');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,W,H);
+
+      // White card
+      const pad = 36;
+      const radius = 28;
+      ctx.fillStyle = 'rgba(255,255,255,0.14)';
+      roundRect(ctx, pad, pad, W - pad*2, H - pad*2, radius, true, false);
+
+      // Title
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 52px Inter, system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillText('Completion Badge', 60, 130);
+
+      // Subtitle
+      ctx.font = '28px Inter, system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillText('Pengantar Pasar Modal – Materi 7: SCF & Waspada Investasi', 60, 180);
+
+      // Name block
+      ctx.fillStyle = 'white';
+      roundRect(ctx, 60, 240, W - 120, 130, 20, true, false);
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 48px Inter, system-ui, -apple-system, Segoe UI, Roboto';
+      const nameText = name && name.length ? name : 'Nama Peserta';
+      ctx.fillText(nameText, 90, 320);
+
+      // Details
+      const date = new Date();
+      const dateStr = date.toLocaleDateString('id-ID', { day:'2-digit', month:'long', year:'numeric' });
+      ctx.font = '26px Inter, system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillStyle = 'white';
+      ctx.fillText('Status: 100% Selesai', 60, 420);
+      ctx.fillText('Tanggal: ' + dateStr, 60, 460);
+      ctx.fillText('Dosen: Franky Kesuma, MSM', 60, 500);
+
+      // Seal
+      drawSeal(ctx, W - 240, 420);
+
+      // Footer
+      ctx.font = '22px Inter, system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.fillText('Generated automatically from your learning progress', 60, H - 60);
+
+      function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+        if (typeof radius === 'number') {
+          radius = {tl: radius, tr: radius, br: radius, bl: radius};
+        }
+        ctx.beginPath();
+        ctx.moveTo(x + radius.tl, y);
+        ctx.lineTo(x + width - radius.tr, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+        ctx.lineTo(x + width, y + height - radius.br);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+        ctx.lineTo(x + radius.bl, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+        ctx.lineTo(x, y + radius.tl);
+        ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+        ctx.closePath();
+        if (fill) ctx.fill();
+        if (stroke) ctx.stroke();
+      }
+
+      function drawSeal(ctx, x, y) {
+        // Circle
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x + 70, y + 70, 70, 0, Math.PI * 2);
+        ctx.fillStyle = '#111827';
+        ctx.fill();
+        // Inner text
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 20px Inter, system-ui, -apple-system, Segoe UI';
+        ctx.fillText('PPM', x + 42, y + 70);
+        ctx.font = '14px Inter, system-ui, -apple-system, Segoe UI';
+        ctx.fillText('SCF &', x + 46, y + 92);
+        ctx.fillText('Waspada', x + 40, y + 110);
+        ctx.restore();
+      }
+    }
+
+    generateBtn.addEventListener('click', () => {
+      const name = participantInput.value.trim();
+      saveName(name);
+      drawBadge(name);
+      const dataURL = badgeCanvas.toDataURL('image/png');
+      downloadLink.href = dataURL;
+      const safeName = (name || 'peserta').toLowerCase().replace(/[^a-z0-9]+/g,'-');
+      downloadLink.download = `badge-${safeName}.png`;
+      downloadLink.classList.remove('hidden');
+      downloadLink.textContent = 'Unduh Badge – ' + (name || 'Peserta');
+    });
+
+    // Initial render
+    renderChecklist();
+    updateProgressUI();
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
+</body>
+</html>
