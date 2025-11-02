@@ -26,6 +26,7 @@
         </nav>
       </div>
     </header>
+    <div class="h-1.5 bg-slate-100"><div id="pbar" class="h-full bg-blue-600 w-0 transition-all"></div></div>
 
     <main>
       <!-- Hero -->
@@ -157,12 +158,30 @@
     </footer>
 
     <script>
+      // ---- Progress helpers (shared) ----
+      function setCookieProgress(percent){
+        try { document.cookie = `exim6_progress=${percent}|${Date.now()}; path=/; max-age=31536000`; } catch(e){}
+      }
+      function computeOverallProgress(){
+        const p1 = (localStorage.getItem('exim:6_1:readKonsep')==='1' && localStorage.getItem('exim:6_1:quiz1')==='1') ? 20:0;
+        const p2 = (localStorage.getItem('exim:6_2:read:alibaba')==='1' && localStorage.getItem('exim:6_2:read:insw')==='1' && localStorage.getItem('exim:6_2:read:shopee')==='1') ? 20:0;
+        const p3 = (localStorage.getItem('exim:6_3:readMain')==='1' && localStorage.getItem('exim:6_3:quiz')==='1') ? 20:0;
+        const p4 = (localStorage.getItem('exim:6_4:preview')==='1' && (localStorage.getItem('exim:6_4:refleksi')||'').trim().length>=20) ? 20:0;
+        const p5 = (localStorage.getItem('exim:6_5:case1-fb:ok')==='1' && localStorage.getItem('exim:6_5:case2-fb:ok')==='1' && localStorage.getItem('exim:6_5:case3-fb:ok')==='1') ? 20:0;
+        return p1+p2+p3+p4+p5;
+      }
+      function renderProgress(){
+        const p = computeOverallProgress();
+        const bar = document.getElementById('pbar'); if(bar){ bar.style.width = p+'%'; }
+        setCookieProgress(p);
+      }
       // Save understanding checkbox
       const uKonsep = document.getElementById('u-konsep');
       if (uKonsep) {
         uKonsep.checked = localStorage.getItem('exim:6_1:understood') === '1';
         uKonsep.addEventListener('change', () => {
           localStorage.setItem('exim:6_1:understood', uKonsep.checked ? '1' : '0');
+          renderProgress();
         });
       }
 
@@ -180,8 +199,41 @@
             box.className = 'mt-2 text-sm text-red-700';
             localStorage.setItem('exim:6_1:quiz1', '0');
           }
+          renderProgress();
         });
       });
+
+      // Auto-read detection for Konsep section (no manual action needed)
+      (function(){
+        const target = document.getElementById('konsep');
+        if(!target) return;
+        let visibleMs = 0; let lastTick = 0; let ticking=false; const needed=8000;
+        const obs = new IntersectionObserver((entries)=>{
+          const e = entries[0];
+          if(e.isIntersecting){
+            lastTick = performance.now();
+            if(!ticking){
+              ticking=true; requestAnimationFrame(function loop(ts){
+                if(!ticking) return;
+                const now = performance.now();
+                visibleMs += (now - lastTick); lastTick = now;
+                if(visibleMs >= needed){
+                  localStorage.setItem('exim:6_1:readKonsep','1');
+                  ticking=false; obs.disconnect(); renderProgress();
+                  return;
+                }
+                requestAnimationFrame(loop);
+              });
+            }
+          } else {
+            ticking=false;
+          }
+        }, {threshold: 0.6});
+        obs.observe(target);
+      })();
+
+      // Initial render
+      renderProgress();
     </script>
   </body>
   </html>

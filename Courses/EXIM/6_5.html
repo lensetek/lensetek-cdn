@@ -23,6 +23,7 @@
         </nav>
       </div>
     </header>
+    <div class="h-1.5 bg-slate-100"><div id="pbar" class="h-full bg-blue-600 w-0 transition-all"></div></div>
 
     <main class="max-w-6xl mx-auto px-4 py-10">
       <h1 class="text-2xl md:text-3xl font-bold text-slate-900">5. Keterkaitan dengan Dunia Nyata</h1>
@@ -135,6 +136,17 @@
     </footer>
 
     <script>
+      // ---- Progress helpers ----
+      function setCookieProgress(percent){ try{ document.cookie = `exim6_progress=${percent}|${Date.now()}; path=/; max-age=31536000`; }catch(e){} }
+      function computeOverallProgress(){
+        const p1 = (localStorage.getItem('exim:6_1:readKonsep')==='1' && localStorage.getItem('exim:6_1:quiz1')==='1') ? 20:0;
+        const p2 = (localStorage.getItem('exim:6_2:read:alibaba')==='1' && localStorage.getItem('exim:6_2:read:insw')==='1' && localStorage.getItem('exim:6_2:read:shopee')==='1') ? 20:0;
+        const p3 = (localStorage.getItem('exim:6_3:readMain')==='1' && localStorage.getItem('exim:6_3:quiz')==='1') ? 20:0;
+        const p4 = (localStorage.getItem('exim:6_4:preview')==='1' && (localStorage.getItem('exim:6_4:refleksi')||'').trim().length>=20) ? 20:0;
+        const p5 = (localStorage.getItem('exim:6_5:case1-fb:ok')==='1' && localStorage.getItem('exim:6_5:case2-fb:ok')==='1' && localStorage.getItem('exim:6_5:case3-fb:ok')==='1') ? 20:0;
+        return p1+p2+p3+p4+p5;
+      }
+      function renderProgress(){ const p=computeOverallProgress(); const bar=document.getElementById('pbar'); if(bar){ bar.style.width=p+'%'; } setCookieProgress(p); autoDoneIfComplete(); }
       // Restore selections and provide feedback
       function handleCase(select, expected, fbId) {
         const saved = localStorage.getItem(select.dataset.key);
@@ -147,6 +159,7 @@
           fb.textContent = correct ? 'Tepat.' : 'Pertimbangkan kembali pilihan platform.';
           fb.className = 'text-xs mt-2 ' + (correct ? 'text-green-700' : 'text-red-700');
           localStorage.setItem('exim:6_5:'+fbId+':ok', correct ? '1' : '0');
+          renderProgress();
         };
         select.addEventListener('change', update);
         update();
@@ -158,7 +171,25 @@
       // Done toggle
       const done = document.getElementById('done-modul');
       done.checked = localStorage.getItem('exim:6_5:done') === '1';
-      done.addEventListener('change', ()=> localStorage.setItem('exim:6_5:done', done.checked ? '1' : '0'));
+      done.addEventListener('change', ()=> { localStorage.setItem('exim:6_5:done', done.checked ? '1' : '0'); renderProgress(); });
+
+      function autoDoneIfComplete(){
+        const allOk = localStorage.getItem('exim:6_5:case1-fb:ok')==='1' && localStorage.getItem('exim:6_5:case2-fb:ok')==='1' && localStorage.getItem('exim:6_5:case3-fb:ok')==='1';
+        if(allOk){ done.checked=true; localStorage.setItem('exim:6_5:done','1'); }
+      }
+
+      // Auto-read detection for main content
+      (function(){
+        const main = document.querySelector('main'); if(!main) return;
+        let ms=0, last=0, ticking=false; const need=8000; const obs=new IntersectionObserver((en)=>{
+          const e=en[0];
+          if(e.isIntersecting){ last=performance.now(); if(!ticking){ ticking=true; requestAnimationFrame(function loop(){ if(!ticking) return; const now=performance.now(); ms+= (now-last); last=now; if(ms>=need){ localStorage.setItem('exim:6_5:readMain','1'); ticking=false; obs.disconnect(); renderProgress(); return;} requestAnimationFrame(loop); }); } }
+          else { ticking=false; }
+        }, {threshold:0.4});
+        obs.observe(main);
+      })();
+
+      renderProgress();
     </script>
   </body>
   </html>
