@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXIM 6.3 • Keunggulan dan Tantangan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body class="bg-white text-slate-800">
+    <header class="border-b bg-white/80 backdrop-blur sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="6_1.html" class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+          <span class="text-sm tracking-wide">EXIM Digital • Modul 6</span>
+        </a>
+        <nav class="flex items-center gap-4 text-sm">
+          <a href="6_1.html" class="hover:text-blue-700">Home</a>
+          <a href="6_2.html" class="hover:text-blue-700">Platform</a>
+          <a href="6_3.html" class="text-blue-700 font-semibold">Keunggulan</a>
+          <a href="6_4.html" class="hover:text-blue-700">Simulasi</a>
+          <a href="6_5.html" class="hover:text-blue-700">Kasus</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+      <h1 class="text-2xl md:text-3xl font-bold text-slate-900">3. Keunggulan dan Tantangan Platform Digital</h1>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="rounded-lg border p-5">
+          <h2 class="font-semibold text-slate-900">Keunggulan</h2>
+          <ul class="mt-2 text-sm text-slate-700 list-disc pl-5 space-y-1">
+            <li>Akses pasar global 24/7</li>
+            <li>Biaya promosi rendah</li>
+            <li>Komunikasi dengan buyer lebih mudah</li>
+            <li>Data pasar & tren real-time</li>
+          </ul>
+          <div class="mt-4 text-xs text-slate-500">Tandai yang sudah Anda terapkan:</div>
+          <div class="mt-2 grid gap-2 text-sm">
+            <label class="inline-flex items-center gap-2"><input type="checkbox" class="h-4 w-4" data-key="exim:6_3:kunggul:profil">Optimasi profil toko</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" class="h-4 w-4" data-key="exim:6_3:kunggul:riset">Riset tren produk</label>
+          </div>
+        </div>
+        <div class="rounded-lg border p-5">
+          <h2 class="font-semibold text-slate-900">Tantangan</h2>
+          <ul class="mt-2 text-sm text-slate-700 list-disc pl-5 space-y-1">
+            <li>Persaingan tinggi antar-supplier global</li>
+            <li>Potensi penipuan (tanpa escrow/assurance)</li>
+            <li>Butuh kemampuan digital marketing & bahasa Inggris</li>
+            <li>Regulasi ekspor–impor berbeda tiap negara</li>
+          </ul>
+          <div class="mt-4 rounded-md bg-slate-50 border p-4">
+            <p class="text-sm font-medium">Kuis pilihan ganda</p>
+            <p class="mt-1 text-sm">Fitur apa yang membantu mengurangi risiko penipuan?</p>
+            <div class="mt-2 grid gap-2 text-sm">
+              <button class="q3 px-3 py-2 rounded border hover:bg-slate-100" data-correct="false">Live chat dengan buyer</button>
+              <button class="q3 px-3 py-2 rounded border hover:bg-slate-100" data-correct="true">Trade Assurance / Escrow</button>
+              <button class="q3 px-3 py-2 rounded border hover:bg-slate-100" data-correct="false">Foto produk resolusi tinggi</button>
+            </div>
+            <div id="q3-feedback" class="mt-2 text-sm"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex gap-3">
+        <a href="6_2.html" class="text-sm text-slate-600 hover:underline">← Kembali</a>
+        <a href="6_4.html" class="inline-flex items-center justify-center rounded-md bg-blue-600 text-white px-4 py-2 text-sm shadow hover:bg-blue-700">Lanjut ke Bagian 4</a>
+      </div>
+    </main>
+
+    <footer class="border-t">
+      <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+        <div>© 2025 Lensetek LLC</div>
+        <div class="flex gap-4">
+          <a href="6_2.html" class="hover:text-slate-700">Bagian 2</a>
+          <a href="6_4.html" class="hover:text-slate-700">Bagian 4</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Persist checkboxes
+      document.querySelectorAll('input[type="checkbox"][data-key]').forEach((cb) => {
+        const key = cb.getAttribute('data-key');
+        cb.checked = localStorage.getItem(key) === '1';
+        cb.addEventListener('change', () => localStorage.setItem(key, cb.checked ? '1' : '0'));
+      });
+      // Quiz
+      document.querySelectorAll('.q3').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const ok = btn.dataset.correct === 'true';
+          const box = document.getElementById('q3-feedback');
+          if (ok) {
+            box.textContent = 'Tepat! Gunakan escrow/Trade Assurance.';
+            box.className = 'mt-2 text-sm text-green-700';
+            localStorage.setItem('exim:6_3:quiz', '1');
+          } else {
+            box.textContent = 'Belum tepat. Pikirkan fitur pembayaran aman.';
+            box.className = 'mt-2 text-sm text-red-700';
+            localStorage.setItem('exim:6_3:quiz', '0');
+          }
+        });
+      });
+    </script>
+  </body>
+  </html>

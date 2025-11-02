@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXIM 6.4 • Simulasi Praktik Mahasiswa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body class="bg-white text-slate-800">
+    <header class="border-b bg-white/80 backdrop-blur sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="6_1.html" class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+          <span class="text-sm tracking-wide">EXIM Digital • Modul 6</span>
+        </a>
+        <nav class="flex items-center gap-4 text-sm">
+          <a href="6_1.html" class="hover:text-blue-700">Home</a>
+          <a href="6_2.html" class="hover:text-blue-700">Platform</a>
+          <a href="6_3.html" class="hover:text-blue-700">Keunggulan</a>
+          <a href="6_4.html" class="text-blue-700 font-semibold">Simulasi</a>
+          <a href="6_5.html" class="hover:text-blue-700">Kasus</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+      <h1 class="text-2xl md:text-3xl font-bold text-slate-900">4. Simulasi Praktik Mahasiswa (sesuai RPS)</h1>
+      <p class="mt-2 text-sm text-slate-700">Lakukan simulasi unggah produk fiktif, analisis fitur platform, dan tulis refleksi singkat.</p>
+
+      <div class="mt-6 grid lg:grid-cols-2 gap-6">
+        <!-- Simulasi Upload Produk -->
+        <section class="rounded-lg border p-5">
+          <h2 class="font-semibold text-slate-900">A) Simulasi unggah produk (fiktif)</h2>
+          <div class="mt-4 grid gap-3 text-sm">
+            <label class="grid gap-1">
+              <span>Nama Produk</span>
+              <input id="p-nama" type="text" class="rounded-md border px-3 py-2" placeholder="Contoh: Kopi Arabika Gayo 1kg" />
+            </label>
+            <label class="grid gap-1">
+              <span>Kategori</span>
+              <input id="p-kategori" type="text" class="rounded-md border px-3 py-2" placeholder="Contoh: Food & Beverage" />
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="grid gap-1">
+                <span>Harga (USD)</span>
+                <input id="p-harga" type="number" step="0.01" class="rounded-md border px-3 py-2" placeholder="6.50" />
+              </label>
+              <label class="grid gap-1">
+                <span>MOQ</span>
+                <input id="p-moq" type="number" class="rounded-md border px-3 py-2" placeholder="50" />
+              </label>
+            </div>
+            <label class="grid gap-1">
+              <span>Deskripsi singkat</span>
+              <textarea id="p-desc" rows="4" class="rounded-md border px-3 py-2" placeholder="Deskripsikan keunggulan produk, sertifikasi, dan kemasan."></textarea>
+            </label>
+            <div class="flex gap-2">
+              <button id="btn-preview" class="rounded-md bg-blue-600 text-white px-4 py-2 shadow hover:bg-blue-700">Buat Preview Listing</button>
+              <button id="btn-simpan" class="rounded-md border px-4 py-2 hover:bg-slate-50">Simpan Draft</button>
+            </div>
+          </div>
+
+          <div id="preview" class="mt-4 hidden rounded-md border bg-slate-50 p-4 text-sm"></div>
+        </section>
+
+        <!-- Analisis Fitur Platform -->
+        <section class="rounded-lg border p-5">
+          <h2 class="font-semibold text-slate-900">B) Analisis fitur platform</h2>
+          <p class="mt-2 text-sm text-slate-700">Tandai fitur yang menurut Anda paling krusial untuk produk Anda:</p>
+          <div class="mt-3 grid sm:grid-cols-2 gap-2 text-sm">
+            <label class="inline-flex items-center gap-2"><input type="checkbox" data-key="exim:6_4:fitur:rfq" class="h-4 w-4">RFQ untuk negosiasi</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" data-key="exim:6_4:fitur:assurance" class="h-4 w-4">Trade Assurance</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" data-key="exim:6_4:fitur:analytics" class="h-4 w-4">Analytics Dashboard</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" data-key="exim:6_4:fitur:logistik" class="h-4 w-4">Logistik ekspor terintegrasi</label>
+          </div>
+
+          <div class="mt-4 rounded-md bg-slate-50 border p-4">
+            <p class="text-sm font-medium">Diskusi reflektif</p>
+            <p class="mt-1 text-sm">Bagaimana platform digital membantu UMKM meningkatkan daya saing global?</p>
+            <textarea id="refleksi" rows="4" class="mt-2 w-full rounded-md border px-3 py-2 text-sm" placeholder="Tuliskan jawaban singkat Anda..."></textarea>
+            <div class="mt-2 flex gap-2">
+              <button id="btn-ref-save" class="rounded-md bg-blue-600 text-white px-3 py-1 text-sm">Simpan Refleksi</button>
+              <span id="ref-status" class="text-xs text-slate-500"></span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="mt-8 flex gap-3">
+        <a href="6_3.html" class="text-sm text-slate-600 hover:underline">← Kembali</a>
+        <a href="6_5.html" class="inline-flex items-center justify-center rounded-md bg-blue-600 text-white px-4 py-2 text-sm shadow hover:bg-blue-700">Lanjut ke Bagian 5</a>
+      </div>
+    </main>
+
+    <footer class="border-t">
+      <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+        <div>© 2025 Lensetek LLC</div>
+        <div class="flex gap-4">
+          <a href="6_3.html" class="hover:text-slate-700">Bagian 3</a>
+          <a href="6_5.html" class="hover:text-slate-700">Bagian 5</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Restore draft
+      const fields = ['p-nama','p-kategori','p-harga','p-moq','p-desc'];
+      fields.forEach((id)=>{
+        const el = document.getElementById(id);
+        const v = localStorage.getItem('exim:6_4:draft:'+id);
+        if (v !== null) el.value = v;
+        el?.addEventListener('input', ()=> localStorage.setItem('exim:6_4:draft:'+id, el.value));
+      });
+
+      // Preview
+      document.getElementById('btn-preview').addEventListener('click', ()=>{
+        const nama = document.getElementById('p-nama').value.trim();
+        const kategori = document.getElementById('p-kategori').value.trim();
+        const harga = document.getElementById('p-harga').value.trim();
+        const moq = document.getElementById('p-moq').value.trim();
+        const desc = document.getElementById('p-desc').value.trim();
+        const preview = document.getElementById('preview');
+        if(!nama || !kategori || !harga || !moq){
+          preview.classList.remove('hidden');
+          preview.innerHTML = '<div class="text-red-700">Lengkapi Nama, Kategori, Harga, dan MOQ.</div>';
+          return;
+        }
+        preview.classList.remove('hidden');
+        preview.innerHTML = `
+          <div class="font-semibold text-slate-900">${nama}</div>
+          <div class="text-xs text-slate-500">Kategori: ${kategori}</div>
+          <div class="mt-1">Harga: <span class="font-medium">$${Number(harga).toFixed(2)}</span> • MOQ: <span class="font-medium">${moq}</span></div>
+          <p class="mt-2">${desc || '—'}</p>
+        `;
+        localStorage.setItem('exim:6_4:preview', '1');
+      });
+
+      // Save draft
+      document.getElementById('btn-simpan').addEventListener('click', ()=>{
+        localStorage.setItem('exim:6_4:draftSaved','1');
+        alert('Draft tersimpan secara lokal di browser Anda.');
+      });
+
+      // Persist analysis checkboxes
+      document.querySelectorAll('input[type="checkbox"][data-key]').forEach((cb) => {
+        const key = cb.getAttribute('data-key');
+        cb.checked = localStorage.getItem(key) === '1';
+        cb.addEventListener('change', () => localStorage.setItem(key, cb.checked ? '1' : '0'));
+      });
+
+      // Refleksi
+      const refleksi = document.getElementById('refleksi');
+      const savedRef = localStorage.getItem('exim:6_4:refleksi');
+      if(savedRef) refleksi.value = savedRef;
+      document.getElementById('btn-ref-save').addEventListener('click', ()=>{
+        localStorage.setItem('exim:6_4:refleksi', refleksi.value.trim());
+        const s = document.getElementById('ref-status');
+        s.textContent = 'Tersimpan';
+        setTimeout(()=> s.textContent = '', 1500);
+      });
+    </script>
+  </body>
+  </html>
