@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pemanfaatan Chatbot AI untuk Produktivitas Tenaga Kerja & UMKM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Landing page materi narasumber: Pemanfaatan Chatbot AI (ChatGPT, Gemini, Meta AI) untuk meningkatkan produktivitas tenaga kerja & UMKM. " />
+</head>
+<body class="bg-white text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="font-semibold text-slate-900">AI x Produktivitas UMKM</a>
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="#tujuan" class="hover:text-indigo-600">Tujuan</a>
+        <a href="#llm" class="hover:text-indigo-600">Apa itu LLM</a>
+        <a href="#manfaat" class="hover:text-indigo-600">Manfaat</a>
+        <a href="#langkah" class="hover:text-indigo-600">Langkah Praktis</a>
+        <a href="#prompt" class="hover:text-indigo-600">Contoh Prompt</a>
+        <a href="#etika" class="hover:text-indigo-600">Etika</a>
+        <a href="#case" class="hover:text-indigo-600">Studi Kasus</a>
+        <a href="#cta" class="hover:text-indigo-600">Mulai</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden inline-flex items-center px-3 py-2 border rounded text-slate-700 border-slate-300">Menu</button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200">
+      <div class="px-4 py-3 flex flex-col gap-3 text-sm">
+        <a href="#tujuan" class="hover:text-indigo-600">Tujuan</a>
+        <a href="#llm" class="hover:text-indigo-600">Apa itu LLM</a>
+        <a href="#manfaat" class="hover:text-indigo-600">Manfaat</a>
+        <a href="#langkah" class="hover:text-indigo-600">Langkah Praktis</a>
+        <a href="#prompt" class="hover:text-indigo-600">Contoh Prompt</a>
+        <a href="#etika" class="hover:text-indigo-600">Etika</a>
+        <a href="#case" class="hover:text-indigo-600">Studi Kasus</a>
+        <a href="#cta" class="hover:text-indigo-600">Mulai</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 py-14 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold leading-tight text-slate-900">Pemanfaatan <span class="text-indigo-600">Chatbot AI</span> untuk Meningkatkan Produktivitas Tenaga Kerja & UMKM</h1>
+        <p class="mt-4 text-slate-700">Materi terapan menggunakan ChatGPT, Gemini, dan Meta AI untuk mempercepat penulisan laporan, membuat konten promosi, menghitung kebutuhan bahan baku, dan menyusun dokumen administrasi.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a target="_blank" rel="noopener" href="https://chat.openai.com/" class="px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400">ChatGPT</a>
+          <a target="_blank" rel="noopener" href="https://gemini.google.com/" class="px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400">Gemini</a>
+          <a target="_blank" rel="noopener" href="https://www.meta.ai/" class="px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400">Meta AI</a>
+          <a target="_blank" rel="noopener" href="https://youtu.be/5mPU5yLfjCo?si=8Fhv-lZenFWA1UdY" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700">Tonton Video</a>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow">
+        <div class="aspect-video">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/5mPU5yLfjCo" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 1: Tujuan -->
+  <section id="tujuan" class="py-12 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-semibold text-slate-900">Tujuan Sesi</h2>
+      <ul class="mt-4 grid md:grid-cols-3 gap-4 text-slate-700 list-disc pl-5">
+        <li>Memahami dasar kerja ChatGPT, Gemini, dan Meta AI.</li>
+        <li>Menerapkan AI untuk tugas harian: laporan, konten, perhitungan bahan.</li>
+        <li>Menetapkan praktik aman & etis saat menggunakan AI.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Slide 2: Apa itu LLM -->
+  <section id="llm" class="py-12">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl font-semibold text-slate-900">Sekilas tentang LLM</h2>
+        <p class="mt-3 text-slate-700">Large Language Model (LLM) adalah model AI yang memahami dan menghasilkan teks mirip manusia. Ia dapat merangkum, menyusun, menghitung, dan membantu pengambilan keputusan ringan berdasarkan instruksi (*prompt*).</p>
+      </div>
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-sm">
+        <h3 class="font-medium text-slate-900">Kapan Dipakai?</h3>
+        <ul class="mt-2 space-y-2 text-slate-700 list-disc pl-5">
+          <li>Butuh draf cepat: laporan, surat, proposal.</li>
+          <li>Butuh ide konten: caption, deskripsi produk.</li>
+          <li>Butuh estimasi sederhana: bahan baku/biaya.</li>
+          <li>Butuh template administrasi berulang.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Manfaat -->
+  <section id="manfaat" class="py-12 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-semibold text-slate-900">Manfaat Langsung</h2>
+      <div class="grid md:grid-cols-4 gap-5 mt-6">
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Laporan Otomatis</h3>
+          <p class="text-sm mt-2 text-slate-700">Ubah poin-poin menjadi laporan harian/mingguan yang rapi.</p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Konten Promosi</h3>
+          <p class="text-sm mt-2 text-slate-700">Caption & deskripsi produk siap pakai untuk marketplace & sosmed.</p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Hitung Bahan</h3>
+          <p class="text-sm mt-2 text-slate-700">Estimasi kebutuhan bahan berdasarkan target produksi.</p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Dokumen Administrasi</h3>
+          <p class="text-sm mt-2 text-slate-700">Buat surat penawaran, invoice, SOP, dan formulir dengan cepat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Langkah Praktis -->
+  <section id="langkah" class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-semibold text-slate-900">Langkah Praktis</h2>
+      <ol class="mt-4 grid md:grid-cols-2 gap-4 text-slate-700 list-decimal pl-5">
+        <li>Pilih platform: <span class="font-medium">ChatGPT</span>, <span class="font-medium">Gemini</span>, atau <span class="font-medium">Meta AI</span>.</li>
+        <li>Tulis <em>prompt</em> jelas: tujuan, konteks, format keluaran.</li>
+        <li>Review & perbaiki hasil, lalu simpan sebagai template.</li>
+        <li>Ulangi & ukur penghematan waktu.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Slide 5: Contoh Prompt -->
+  <section id="prompt" class="py-12 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-semibold text-slate-900">Contoh Prompt Siap Pakai</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6 text-sm">
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium text-slate-900">Laporan Kegiatan</h3>
+          <pre class="mt-2 whitespace-pre-wrap text-slate-700">Buat laporan kegiatan pelatihan UMKM selama 1 hari. Struktur: Pendahuluan, Tujuan, Peserta, Rangkaian Acara, Hasil, Dokumentasi, Penutup. Gaya formal, panjang 600 kata.</pre>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium text-slate-900">Konten Promosi</h3>
+          <pre class="mt-2 whitespace-pre-wrap text-slate-700">Tulis 5 caption IG untuk promosi batik lokal motif Dayak. Gaya persuasif, sertakan 3 hashtag relevan dan ajakan DM untuk pemesanan.</pre>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium text-slate-900">Hitung Bahan</h3>
+          <pre class="mt-2 whitespace-pre-wrap text-slate-700">Saya memproduksi 200 roti sisir. Resep dasar: 1kg tepung menghasilkan 50 roti, gula 200g, ragi 20g, margarin 100g. Hitungkan total kebutuhan bahan & estimasi biaya dengan harga: tepung 12rb/kg, gula 14rb/kg, ragi 25rb/100g, margarin 20rb/200g.</pre>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium text-slate-900">Dokumen Administrasi</h3>
+          <pre class="mt-2 whitespace-pre-wrap text-slate-700">Susun draft surat penawaran kerjasama kepada toko grosir. Sertakan keunggulan produk, skema harga, dan kontak. Format rapi siap cetak.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Demo Checklist -->
+  <section id="demo" class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-semibold text-slate-900">Checklist Demo Langsung</h2>
+      <ul class="mt-4 list-disc pl-5 text-slate-700 space-y-2">
+        <li>Buka ChatGPT/Gemini/Meta AI & paste salah satu prompt.</li>
+        <li>Tunjukkan cara mengedit prompt agar hasil lebih spesifik.</li>
+        <li>Bandingkan hasil 2 platform untuk tugas yang sama.</li>
+        <li>Simpan hasil sebagai template kerja harian.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Slide 7: Etika & Batasan -->
+  <section id="etika" class="py-12 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl font-semibold text-slate-900">Etika & Batasan</h2>
+        <ul class="mt-4 list-disc pl-5 text-slate-700 space-y-2">
+          <li>Jangan unggah data pribadi atau rahasia bisnis ke layanan publik.</li>
+          <li>Gunakan AI sebagai draf awal; tetap lakukan verifikasi manusia.</li>
+          <li>Transparansi: sebutkan jika konten dibantu AI saat diperlukan.</li>
+          <li>Hargai hak cipta & sumber saat menyusun materi.</li>
+        </ul>
+      </div>
+      <div class="p-5 rounded-2xl border border-slate-200 bg-white text-sm">
+        <h3 class="font-medium text-slate-900">Tips Keamanan</h3>
+        <p class="mt-2 text-slate-700">Gunakan akun resmi, aktifkan 2FA, dan simpan template di pengelola dokumen internal (Drive/Notion) agar mudah diaudit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Alat Pendukung -->
+  <section id="tools" class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-semibold text-slate-900">Alat Pendukung (Opsional)</h2>
+      <div class="grid md:grid-cols-3 gap-5 mt-6">
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Canva / Google Docs</h3>
+          <p class="text-sm mt-2 text-slate-700">Finishing desain & format laporan sebelum dibagikan.</p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Spreadsheet</h3>
+          <p class="text-sm mt-2 text-slate-700">Rekap estimasi bahan & biaya produksi.</p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-medium">Notion/Drive</h3>
+          <p class="text-sm mt-2 text-slate-700">Penyimpanan template & kolaborasi tim.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 9: Studi Kasus -->
+  <section id="case" class="py-12 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl font-semibold text-slate-900">Studi Kasus UMKM (Ringkas)</h2>
+        <p class="mt-3 text-slate-700">Toko roti lokal mengadopsi ChatGPT untuk laporan harian & kalkulasi bahan. Hasilnya: waktu administratif turun 60%, kesalahan estimasi berkurang, dan frekuensi posting promosi meningkat 3× per minggu.</p>
+      </div>
+      <div class="p-5 rounded-2xl border border-slate-200 bg-white text-sm">
+        <h3 class="font-medium text-slate-900">Metode</h3>
+        <ul class="mt-2 list-disc pl-5 text-slate-700 space-y-2">
+          <li>Template laporan + otomatisasi prompt.</li>
+          <li>Caption promosi terjadwal.</li>
+          <li>Spreadsheet biaya terhubung ke output AI.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Call To Action -->
+  <section id="cta" class="py-14">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-slate-900">Mulai Hari Ini</h2>
+      <p class="mt-3 text-slate-700">Pilih satu tugas berulang (laporan/konten/admin), buat templatenya di ChatGPT/Gemini/Meta AI, dan ukur penghematan waktunya minggu ini.</p>
+      <div class="mt-6 flex flex-wrap gap-3 justify-center">
+        <a target="_blank" rel="noopener" href="https://chat.openai.com/" class="px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400">Buka ChatGPT</a>
+        <a target="_blank" rel="noopener" href="https://gemini.google.com/" class="px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400">Buka Gemini</a>
+        <a target="_blank" rel="noopener" href="https://www.meta.ai/" class="px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400">Buka Meta AI</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-slate-600 flex flex-col md:flex-row items-center justify-between gap-3">
+      <p>© <span id="year"></span> Lensetek International, LLC. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a href="#home" class="hover:text-indigo-600">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
