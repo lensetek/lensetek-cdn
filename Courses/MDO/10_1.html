@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rekrutmen Digital – Managing Digital Organization (Pertemuan 10)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Landing page materi pertemuan 10 – Rekrutmen Digital: kekuatan digital, evolusi, definisi, mobile recruiting, inklusivitas, AI & teknologi rekrutmen, studi kasus, referensi." />
+  <style>
+    /* Optional micro-interactions */
+    .tick { transition: transform .2s ease, opacity .2s ease; }
+    .checked .tick { transform: scale(1.05); opacity: 1; }
+    .unchecked .tick { transform: scale(.9); opacity: .4; }
+    .progress-squircle { clip-path: path('M10 2 C5 2 2 5 2 10 v0 c0 5 3 8 8 8 h0 c5 0 8-3 8-8 v0 c0-5-3-8-8-8 z'); }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900">
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between py-3">
+        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-neutral-900 text-white">
+            M10
+          </span>
+          <span>Rekrutmen Digital · MBD352</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#overview" class="hover:underline">Ringkasan</a>
+          <a href="#module-1" class="hover:underline">Kekuatan Digital</a>
+          <a href="#module-2" class="hover:underline">Evolusi</a>
+          <a href="#module-3" class="hover:underline">Definisi</a>
+          <a href="#module-4" class="hover:underline">Mobile</a>
+          <a href="#module-5" class="hover:underline">Inklusif</a>
+          <a href="#module-6" class="hover:underline">AI & Tech</a>
+          <a href="#module-7" class="hover:underline">Kasus</a>
+          <a href="#referensi" class="hover:underline">Referensi</a>
+        </nav>
+        <button id="resetProgress" class="ml-4 rounded-xl border px-3 py-1.5 text-xs md:text-sm hover:bg-neutral-100">Reset Progress</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Rekrutmen Digital
+            <span class="block text-neutral-500 text-xl md:text-2xl font-medium mt-3">Managing Digital Organization · Pertemuan 10</span>
+          </h1>
+          <p class="mt-6 text-neutral-700 leading-relaxed">Cara perusahaan mencari, menilai, dan merekrut talenta sudah berubah total. Materi ini merangkum pondasi, strategi, dan alat yang dipakai organisasi kelas dunia untuk merebut kandidat terbaik—cepat, adil, dan terukur.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="inline-flex items-center gap-2 rounded-xl bg-neutral-900 text-white px-3 py-1.5">Durasi: 1×3×50′</span>
+            <span class="inline-flex items-center gap-2 rounded-xl bg-neutral-200 px-3 py-1.5">Mode: Case & Diskusi</span>
+            <span class="inline-flex items-center gap-2 rounded-xl bg-neutral-200 px-3 py-1.5">Fokus: Praktik + Etika</span>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-700 p-1 shadow-xl">
+            <div class="h-full w-full rounded-3xl bg-white grid place-items-center">
+              <div class="p-6 text-center">
+                <p class="text-sm uppercase tracking-widest text-neutral-400">Progress Materi</p>
+                <div class="mt-4 flex items-center justify-center gap-4">
+                  <div class="progress-squircle h-28 w-28 bg-neutral-100 grid place-items-center">
+                    <div class="relative">
+                      <svg viewBox="0 0 120 120" class="h-24 w-24 -rotate-90">
+                        <circle cx="60" cy="60" r="52" stroke="#e5e5e5" stroke-width="12" fill="none" />
+                        <circle id="progressCircle" cx="60" cy="60" r="52" stroke="#111827" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="327" stroke-dashoffset="327" />
+                      </svg>
+                      <div class="absolute inset-0 grid place-items-center">
+                        <span id="progressPercent" class="text-3xl font-bold">0%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="min-w-[200px] text-left">
+                    <div class="w-full h-2 rounded-full bg-neutral-200 overflow-hidden">
+                      <div id="progressBar" class="h-full w-0 bg-neutral-900"></div>
+                    </div>
+                    <p class="mt-2 text-sm text-neutral-600"><span id="progressCount">0</span> dari <span id="progressTotal">0</span> bagian selesai</p>
+                    <p class="mt-1 text-xs text-neutral-500">Progress tersimpan otomatis di peramban kamu.</p>
+                  </div>
+                </div>
+                <button id="markAll" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-neutral-900 text-white px-4 py-2 text-sm hover:opacity-90">
+                  Tandai Semua Selesai
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="py-10 md:py-14 border-t">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-12 gap-8">
+        <div class="md:col-span-4">
+          <h2 class="text-2xl md:text-3xl font-bold">Ringkasan Materi</h2>
+          <p class="mt-3 text-neutral-700">Kita kupas tuntas tujuh pokok bahasan: kekuatan digital, evolusi perekrutan, definisi & cakupan, mobile recruiting, inklusivitas, AI & teknologi baru, serta studi kasus global yang bisa ditiru.</p>
+          <label class="mt-4 flex items-center gap-2 text-sm select-none">
+            <input type="checkbox" class="module-check h-4 w-4" data-module="overview">
+            <span>Tandai ringkasan ini selesai</span>
+          </label>
+        </div>
+        <div class="md:col-span-8 grid gap-4">
+          <div class="rounded-2xl border p-5 bg-white">
+            <h3 class="font-semibold">Tujuan Pembelajaran</h3>
+            <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1">
+              <li>Menganalisis dampak digitalisasi terhadap strategi rekrutmen.</li>
+              <li>Menerapkan pendekatan <em>data-driven</em> dan <em>mobile-first</em> dalam perekrutan.</li>
+              <li>Merancang proses rekrutmen yang inklusif dan etis.</li>
+              <li>Memanfaatkan AI/analitik tanpa mengorbankan fairness dan pengalaman kandidat.</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border p-5 bg-white">
+            <h3 class="font-semibold">Output Kuliah</h3>
+            <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1">
+              <li>Blueprint rekrutmen digital end-to-end untuk satu posisi prioritas.</li>
+              <li>Checklist audit bias & aksesibilitas proses rekrutmen.</li>
+              <li>Rencana eksperimen A/B untuk kanal sourcing dan screening.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modules -->
+  <main class="pb-20">
+    <!-- Module 1 -->
+    <section id="module-1" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">1) Kekuatan Digital dalam Rekrutmen</h2>
+            <p class="mt-3 text-neutral-700">Teknologi memperluas jangkauan ke kandidat global, mengotomatisasi screening awal, dan menguatkan <em>employer brand</em> lewat kanal digital. Dampaknya: <strong>lebih cepat, lebih akurat, lebih hemat</strong>.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li><strong>Reach:</strong> Iklan dinamis & talent pool lintas negara.</li>
+              <li><strong>Automation:</strong> ATS menyaring CV & mengatur komunikasi kandidat.</li>
+              <li><strong>Data & Insight:</strong> analitik prediktif untuk memetakan <em>role fit</em> & retensi.</li>
+              <li><strong>Branding:</strong> konten karier, testimoni karyawan, dan social proof.</li>
+            </ul>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-1">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+        <div class="mt-5 grid md:grid-cols-3 gap-4">
+          <div class="rounded-2xl border p-4 bg-white">
+            <p class="text-xs uppercase tracking-wide text-neutral-500">KPI</p>
+            <p class="mt-1 font-semibold">Time-to-Fill ↓</p>
+            <p class="text-sm text-neutral-600">Kurangi waktu dari posting hingga offer diterima.</p>
+          </div>
+          <div class="rounded-2xl border p-4 bg-white">
+            <p class="text-xs uppercase tracking-wide text-neutral-500">KPI</p>
+            <p class="mt-1 font-semibold">Quality-of-Hire ↑</p>
+            <p class="text-sm text-neutral-600">Gunakan sinyal performa & retensi 6–12 bulan.</p>
+          </div>
+          <div class="rounded-2xl border p-4 bg-white">
+            <p class="text-xs uppercase tracking-wide text-neutral-500">KPI</p>
+            <p class="mt-1 font-semibold">Candidate NPS</p>
+            <p class="text-sm text-neutral-600">Ukur pengalaman kandidat di setiap tahap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 2 -->
+    <section id="module-2" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">2) Evolusi → Revolusi Rekrutmen</h2>
+            <ol class="mt-3 list-decimal pl-6 space-y-2 text-neutral-700">
+              <li><strong>Manual</strong>: iklan cetak, job fair, seleksi manual.</li>
+              <li><strong>E-Recruitment</strong>: portal lowongan & email.</li>
+              <li><strong>Social & Mobile</strong>: media sosial, kandidat pasif, aplikasi.</li>
+              <li><strong>AI-Powered</strong>: pencocokan otomatis & prediksi performa.</li>
+            </ol>
+            <p class="mt-4 text-neutral-700">Mindset HR bergeser: dari administratif → strategis, dari intuisi → berbasis data.</p>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-2">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 3 -->
+    <section id="module-3" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">3) Definisi & Cakupan Rekrutmen Digital</h2>
+            <p class="mt-3 text-neutral-700">Pemanfaatan teknologi digital pada seluruh siklus perekrutan: <strong>sourcing → screening → interview → offer → onboarding</strong>.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li>Platform: LinkedIn, Job portals, talent communities.</li>
+              <li>Analitik: <em>fit score</em>, prediksi retensi, benchmark gaji.</li>
+              <li>Pengalaman kandidat: cepat, jelas, dan humanis.</li>
+              <li>Brand & konten: career site, budaya, cerita tim.</li>
+            </ul>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-3">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 4 -->
+    <section id="module-4" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">4) Mobile Recruiting</h2>
+            <p class="mt-3 text-neutral-700">Mayoritas kandidat melamar via ponsel. Desain proses yang <strong>mobile-first</strong> bukan bonus—itu wajib.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li>Career site responsif & formulir singkat.</li>
+              <li>Chatbot 24/7 untuk FAQ & penjadwalan.</li>
+              <li>Notifikasi real-time (email/app) untuk update status.</li>
+              <li>Microskills/quiz singkat untuk screening awal.</li>
+            </ul>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-4">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 5 -->
+    <section id="module-5" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">5) Inklusivitas & Aksesibilitas</h2>
+            <p class="mt-3 text-neutral-700">Teknologi harus memperluas kesempatan, bukan menutupnya. Minimalkan bias dan pastikan akses untuk semua.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li>Bahasa lowongan netral & bebas stereotip.</li>
+              <li>Desain aksesibel (kontras, navigasi keyboard, teks alternatif).</li>
+              <li>Algoritma transparan, diaudit, dan dapat dijelaskan.</li>
+              <li>Pelatihan panitia rekrut soal etika data & AI.</li>
+            </ul>
+            <div class="mt-4 rounded-xl border bg-amber-50 text-amber-900 p-4">
+              <p class="text-sm"><strong>Catatan risiko:</strong> Audit bias pada model AI secara berkala; siapkan jalur eskalasi manual untuk keputusan abu-abu.</p>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-5">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 6 -->
+    <section id="module-6" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">6) AI & Teknologi Rekrutmen</h2>
+            <p class="mt-3 text-neutral-700">Gunakan AI seperlunya—untuk mempercepat dan memperkaya keputusan, bukan menggantikan penilaian manusia.</p>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Toolkit Umum</p>
+                <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>ATS & CRM Talent</li>
+                  <li>Chatbot & Scheduling otomatis</li>
+                  <li>Video interview terstruktur</li>
+                  <li>Analitik prediktif <em>fit/retention</em></li>
+                  <li>Verifikasi berbasis blockchain (sertifikat, riwayat)</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Prinsip Tata Kelola</p>
+                <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>Transparansi & <em>explainability</em></li>
+                  <li>Data minimization & privasi</li>
+                  <li>Human-in-the-loop untuk keputusan final</li>
+                  <li>Audit bias & monitoring berkala</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-6">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 7 -->
+    <section id="module-7" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">7) Studi Kasus & Template Aksi</h2>
+            <p class="mt-3 text-neutral-700">Belajar dari praktik terbaik, lalu adaptasikan seperlunya. Berikut sketsa cepat yang bisa langsung dipakai.</p>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Contoh Praktik</p>
+                <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>Screening AI untuk volume tinggi (peran entry-level).</li>
+                  <li>Talent pool komunitas & kampus untuk peran digital.</li>
+                  <li>Interview terstruktur + rubric kompetensi.</li>
+                  <li>Feedback otomatis ke kandidat (respectful experience).</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Template Blueprint</p>
+                <ol class="mt-2 list-decimal pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>Definisikan persona & kompetensi inti.</li>
+                  <li>Pilih kanal sourcing prioritas (A/B test 2–3 kanal).</li>
+                  <li>Rancang funnel & SLA tiap tahap (SLA hari/jam).</li>
+                  <li>Siapkan metrik: TTF, QoH, NPS, DEI indicators.</li>
+                  <li>Audit aksesibilitas & bias per triwulan.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-7">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Referensi -->
+  <section id="referensi" class="py-10 md:py-14 border-t bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold">Referensi Terpilih</h2>
+      <p class="mt-3 text-neutral-700">Sumber rujukan dari RPS untuk memperdalam topik ini.</p>
+      <ul class="mt-4 grid md:grid-cols-2 gap-3 text-sm">
+        <li class="rounded-xl border p-4">Merrell, J. M. (2022). <em>Digitizing Talent: Creative strategies for the digital recruiting age</em>. SHRM.</li>
+        <li class="rounded-xl border p-4">Laudon, K. C., & Laudon, J. P. (2022). <em>Management Information Systems</em>. Pearson.</li>
+        <li class="rounded-xl border p-4">Hacioglu, U. (2020). <em>Digital Business Strategies in Blockchain Ecosystems</em>. Springer.</li>
+        <li class="rounded-xl border p-4">Lenox, M. (2023). <em>Strategy in the Digital Age</em>. Stanford University Press.</li>
+      </ul>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a href="#overview" class="inline-flex items-center gap-2 rounded-xl bg-neutral-900 text-white px-4 py-2 text-sm hover:opacity-90">Kembali ke atas</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-sm text-neutral-600">
+      <p>© 2025 Managing Digital Organization (MBD352) · Materi Pertemuan 10</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const STORAGE_KEY = 'mdorg-m10-progress-v1';
+      const checks = Array.from(document.querySelectorAll('.module-check'));
+      const total = checks.length;
+      const progressBar = document.getElementById('progressBar');
+      const progressCircle = document.getElementById('progressCircle');
+      const progressPercent = document.getElementById('progressPercent');
+      const progressCount = document.getElementById('progressCount');
+      const progressTotal = document.getElementById('progressTotal');
+      const resetBtn = document.getElementById('resetProgress');
+      const markAllBtn = document.getElementById('markAll');
+
+      progressTotal.textContent = total;
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return {};
+          return JSON.parse(raw) || {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function save(state) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+      }
+
+      function compute() {
+        const state = load();
+        let done = 0;
+        checks.forEach(chk => {
+          const key = chk.dataset.module;
+          const checked = !!state[key];
+          chk.checked = checked;
+          chk.closest('label')?.classList.toggle('checked', checked);
+          chk.closest('label')?.classList.toggle('unchecked', !checked);
+          if (checked) done++;
+        });
+        updateUI(done);
+      }
+
+      function updateUI(done) {
+        const ratio = total === 0 ? 0 : done / total;
+        const pct = Math.round(ratio * 100);
+        progressBar.style.width = (pct + '%');
+        progressPercent.textContent = pct + '%';
+        progressCount.textContent = done;
+        // Circle length ~ 2πr for r=52 → 326.7
+        const circumference = 327;
+        const offset = circumference - (circumference * ratio);
+        progressCircle.style.strokeDashoffset = offset;
+      }
+
+      function toggle(e) {
+        const chk = e.target;
+        if (!chk.matches('.module-check')) return;
+        const state = load();
+        state[chk.dataset.module] = chk.checked;
+        save(state);
+        const done = Object.values(state).filter(Boolean).length;
+        updateUI(done);
+      }
+
+      function reset() {
+        save({});
+        compute();
+      }
+
+      function markAll() {
+        const state = {};
+        checks.forEach(chk => { state[chk.dataset.module] = true; });
+        save(state);
+        compute();
+      }
+
+      document.addEventListener('change', toggle);
+      resetBtn.addEventListener('click', reset);
+      markAllBtn.addEventListener('click', markAll);
+
+      compute();
+    })();
+  </script>
+</body>
+</html>
