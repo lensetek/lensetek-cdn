@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pertemuan 11 – Pelatihan Digital & SDM Bisnis 4.0 · MBD352</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Landing page materi pertemuan 11: Pelatihan Digital dan Manajemen SDM dalam Bisnis 4.0. Prinsip Industri 4.0, ekonomi digital, digitalisasi pelatihan profesional, infrastruktur sosial cerdas, studi kasus. Dengan progress bar tersimpan di localStorage." />
+  <style>
+    .progress-squircle { clip-path: path('M10 2 C5 2 2 5 2 10 v0 c0 5 3 8 8 8 h0 c5 0 8-3 8-8 v0 c0-5-3-8-8-8 z'); }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900">
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between py-3">
+        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-neutral-900 text-white">M11</span>
+          <span>Pelatihan Digital & SDM · MBD352</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#overview" class="hover:underline">Ringkasan</a>
+          <a href="#module-1" class="hover:underline">Prinsip 4.0</a>
+          <a href="#module-2" class="hover:underline">Bisnis 4.0</a>
+          <a href="#module-3" class="hover:underline">Digitalisasi Pelatihan</a>
+          <a href="#module-4" class="hover:underline">Infrastruktur Cerdas</a>
+          <a href="#module-5" class="hover:underline">Kasus</a>
+          <a href="#referensi" class="hover:underline">Referensi</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button id="resetProgress" class="rounded-xl border px-3 py-1.5 text-xs md:text-sm hover:bg-neutral-100">Reset Progress</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Pelatihan Digital & SDM dalam Bisnis 4.0
+            <span class="block text-neutral-500 text-xl md:text-2xl font-medium mt-3">Managing Digital Organization · Pertemuan 11</span>
+          </h1>
+          <p class="mt-6 text-neutral-700 leading-relaxed">Mendesain sistem pembelajaran kerja yang adaptif, berbasis data, dan scalable. Tujuan akhirnya jelas: kompetensi naik, kinerja terukur, budaya belajar hidup.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="inline-flex items-center gap-2 rounded-xl bg-neutral-900 text-white px-3 py-1.5">Durasi: 1×3×50′</span>
+            <span class="inline-flex items-center gap-2 rounded-xl bg-neutral-200 px-3 py-1.5">Mode: Studi Kasus</span>
+            <span class="inline-flex items-center gap-2 rounded-xl bg-neutral-200 px-3 py-1.5">Fokus: Learning Analytics</span>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-700 p-1 shadow-xl">
+            <div class="h-full w-full rounded-3xl bg-white grid place-items-center">
+              <div class="p-6 text-center">
+                <p class="text-sm uppercase tracking-widest text-neutral-400">Progress Materi</p>
+                <div class="mt-4 flex items-center justify-center gap-4">
+                  <div class="progress-squircle h-28 w-28 bg-neutral-100 grid place-items-center">
+                    <div class="relative">
+                      <svg viewBox="0 0 120 120" class="h-24 w-24 -rotate-90">
+                        <circle cx="60" cy="60" r="52" stroke="#e5e5e5" stroke-width="12" fill="none" />
+                        <circle id="progressCircle" cx="60" cy="60" r="52" stroke="#111827" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="327" stroke-dashoffset="327" />
+                      </svg>
+                      <div class="absolute inset-0 grid place-items-center">
+                        <span id="progressPercent" class="text-3xl font-bold">0%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="min-w-[200px] text-left">
+                    <div class="w-full h-2 rounded-full bg-neutral-200 overflow-hidden">
+                      <div id="progressBar" class="h-full w-0 bg-neutral-900"></div>
+                    </div>
+                    <p class="mt-2 text-sm text-neutral-600"><span id="progressCount">0</span> dari <span id="progressTotal">0</span> bagian selesai</p>
+                    <p class="mt-1 text-xs text-neutral-500">Progress tersimpan otomatis di peramban kamu.</p>
+                  </div>
+                </div>
+                <button id="markAll" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-neutral-900 text-white px-4 py-2 text-sm hover:opacity-90">Tandai Semua Selesai</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="py-10 md:py-14 border-t">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-12 gap-8">
+        <div class="md:col-span-4">
+          <h2 class="text-2xl md:text-3xl font-bold">Ringkasan Materi</h2>
+          <p class="mt-3 text-neutral-700">Lima bahasan utama: prinsip Industri 4.0, Bisnis 4.0 sebagai bagian ekonomi digital, digitalisasi pelatihan profesional, infrastruktur sosial cerdas, dan studi kasus implementasi.</p>
+          <label class="mt-4 flex items-center gap-2 text-sm select-none">
+            <input type="checkbox" class="module-check h-4 w-4" data-module="overview">
+            <span>Tandai ringkasan ini selesai</span>
+          </label>
+        </div>
+        <div class="md:col-span-8 grid gap-4">
+          <div class="rounded-2xl border p-5 bg-white">
+            <h3 class="font-semibold">Tujuan Pembelajaran</h3>
+            <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1">
+              <li>Memetakan kompetensi prioritas untuk peran digital.</li>
+              <li>Mendesain kurikulum <em>adaptive learning</em> & microlearning.</li>
+              <li>Membangun <em>learning analytics</em> untuk ROI pelatihan.</li>
+              <li>Menghubungkan pelatihan dengan kinerja & karier.</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border p-5 bg-white">
+            <h3 class="font-semibold">Output Kuliah</h3>
+            <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1">
+              <li>Peta kompetensi (role-based competency map).</li>
+              <li>Rancangan LMS/LXP dan alur konten 90 hari.</li>
+              <li>Dashboard KPI: learning hours, completion, skill lift, impact.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modules -->
+  <main class="pb-20">
+    <!-- Module 1 -->
+    <section id="module-1" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">1) Pengertian & Prinsip Industri 4.0</h2>
+            <p class="mt-3 text-neutral-700">Integrasi IoT, AI, cloud, big data, robotik, dan otomasi melahirkan lingkungan kerja yang cerdas dan terhubung. Implikasinya pada pelatihan: konten harus kontekstual, adaptif, dan cepat berubah.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li>Real-time data untuk keputusan belajar.</li>
+              <li>Kolaborasi manusia–mesin & <em>augmented workforce</em>.</li>
+              <li>Fleksibilitas kerja: hybrid/remote, personalized schedule.</li>
+              <li>Budaya agile: iterasi cepat, eksperimen terus-menerus.</li>
+            </ul>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-1">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 2 -->
+    <section id="module-2" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">2) Bisnis 4.0 sebagai Subjek Ekonomi Digital</h2>
+            <p class="mt-3 text-neutral-700">Talenta digital dan <em>learning agility</em> jadi kunci. Sistem pelatihan beralih dari statis menjadi lincah.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li><strong>Adaptive learning</strong>: konten menyesuaikan performa peserta.</li>
+              <li><strong>Microlearning</strong>: modul singkat, on demand.</li>
+              <li><strong>Gamification</strong>: skor, badge, simulasi.</li>
+              <li><strong>Social learning</strong>: komunitas & peer feedback.</li>
+            </ul>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-2">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 3 -->
+    <section id="module-3" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">3) Digitalisasi Sistem Pelatihan Profesional</h2>
+            <p class="mt-3 text-neutral-700">Bangun arsitektur pembelajaran dari <em>platform</em>, konten, hingga analitik. Sambungkan ke HRIS agar jalur karier dan skill gap terpantau.</p>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Komponen</p>
+                <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>LMS/LXP (Moodle, SuccessFactors, etc.)</li>
+                  <li>Konten: microlearning, simulasi, AR/VR</li>
+                  <li>AI mentor & chatbot</li>
+                  <li>Learning Analytics Dashboard</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">KPI & ROI</p>
+                <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>Completion rate & learning hours</li>
+                  <li>Skill lift & assessment score</li>
+                  <li>Time-to-competency</li>
+                  <li>Impact ke KPI bisnis (OKR)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-3">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 4 -->
+    <section id="module-4" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">4) Infrastruktur Sosial Cerdas</h2>
+            <p class="mt-3 text-neutral-700">Ekosistem belajar yang menghubungkan kampus, pemerintah, industri, dan startup. Tujuannya mempercepat inovasi dan kewirausahaan sosial.</p>
+            <ul class="mt-4 list-disc pl-6 space-y-2 text-neutral-700">
+              <li>Cloud untuk skala & keterbukaan.</li>
+              <li>Micro-credential & digital badges.</li>
+              <li>Kemitraan edtech untuk re/upskilling massal.</li>
+              <li>Komunitas profesional berbasis data & praktik.</li>
+            </ul>
+            <div class="mt-4 rounded-xl border bg-amber-50 text-amber-900 p-4">
+              <p class="text-sm"><strong>Catatan implementasi:</strong> siapkan tata kelola data lintas lembaga (privasi, interoperabilitas, standar kurikulum).</p>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-4">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 5 -->
+    <section id="module-5" class="py-10 md:py-14 border-t">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-6">
+          <div class="max-w-3xl">
+            <h2 class="text-2xl md:text-3xl font-bold">5) Studi Kasus Implementasi</h2>
+            <p class="mt-3 text-neutral-700">Belajar dari organisasi yang berhasil menskalakan pembelajaran digital dan menautkannya ke kinerja.</p>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Kerangka Aksi 90 Hari</p>
+                <ol class="mt-2 list-decimal pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>Audit kompetensi & gap per peran.</li>
+                  <li>Pilot microlearning + AI mentor.</li>
+                  <li>Hubungkan ke KPI & OKR tim.</li>
+                  <li>Review bulanan: iterasi konten & funnel.</li>
+                </ol>
+              </div>
+              <div class="rounded-2xl border p-4 bg-white">
+                <p class="font-semibold">Checklist Tata Kelola</p>
+                <ul class="mt-2 list-disc pl-5 text-neutral-700 space-y-1 text-sm">
+                  <li>Privasi & minimisasi data.</li>
+                  <li>Transparansi algoritma rekomendasi.</li>
+                  <li>Aksesibilitas konten (WCAG dasar).</li>
+                  <li>Pelibatan serikat/komite pekerja.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" class="module-check h-4 w-4" data-module="module-5">
+              <span class="text-sm">Tandai selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Referensi -->
+  <section id="referensi" class="py-10 md:py-14 border-t bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold">Referensi Terpilih</h2>
+      <p class="mt-3 text-neutral-700">Sumber dari RPS untuk pendalaman materi.</p>
+      <ul class="mt-4 grid md:grid-cols-2 gap-3 text-sm">
+        <li class="rounded-xl border p-4">Nagy, S. G., & Stukovszky (2023). <em>Smart Business & Digital Transformation: Industry 4.0 Perspective</em>. Routledge.</li>
+        <li class="rounded-xl border p-4">Popkova, E. G. (2022). <em>Business 4.0 as a Subject of the Digital Economy</em>. Springer.</li>
+        <li class="rounded-xl border p-4">Möller, D. P. F. (2023). <em>Guide to Cybersecurity in Digital Transformation</em>. Springer.</li>
+        <li class="rounded-xl border p-4">Lenox, M. (2023). <em>Strategy in the Digital Age</em>. Stanford University Press.</li>
+      </ul>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a href="#overview" class="inline-flex items-center gap-2 rounded-xl bg-neutral-900 text-white px-4 py-2 text-sm hover:opacity-90">Kembali ke atas</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-sm text-neutral-600">
+      <p>© 2025 Managing Digital Organization (MBD352) · Materi Pertemuan 11</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const STORAGE_KEY = 'mdorg-m11-progress-v1';
+      const checks = Array.from(document.querySelectorAll('.module-check'));
+      const total = checks.length;
+      const progressBar = document.getElementById('progressBar');
+      const progressCircle = document.getElementById('progressCircle');
+      const progressPercent = document.getElementById('progressPercent');
+      const progressCount = document.getElementById('progressCount');
+      const progressTotal = document.getElementById('progressTotal');
+      const resetBtn = document.getElementById('resetProgress');
+      const markAllBtn = document.getElementById('markAll');
+
+      // Inject small progress UI if missing
+      (function ensureSmallUI(){
+        const smallBar = document.getElementById('progressBar');
+        if (!smallBar) return;
+      })();
+
+      if (progressTotal) progressTotal.textContent = total;
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return {};
+          return JSON.parse(raw) || {};
+        } catch (e) { return {}; }
+      }
+
+      function save(state) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+      }
+
+      function compute() {
+        const state = load();
+        let done = 0;
+        checks.forEach(chk => {
+          const key = chk.dataset.module;
+          const checked = !!state[key];
+          chk.checked = checked;
+          if (checked) done++;
+        });
+        updateUI(done);
+      }
+
+      function updateUI(done) {
+        const ratio = total === 0 ? 0 : done / total;
+        const pct = Math.round(ratio * 100);
+        if (progressBar) progressBar.style.width = (pct + '%');
+        if (progressPercent) progressPercent.textContent = pct + '%';
+        if (progressCount) progressCount.textContent = done;
+        const circumference = 327;
+        const offset = circumference - (circumference * ratio);
+        if (progressCircle) progressCircle.style.strokeDashoffset = offset;
+      }
+
+      function toggle(e) {
+        const chk = e.target;
+        if (!chk.matches('.module-check')) return;
+        const state = load();
+        state[chk.dataset.module] = chk.checked;
+        save(state);
+        const done = Object.values(state).filter(Boolean).length;
+        updateUI(done);
+      }
+
+      function reset() {
+        save({});
+        compute();
+      }
+
+      function markAll() {
+        const state = {};
+        checks.forEach(chk => { state[chk.dataset.module] = true; });
+        save(state);
+        compute();
+      }
+
+      document.addEventListener('change', toggle);
+      if (resetBtn) resetBtn.addEventListener('click', reset);
+      if (markAllBtn) markAllBtn.addEventListener('click', markAll);
+
+      compute();
+    })();
+  </script>
+</body>
+</html>
