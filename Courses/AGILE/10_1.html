@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modul 10 – Scrum Framework | Agile Method</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+    .progress-smooth { transition: width 300ms ease, background-color 200ms ease; }
+    .card { @apply bg-white/90 backdrop-blur shadow-sm rounded-2xl border border-slate-200; }
+    .pill { @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-slate-900 text-white grid place-items-center font-bold">A</div>
+        <div>
+          <h1 class="text-lg md:text-xl font-bold">Agile Method — Modul 10</h1>
+          <p class="text-slate-500 text-sm">Memahami konsep Scrum Framework</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="exportBtn" class="px-3 py-2 text-sm rounded-xl border border-slate-300 hover:bg-slate-50">Export Progress</button>
+        <button id="importBtn" class="px-3 py-2 text-sm rounded-xl border border-slate-300 hover:bg-slate-50">Import Progress</button>
+        <button id="resetBtn" class="px-3 py-2 text-sm rounded-xl bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">Reset</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <!-- Hero / Overview -->
+    <section class="card p-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Scrum Framework — Roadmap Pembelajaran</h2>
+          <p class="text-slate-600 mt-2 max-w-2xl">Selesaikan setiap materi untuk mengunci pemahaman: roles, artefak, events, nilai & empiricism, DoD, metrik, anti‑pattern, hingga latihan kasus. Progress kamu disimpan otomatis di browser (localStorage).</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="pill bg-emerald-50 text-emerald-700 border border-emerald-200">Agile</span>
+            <span class="pill bg-indigo-50 text-indigo-700 border border-indigo-200">Scrum</span>
+            <span class="pill bg-amber-50 text-amber-700 border border-amber-200">Praktik</span>
+          </div>
+        </div>
+        <div class="w-full md:w-80">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm text-slate-600">Total Progress</span>
+            <span id="totalLabel" class="text-sm font-semibold">0%</span>
+          </div>
+          <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+            <div id="totalBar" class="h-full w-0 bg-slate-900 progress-smooth"></div>
+          </div>
+          <p class="text-xs text-slate-500 mt-2">Tip: klik judul materi untuk membuka/tutup detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- List Sections -->
+    <section id="sections" class="grid md:grid-cols-2 gap-6"></section>
+
+    <!-- CTA / Footer -->
+    <section class="card p-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-bold">Siap lanjut?</h3>
+          <p class="text-slate-600">Setelah semua materi di Modul 10 selesai, kamu siap masuk ke pendalaman elemen Scrum (Modul 11) dan penerapan end‑to‑end (Modul 12).</p>
+        </div>
+        <a href="#sections" class="px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-sm">Mulai/lanjutkan belajar</a>
+      </div>
+    </section>
+    <footer class="py-8 text-center text-xs text-slate-500">© 2025 Agile Method — Modul 10. Disimpan lokal di perangkatmu.</footer>
+  </main>
+
+  <template id="sectionTemplate">
+    <div class="card overflow-hidden">
+      <button class="w-full flex items-start justify-between p-5 text-left hover:bg-slate-50 focus:outline-none section-toggle">
+        <div>
+          <h4 class="text-lg font-bold section-title"></h4>
+          <p class="text-slate-600 text-sm mt-1 section-desc"></p>
+          <div class="mt-2 flex flex-wrap gap-2 section-tags"></div>
+        </div>
+        <div class="w-40 shrink-0 ml-4">
+          <div class="flex items-center justify-between mb-1"><span class="text-xs text-slate-600">Progress</span><span class="text-xs font-semibold section-label">0%</span></div>
+          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-full w-0 bg-slate-900 progress-smooth section-bar"></div>
+          </div>
+        </div>
+      </button>
+      <div class="px-5 pb-5 space-y-4 hidden section-content">
+        <ul class="space-y-3 checklist"></ul>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-2 text-sm rounded-xl border border-slate-300 hover:bg-slate-50 mark-all">Tandai Selesai</button>
+          <button class="px-3 py-2 text-sm rounded-xl border border-slate-300 hover:bg-slate-50 unmark-all">Batalkan Semua</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="checkItemTemplate">
+    <li class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50">
+      <input type="checkbox" class="mt-1 h-5 w-5 rounded-md border-slate-300" />
+      <div class="grow">
+        <p class="font-medium text-sm"></p>
+        <p class="text-xs text-slate-600 mt-0.5"></p>
+      </div>
+      <a target="_blank" class="text-xs underline text-slate-600 hover:text-slate-900 resource-link hidden">Bahan</a>
+    </li>
+  </template>
+
+  <script>
+    // ---- Data Materi Modul 10 ----
+    const KEY = 'mod10Progress_v1';
+    const sectionsData = [
+      {
+        id: 'overview',
+        title: 'Gambaran Umum Scrum Framework',
+        desc: 'Mindset empiricism, nilai Scrum, dan gambaran kerangka kerja roles–events–artefak.',
+        tags: ['Empiricism','Nilai Scrum'],
+        items: [
+          { id:'ov-1', title:'Baca ringkasan Scrum & Empiricism', note:'Transparansi, inspeksi, adaptasi.', link:'' },
+          { id:'ov-2', title:'Kenali 5 Nilai Scrum', note:'Focus, Openness, Commitment, Courage, Respect.', link:'' },
+          { id:'ov-3', title:'Peta kerangka kerja', note:'Hubungan roles, events, artefak, komitmen.', link:'' },
+        ]
+      },
+      {
+        id: 'roles',
+        title: 'Roles: Product Owner, Scrum Master, Developers',
+        desc: 'Tanggung jawab inti dan kolaborasi antar peran untuk menghasilkan nilai.',
+        tags: ['Roles'],
+        items: [
+          { id:'ro-1', title:'PO: nilai & prioritas backlog', note:'Product Goal, urutan prioritas.', link:'' },
+          { id:'ro-2', title:'SM: fasilitasi & penghalang', note:'Pelatihan proses, hilangkan impediments.', link:'' },
+          { id:'ro-3', title:'Developers: bangun Increment', note:'Kolaborasi lintas-disiplin.', link:'' },
+        ]
+      },
+      {
+        id: 'artifacts',
+        title: 'Artefak & Komitmen',
+        desc: 'Product Backlog ↔ Product Goal, Sprint Backlog ↔ Sprint Goal, Increment ↔ Definition of Done.',
+        tags: ['Backlog','DoD','Goal'],
+        items: [
+          { id:'ar-1', title:'Product Backlog & Product Goal', note:'DEEP: Detailed, Estimated, Emergent, Prioritized.', link:'' },
+          { id:'ar-2', title:'Sprint Backlog & Sprint Goal', note:'Rencana untuk Sprint aktif.', link:'' },
+          { id:'ar-3', title:'Increment & DoD', note:'Siap pakai/rilis memenuhi standar kualitas.', link:'' },
+        ]
+      },
+      {
+        id: 'events',
+        title: 'Events: Ritme Kerja Sprint',
+        desc: 'Sprint, Planning, Daily Scrum, Review, Retrospective—fungsi dan outcome yang diharapkan.',
+        tags: ['Events','Time-box'],
+        items: [
+          { id:'ev-1', title:'Sprint & time-box', note:'1–4 minggu, fokus ke Sprint Goal.', link:'' },
+          { id:'ev-2', title:'Sprint Planning (Why/What/How)', note:'Rumuskan Sprint Goal yang tajam.', link:'' },
+          { id:'ev-3', title:'Daily Scrum', note:'Sinkronisasi 15 menit, bukan status ke SM.', link:'' },
+          { id:'ev-4', title:'Sprint Review', note:'Validasi nilai dengan stakeholder.', link:'' },
+          { id:'ev-5', title:'Retrospective', note:'Pilih 1–2 eksperimen perbaikan.', link:'' },
+        ]
+      },
+      {
+        id: 'quality',
+        title: 'Kualitas: Definition of Done & Flow',
+        desc: 'Standar DoD, WIP kecil, pipeline test, dan alur kerja yang lancar.',
+        tags: ['Quality','Flow'],
+        items: [
+          { id:'ql-1', title:'Susun DoD timmu', note:'Coding standard, test, review, security dasar.', link:'' },
+          { id:'ql-2', title:'Kelola WIP', note:'Kecilkan pekerjaan berjalan untuk kurangi bottleneck.', link:'' },
+          { id:'ql-3', title:'Automasi test & CI', note:'Cegah regresi, percepat feedback.', link:'' },
+        ]
+      },
+      {
+        id: 'metrics',
+        title: 'Metrik yang Bernilai',
+        desc: 'Flow metrics (lead/cycle/WIP) dan outcome metrics (adopsi, retensi, revenue).',
+        tags: ['Metrics'],
+        items: [
+          { id:'me-1', title:'Ukur lead & cycle time', note:'Pantau kecepatan aliran kerja.', link:'' },
+          { id:'me-2', title:'Tetapkan outcome metrics', note:'Dampak ke pengguna & bisnis.', link:'' },
+          { id:'me-3', title:'Jangan memaksa velocity', note:'Gunakan untuk estimasi kapasitas, bukan target.', link:'' },
+        ]
+      },
+      {
+        id: 'antipattern',
+        title: 'Anti‑Pattern yang Harus Dihindari',
+        desc: 'Kesalahan umum yang bikin Scrum macet dan cara menghindarinya.',
+        tags: ['Anti‑pattern'],
+        items: [
+          { id:'ap-1', title:'Daily = status ke SM', note:'Harusnya forum Developers.', link:'' },
+          { id:'ap-2', title:'Review tanpa stakeholder', note:'Feedback telat, nilai tak tervalidasi.', link:'' },
+          { id:'ap-3', title:'Retro tanpa eksperimen', note:'Tidak ada perubahan nyata.', link:'' },
+        ]
+      },
+      {
+        id: 'exercise',
+        title: 'Latihan Kasus Mini (Fintech)',
+        desc: 'Rancang Sprint 2 minggu: Product Goal, Sprint Goal, 5–7 item Sprint Backlog.',
+        tags: ['Exercise'],
+        items: [
+          { id:'ex-1', title:'Tulis Product Goal', note:'1 kalimat, arah produk.', link:'' },
+          { id:'ex-2', title:'Rumuskan Sprint Goal', note:'Spesifik, terukur, 2 minggu.', link:'' },
+          { id:'ex-3', title:'Siapkan Sprint Backlog', note:'5–7 item, ukuran kecil.', link:'' },
+        ]
+      },
+      {
+        id: 'quiz',
+        title: 'Kuis Format Ringan',
+        desc: '5 pernyataan benar/salah mengenai konsep inti Scrum.',
+        tags: ['Quiz'],
+        items: [
+          { id:'qz-1', title:'Benar/Salah: Velocity = target manajemen', note:'Jawaban: Salah.', link:'' },
+          { id:'qz-2', title:'Benar/Salah: DoD wajib untuk Increment', note:'Jawaban: Benar.', link:'' },
+          { id:'qz-3', title:'Benar/Salah: Daily = status report', note:'Jawaban: Salah.', link:'' },
+          { id:'qz-4', title:'Benar/Salah: Sprint Review = demo internal', note:'Jawaban: Salah.', link:'' },
+          { id:'qz-5', title:'Benar/Salah: PO memutuskan prioritas', note:'Jawaban: Benar.', link:'' },
+        ]
+      },
+    ];
+
+    // ---- Utilities ----
+    const $ = (sel, el=document) => el.querySelector(sel);
+    const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+
+    function loadState() {
+      try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+    }
+    function saveState(state) { localStorage.setItem(KEY, JSON.stringify(state)); }
+
+    function calcSectionProgress(state, section) {
+      const total = section.items.length;
+      const done = section.items.filter(it => state[it.id]).length;
+      return { done, total, pct: total ? Math.round(done * 100 / total) : 0 };
+    }
+    function calcTotalProgress(state) {
+      const allItems = sectionsData.flatMap(s => s.items);
+      const total = allItems.length;
+      const done = allItems.filter(it => state[it.id]).length;
+      return { done, total, pct: total ? Math.round(done * 100 / total) : 0 };
+    }
+
+    // ---- Render ----
+    const container = document.getElementById('sections');
+    const sectionTpl = document.getElementById('sectionTemplate');
+    const itemTpl = document.getElementById('checkItemTemplate');
+
+    let state = loadState();
+
+    sectionsData.forEach(section => {
+      const node = sectionTpl.content.cloneNode(true);
+      const root = node.children[0];
+
+      $('.section-title', root).textContent = section.title;
+      $('.section-desc', root).textContent = section.desc;
+
+      const tagsWrap = $('.section-tags', root);
+      section.tags.forEach(t => {
+        const tag = document.createElement('span');
+        tag.className = 'pill bg-slate-100 text-slate-700 border border-slate-200';
+        tag.textContent = t;
+        tagsWrap.appendChild(tag);
+      });
+
+      const content = $('.section-content', root);
+      const checklist = $('.checklist', root);
+
+      section.items.forEach(item => {
+        const itemNode = itemTpl.content.cloneNode(true);
+        const li = itemNode.children[0];
+        const cb = $('input[type="checkbox"]', li);
+        const titleEl = $('p.font-medium', li);
+        const noteEl = $('p.text-xs', li);
+        const linkEl = $('.resource-link', li);
+        titleEl.textContent = item.title;
+        noteEl.textContent = item.note || '';
+        if (item.link) { linkEl.href = item.link; linkEl.classList.remove('hidden'); }
+
+        // set checkbox from state
+        cb.checked = !!state[item.id];
+        cb.addEventListener('change', () => {
+          state[item.id] = cb.checked;
+          saveState(state);
+          updateSectionUI(root, section);
+          updateTotalUI();
+        });
+
+        checklist.appendChild(li);
+      });
+
+      // toggle
+      $('.section-toggle', root).addEventListener('click', (e) => {
+        // avoid toggle when clicking inside progress area buttons?
+        if (e.target.closest('.w-40')) return; // keep clicks on progress area from toggling
+        content.classList.toggle('hidden');
+      });
+
+      // mark all / unmark all
+      $('.mark-all', root).addEventListener('click', () => {
+        section.items.forEach(it => state[it.id] = true);
+        saveState(state);
+        $$('.checklist input[type="checkbox"]', root).forEach(cb => cb.checked = true);
+        updateSectionUI(root, section);
+        updateTotalUI();
+      });
+      $('.unmark-all', root).addEventListener('click', () => {
+        section.items.forEach(it => state[it.id] = false);
+        saveState(state);
+        $$('.checklist input[type="checkbox"]', root).forEach(cb => cb.checked = false);
+        updateSectionUI(root, section);
+        updateTotalUI();
+      });
+
+      container.appendChild(root);
+      updateSectionUI(container.lastElementChild, section);
+    });
+
+    // ---- Progress UI Updaters ----
+    function updateSectionUI(root, section) {
+      const { pct } = calcSectionProgress(state, section);
+      $('.section-bar', root).style.width = pct + '%';
+      $('.section-label', root).textContent = pct + '%';
+    }
+    function updateTotalUI() {
+      const { pct } = calcTotalProgress(state);
+      document.getElementById('totalBar').style.width = pct + '%';
+      document.getElementById('totalLabel').textContent = pct + '%';
+    }
+    updateTotalUI();
+
+    // ---- Export / Import / Reset ----
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'mod10-progress.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('importBtn').addEventListener('click', async () => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'application/json';
+      input.onchange = async () => {
+        const file = input.files[0];
+        if (!file) return;
+        try {
+          const text = await file.text();
+          const imported = JSON.parse(text);
+          if (imported && typeof imported === 'object') {
+            state = imported;
+            saveState(state);
+            // re-sync checkboxes
+            sectionsData.forEach((section, idx) => {
+              const root = container.children[idx];
+              section.items.forEach((it, i) => {
+                const cb = $$('.checklist input[type="checkbox"]', root)[i];
+                cb.checked = !!state[it.id];
+              });
+              updateSectionUI(root, section);
+            });
+            updateTotalUI();
+            alert('Progress berhasil diimpor.');
+          }
+        } catch (e) {
+          alert('Gagal mengimpor progress. Pastikan format JSON benar.');
+        }
+      };
+      input.click();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('Hapus semua progress Modul 10 di perangkat ini?')) return;
+      state = {};
+      saveState(state);
+      // uncheck all
+      $$('#sections .checklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+      // update all sections
+      sectionsData.forEach((section, idx) => updateSectionUI(container.children[idx], section));
+      updateTotalUI();
+    });
+  </script>
+</body>
+</html>
